@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <meta name="description"
+        content="Marg'ilon shahar 1-umumiy o'rta ta'lim maktabi haqida — tarixi, rahbariyati, o'qituvchilar jamoasi va infratuzilmasi.">
+    <title>Maktab haqida - 1-maktab</title>
+    <link id="theme-css" rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ===== ABOUT PAGE STYLES ===== */
+        .about-hero {
+            background: linear-gradient(135deg, #4338ca 0%, #6366f1 50%, #8b5cf6 100%);
+            padding: 80px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.theme-green .about-hero {
+            background: linear-gradient(135deg, #065f46 0%, #059669 50%, #10b981 100%);
+        }
+
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 50%, rgba(255, 255, 255, 0.07) 0%, transparent 60%);
+        }
+
+        .about-hero h1 {
+            color: white;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 800;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-hero p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .about-hero .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: white;
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 0.05em;
+        }
+
+        /* ===== QUICK STATS BAR ===== */
+        .stats-bar {
+            background: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 28px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 12px;
+            border-right: 1px solid #e2e8f0;
+        }
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+        .stat-item .stat-num {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .stat-item .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
+        .stat-item .stat-icon {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+            opacity: 0.7;
+        }
+
+        /* ===== SECTION STYLES ===== */
+        .about-section {
+            padding: 70px 0;
+        }
+
+        .about-section.bg-light-section {
+            background: #f8fafc;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-gradient);
+            color: white;
+            padding: 5px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+            letter-spacing: 0.05em;
+        }
+
+        .section-header h2 {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        /* ===== HISTORY SECTION ===== */
+        .history-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow-md, 0 4px 20px rgba(0, 0, 0, 0.08));
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .history-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+        }
+
+        .history-card .text-content p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .history-card .highlight-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.06) 0%, rgba(139, 92, 246, 0.06) 100%);
+            border-left: 4px solid var(--primary-color);
+            border-radius: 0 12px 12px 0;
+            padding: 18px 20px;
+            margin: 20px 0;
+        }
+
+        .history-card .highlight-box p {
+            margin: 0;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary-color), transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 28px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -22px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        .timeline-item .year {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .timeline-item .event {
+            font-weight: 600;
+            color: var(--text-main);
+            margin: 2px 0;
+        }
+
+        .timeline-item .desc {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* ===== LEADERSHIP CARDS ===== */
+        .leader-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .leader-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 35px rgba(67, 56, 202, 0.15);
+        }
+
+        .leader-card.director-card {
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .leader-card.deputy-card {
+            border-top: 4px solid var(--secondary-color);
+        }
+
+        .leader-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin: 0 auto 16px;
+        }
+
+        .deputy-card .leader-avatar {
+            background: linear-gradient(135deg, #818cf8, #6366f1);
+        }
+
+        .leader-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            margin-bottom: 6px;
+        }
+
+        .leader-card .role-badge {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary-color);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin: 0 auto 14px;
+        }
+
+        .deputy-card .role-badge {
+            background: rgba(129, 140, 248, 0.12);
+            color: #6366f1;
+        }
+
+        .leader-card p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin: 0;
+        }
+
+        /* ===== TEACHER CARDS ===== */
+        .teacher-card {
+            background: white;
+            border-radius: 16px;
+            padding: 28px 20px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .teacher-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.15);
+        }
+
+        .teacher-icon {
+            width: 68px;
+            height: 68px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin: 0 auto 16px;
+        }
+
+        .teacher-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .teacher-card .subject {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .teacher-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* ===== INFRASTRUCTURE ===== */
+        .infra-card {
+            background: white;
+            border-radius: 16px;
+            padding: 28px 24px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .infra-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.12);
+        }
+
+        .infra-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .infra-card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .infra-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* ===== VALUES ===== */
+        .value-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px 24px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .value-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.12);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            margin-bottom: 14px;
+        }
+
+        .value-card h4 {
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .value-card p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Green theme overrides */
+        body.theme-green .stats-bar {
+            background: white;
+        }
+
+        body.theme-green .stat-item .stat-num {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        body.theme-green .leader-card.director-card {
+            border-top-color: var(--primary-color);
+        }
+
+        body.theme-green .leader-card .role-badge {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--primary-color);
+        }
+
+        body.theme-green .infra-icon {
+            background: var(--primary-gradient);
+        }
+
+        body.theme-green .section-badge {
+            background: var(--primary-gradient);
+        }
+
+        @media (max-width: 768px) {
+            .stat-item {
+                border-right: none;
+                border-bottom: 1px solid #e2e8f0;
+            }
+
+            .stat-item:last-child {
+                border-bottom: none;
+            }
+
+            .about-hero {
+                padding: 50px 0 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'modern';
+        document.body.classList.add('theme-' + savedTheme);
+    </script>
+
+    <!-- Header -->
+    <header>
+        <!-- Ticker -->
+        <div class="ticker-wrap">
+            <div class="ticker">
+                DIQQAT! Sayt hozirda test rejimida ishlamoqda.
+            </div>
+        </div>
+
+        <!-- Branding Section -->
+        <div class="branding-bar">
+            <div class="ministry-links">
+                <div class="ministry-item">
+                    <img src="logo_min.png" alt="Gerb">
+                    <span>O'zbekiston Respublikasi maktabgacha va maktab ta'limi vazirligi</span>
+                </div>
+            </div>
+            <div class="school-identity">
+                <img src="logo.png" alt="Maktab Logosi" class="school-logo"
+                    style="width: 50px !important; height: 50px !important;">
+                <div class="school-name">
+                    <h1>Marg'ilon shahar 1-umumiy o'rta ta'lim maktabi</h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+            <div class="container">
+                <button class="navbar-toggler mx-auto" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-center">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Bosh sahifa</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="about.html">Maktab haqida</a></li>
+                        <li class="nav-item"><a class="nav-link" href="achievements.html">Yutuqlar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="statistics.html">Statistika</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Aloqa</a></li>
+                        <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                            <button id="themeToggle" class="btn btn-outline-light btn-sm rounded-pill px-3">
+                                <i class="fas fa-magic me-1"></i> <span id="themeToggleText">Modern</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="about-hero">
+        <div class="container">
+            <div class="hero-badge"><i class="fas fa-school me-2"></i>eMaktab tasdiqlangan ma'lumotlar</div>
+            <h1>Maktab haqida</h1>
+            <p>Marg'ilon shahar 1-umumiy o'rta ta'lim maktabi — bilim, ijod va kelajak uchun munosib zamin</p>
+        </div>
+    </section>
+
+    <!-- Quick Stats Bar -->
+    <div class="stats-bar">
+        <div class="container">
+            <div class="row g-0">
+                <div class="col-6 col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-icon"><i class="fas fa-user-graduate"></i></div>
+                        <div class="stat-num">2,183</div>
+                        <div class="stat-label">Jami o'quvchilar</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                        <div class="stat-num">146</div>
+                        <div class="stat-label">Pedagog xodimlar</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-icon"><i class="fas fa-building"></i></div>
+                        <div class="stat-num">5</div>
+                        <div class="stat-label">Ta'lim binolari</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-icon"><i class="fas fa-calendar-alt"></i></div>
+                        <div class="stat-num">60+</div>
+                        <div class="stat-label">Yillik tajriba</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HISTORY SECTION -->
+    <section class="about-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge"><i class="fas fa-landmark me-2"></i>Tarix</div>
+                <h2>Maktab tarixi</h2>
+                <p>Avlodlar davomiyligini ta'minlagan ta'lim o'chog'i</p>
+            </div>
+            <div class="row g-4 align-items-start">
+                <div class="col-lg-7">
+                    <div class="history-card">
+                        <div class="text-content">
+                            <p>Marg'ilon shahar 1-umumiy o'rta ta'lim maktabi Farg'ona viloyatining qadimiy Marg'ilon
+                                shahrida joylashgan bo'lib, o'nlab yillar davomida minglab o'quvchilarga sifatli bilim
+                                berish va kamol topishga zamin yaratib kelmoqda.</p>
+                            <div class="highlight-box">
+                                <p><i class="fas fa-map-marker-alt me-2"></i>Farg'ona viloyati, Marg'ilon shahar,
+                                    Miltiqsoz MFY, B.Marg'iloniy ko'chasi, 77-uy</p>
+                            </div>
+                            <p>Maktab davlat mulki hisoblanib, Farg'ona viloyati Marg'ilon shahar Maktabgacha va maktab
+                                ta'limi bo'limi nazoratida faoliyat yuritadi. Zamonaviy ta'lim standartlari asosida
+                                o'quvchilarni bilim, ko'nikma va malakalar bilan qurollantirib, ularni hayotga
+                                tayyorlash maktabning asosiy maqsadi hisoblanadi.</p>
+                            <p>Bugun maktabda <strong>2,183 nafar o'quvchi</strong> ta'lim olmoqda va ularga <strong>146
+                                    nafar malakali pedagog xodim</strong> saboq bermoqda. Maktab Farg'ona viloyati
+                                miqyosida o'z natijalari bilan eng yetakchi ta'lim muassasalaridan biri sifatida e'tirof
+                                etilmoqda.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <!-- Marg'ilon shahar xaritasi -->
+                    <div
+                        style="border-radius: 20px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 8px 30px rgba(0,0,0,0.18);">
+                        <iframe
+                            src="https://www.openstreetmap.org/export/embed.html?bbox=71.68%2C40.45%2C71.78%2C40.50&layer=mapnik&marker=40.4683%2C71.7236"
+                            style="width: 100%; height: 200px; border: none; display: block;"
+                            title="Marg'ilon shahri xaritasi" loading="lazy"></iframe>
+                        <div
+                            style="background: rgba(67,56,202,0.88); color: white; text-align: center; font-size: 0.8rem; padding: 8px 12px; font-weight: 500;">
+                            <i class="fas fa-map-marker-alt me-1"></i>Marg'ilon shahri — OpenStreetMap
+                        </div>
+                    </div>
+                    <div class="history-card"
+                        style="background: linear-gradient(135deg, #4338ca 0%, #6366f1 50%, #8b5cf6 100%); color: white;">
+
+                        <h4 style="color: white; font-weight: 700; margin-bottom: 24px;"><i
+                                class="fas fa-flag me-2"></i>Muhim bosqichlar</h4>
+                        <div class="timeline" style="padding-left: 24px;">
+                            <div class="timeline-item">
+                                <div class="year" style="color: rgba(255,255,255,0.6);">Tashkil etilgan</div>
+                                <div class="event" style="color: white;">1-maktab ochildi</div>
+                                <div class="desc" style="color: rgba(255,255,255,0.75);">Marg'ilon shahrida ta'lim
+                                    o'chog'i sifatida faoliyat boshladi</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="year" style="color: rgba(255,255,255,0.6);">Kengayish</div>
+                                <div class="event" style="color: white;">5 blokli zamonaviy bino</div>
+                                <div class="desc" style="color: rgba(255,255,255,0.75);">O'quvchilar soni o'sishi bilan
+                                    maktab kengaytirildi</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="year" style="color: rgba(255,255,255,0.6);">2023-2024</div>
+                                <div class="event" style="color: white;">Raqamlashtirish bosqichi</div>
+                                <div class="desc" style="color: rgba(255,255,255,0.75);">eMaktab tizimiga to'liq
+                                    integratsiya, zamonaviy ta'lim usullari</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="year" style="color: rgba(255,255,255,0.6);">2025</div>
+                                <div class="event" style="color: white;">2,183 o'quvchi</div>
+                                <div class="desc" style="color: rgba(255,255,255,0.75);">Hozirda faoliyat ko'rsatayotgan
+                                    eng yirik maktablardan biri</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LEADERSHIP SECTION -->
+    <section class="about-section bg-light-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge"><i class="fas fa-users me-2"></i>Rahbariyat</div>
+                <h2>Maktab rahbariyati</h2>
+                <p>Maktabimiz faoliyatini boshqaruvchi tajribali mutaxassislar</p>
+            </div>
+
+            <!-- Director -->
+            <div class="row justify-content-center mb-4">
+                <div class="col-md-5 col-lg-4">
+                    <div class="leader-card director-card">
+                        <div class="leader-avatar">А</div>
+                        <h3>Abduraximova Munojatxon Abdusamatovna</h3>
+                        <div class="text-center">
+                            <span class="role-badge"><i class="fas fa-star me-1"></i>Direktor</span>
+                        </div>
+                        <p>Marg'ilon shahar 1-umumiy o'rta ta'lim maktabining direktori</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deputies — O'quv ishlari bo'yicha (1-3) -->
+            <p class="text-muted text-center mb-3"
+                style="font-size:0.85rem; font-weight:600; text-transform: uppercase; letter-spacing:0.08em;">O'quv
+                ishlari bo'yicha o'rinbosarlar</p>
+            <div class="row g-4 mb-4">
+                <div class="col-md-4">
+                    <div class="leader-card deputy-card">
+                        <div class="leader-avatar">U</div>
+                        <h3>Umronov Sardorbek Sodirbek o'g'li</h3>
+                        <div class="text-center">
+                            <span class="role-badge">O'quv ishlari — o'rinbosar</span>
+                        </div>
+                        <p>O'quv ishlari bo'yicha direktor o'rinbosari, o'qituvchi</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="leader-card deputy-card">
+                        <div class="leader-avatar">U</div>
+                        <h3>Umarova Diloromxon Muxtorovna</h3>
+                        <div class="text-center">
+                            <span class="role-badge">O'quv ishlari — o'rinbosar</span>
+                        </div>
+                        <p>O'quv ishlari bo'yicha direktor o'rinbosari, o'qituvchi</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="leader-card deputy-card">
+                        <div class="leader-avatar">X</div>
+                        <h3>Xakimov Baxodirjon Nazirdjanovich</h3>
+                        <div class="text-center">
+                            <span class="role-badge">O'quv ishlari — o'rinbosar</span>
+                        </div>
+                        <p>O'quv ishlari bo'yicha direktor o'rinbosari, o'qituvchi</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Maktab maslahatchisi (yangi lavozim) -->
+            <div class="row g-4 justify-content-center mb-4">
+                <div class="col-md-5 col-lg-4">
+                    <div class="leader-card"
+                        style="border-top: 4px solid #f59e0b; border-style: dashed; opacity: 0.85;">
+                        <div class="leader-avatar"
+                            style="background: linear-gradient(135deg, #d97706, #f59e0b); font-size: 2rem;">🔍</div>
+                        <h3 style="color: #92400e; letter-spacing: 0.02em;">Aniqlanmoqda...</h3>
+                        <div class="text-center">
+                            <span class="role-badge" style="background: rgba(245,158,11,0.12); color: #d97706;">Maktab
+                                maslahatchisi — yangi lavozim</span>
+                        </div>
+                        <p style="color: #78716c; font-style: italic;">Ushbu lavozim yaqin kunda rasmiy tarzda
+                            tayinlanadi. Nomzod ko'rib chiqilmoqda.</p>
+                        <div class="text-center mt-2">
+                            <span style="font-size: 0.75rem; color: #a78bfa; font-weight: 600;">🕐 Tez kunda e'lon
+                                qilinadi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ma'naviy-ma'rifiy bo'yicha (4) -->
+            <p class="text-muted text-center mb-3"
+                style="font-size:0.85rem; font-weight:600; text-transform: uppercase; letter-spacing:0.08em;">
+                Ma'naviy-ma'rifiy ishlar bo'yicha</p>
+            <div class="row g-4 justify-content-center mb-4">
+                <div class="col-md-5 col-lg-4">
+                    <div class="leader-card deputy-card">
+                        <div class="leader-avatar">A</div>
+                        <h3>Abloberdiyev Sherzodjon Yusubjonovich</h3>
+                        <div class="text-center">
+                            <span class="role-badge">Ma'naviy-ma'rifiy — o'rinbosar</span>
+                        </div>
+                        <p>Ma'naviy-ma'rifiy ishlar bo'yicha direktor o'rinbosari, o'qituvchi</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Psixologlar (5-6) -->
+            <p class="text-muted text-center mb-3"
+                style="font-size:0.85rem; font-weight:600; text-transform: uppercase; letter-spacing:0.08em;">Maktab
+                psixologlari</p>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-5 col-lg-4">
+                    <div class="leader-card" style="border-top: 4px solid #10b981;">
+                        <div class="leader-avatar"
+                            style="background: linear-gradient(135deg, #059669, #10b981); font-size: 2rem;">👩‍🏫</div>
+                        <h3>Abduhalilova Xosiyatxon</h3>
+                        <div class="text-center">
+                            <span class="role-badge" style="background: rgba(16,185,129,0.12); color: #059669;">Maktab
+                                psixologi</span>
+                        </div>
+                        <p>O'quvchilarning psixologik qo'llab-quvvatlash va rivojlanish maslahatchi</p>
+                    </div>
+                </div>
+                <div class="col-md-5 col-lg-4">
+                    <div class="leader-card" style="border-top: 4px solid #10b981;">
+                        <div class="leader-avatar"
+                            style="background: linear-gradient(135deg, #059669, #10b981); font-size: 2rem;">👩‍🏫</div>
+                        <h3>Xoldorova Diloromxon Po'latovna</h3>
+                        <div class="text-center">
+                            <span class="role-badge" style="background: rgba(16,185,129,0.12); color: #059669;">Maktab
+                                psixologi</span>
+                        </div>
+                        <p>O'quvchilar va ota-onalar bilan boshqaruv xodimi va psixolog</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEACHERS SECTION -->
+    <section class="about-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge"><i class="fas fa-chalkboard-teacher me-2"></i>Pedagoglar</div>
+                <h2>O'qituvchilar jamoasi</h2>
+                <p>146 nafar malakali pedagog — har bir o'quvchining kelajagi uchun</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-sm-6 col-lg-3">
+                    <div class="teacher-card">
+                        <div class="teacher-icon"><i class="fas fa-book-open"></i></div>
+                        <h3>Ona tili va adabiyot</h3>
+                        <div class="subject">Filologiya</div>
+                        <p>Ona tilining go'zalligini o'rgatuvchi, adabiyot dunyosiga olib kiruvchi tajribali pedagog.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="teacher-card">
+                        <div class="teacher-icon"><i class="fas fa-calculator"></i></div>
+                        <h3>Matematika</h3>
+                        <div class="subject">Aniq fanlar</div>
+                        <p>O'quvchilarni respublika va xalqaro olimpiadalarga tayyorlaydigan yosh mutaxassis.</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="teacher-card">
+                        <div class="teacher-icon"><i class="fas fa-atom"></i></div>
+                        <h3>Fizika va kimyo</h3>
+                        <div class="subject">Tabiiy fanlar</div>
+                        <p>"Yilning eng yaxshi fan o'qituvchisi" unvoni sohibi. Laboratoriya darslarida amaliy bilim.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="teacher-card">
+                        <div class="teacher-icon"><i class="fas fa-globe-americas"></i></div>
+                        <h3>Chet tillar</h3>
+                        <div class="subject">Til o'rganish</div>
+                        <p>Ingliz, nemis va rus tillarini zamonaviy metodlar asosida o'qitish bo'yicha mutaxassislar.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INFRASTRUCTURE SECTION -->
+    <section class="about-section bg-light-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge"><i class="fas fa-building me-2"></i>Infratuzilma</div>
+                <h2>Maktab infratuzilmasi</h2>
+                <p>5 ta bino va zamonaviy texnik jihozlar bilan ta'minlangan muhit</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="infra-card">
+                        <div class="infra-icon"><i class="fas fa-school"></i></div>
+                        <div>
+                            <h4>1-blok — Asosiy bino</h4>
+                            <p>Maktabning markaziy ta'lim binosi. Darsxonalar, ma'muriyat xonalari va kutubxona
+                                joylashgan.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="infra-card">
+                        <div class="infra-icon"><i class="fas fa-chalkboard"></i></div>
+                        <div>
+                            <h4>2-blok — Darsxonalar</h4>
+                            <p>Quyi sinflar uchun maxsus jihozlangan darsxonalar. Yosh o'quvchilarga qulay muhit
+                                yaratilgan.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="infra-card">
+                        <div class="infra-icon"><i class="fas fa-flask"></i></div>
+                        <div>
+                            <h4>3-blok — Laboratoriyalar</h4>
+                            <p>Kimyo, fizika va biologiya laboratoriyalari. Xona 59 — maxsus Ingliz tili o'quv xonasi.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="infra-card">
+                        <div class="infra-icon"><i class="fas fa-laptop"></i></div>
+                        <div>
+                            <h4>4-blok — Texnologiya</h4>
+                            <p>Kompyuter sinflar va zamonaviy axborot-kommunikatsiya texnologiyalari kabineti.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="infra-card">
+                        <div class="infra-icon"><i class="fas fa-futbol"></i></div>
+                        <div>
+                            <h4>5-blok — Sport kompleksi</h4>
+                            <p>Katta sport zali, ochiq maydoncha va sport inventarlari bilan to'liq jihozlangan faol dam
+                                olish hududi.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="infra-card">
+                        <div class="infra-icon"><i class="fas fa-utensils"></i></div>
+                        <div>
+                            <h4>Qo'shimcha xizmatlar</h4>
+                            <p>Tibbiyot punkti, o'quvchilar ovqatlanish xonasi va kutubxona — o'quvchilar qurodining
+                                to'liq ta'minlovi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VALUES / CONTACTS -->
+    <section class="about-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge"><i class="fas fa-heart me-2"></i>Qadriyatlar</div>
+                <h2>Bizning maqsadimiz</h2>
+                <p>O'quvchining kamoloti — ustuvor yo'nalishimiz</p>
+            </div>
+            <div class="row g-4 mb-5">
+                <div class="col-sm-6 col-lg-3">
+                    <div class="value-card">
+                        <div class="value-icon">🎓</div>
+                        <h4>Sifatli ta'lim</h4>
+                        <p>Zamonaviy o'qitish metodlari va malakali pedagoglar orqali bilim berish</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="value-card">
+                        <div class="value-icon">🌟</div>
+                        <h4>Ijod va innovatsiya</h4>
+                        <p>Har bir o'quvchining iste'dodi va qobiliyatini rivojlantirish</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="value-card">
+                        <div class="value-icon">🤝</div>
+                        <h4>Hamkorlik</h4>
+                        <p>Ota-onalar, o'qituvchilar va jamiyat o'rtasida mustahkam munosabatlar</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="value-card">
+                        <div class="value-icon">🏆</div>
+                        <h4>Yutuqlarga intilish</h4>
+                        <p>Olimpiadalar, ko'rik-tanlovlar va sport musobaqalarida faol ishtirok</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact info -->
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="history-card" style="text-align: center;">
+                        <h4 style="font-weight: 700; margin-bottom: 20px;"><i class="fas fa-address-card me-2"
+                                style="color: var(--primary-color);"></i>Bog'lanish ma'lumotlari</h4>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div style="padding: 16px; background: rgba(99,102,241,0.06); border-radius: 12px;">
+                                    <i class="fas fa-map-marker-alt fa-lg mb-2"
+                                        style="color: var(--primary-color);"></i>
+                                    <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">Farg'ona
+                                        viloyati, Marg'ilon shahar, B.Marg'iloniy ko'chasi, 77-uy</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div style="padding: 16px; background: rgba(99,102,241,0.06); border-radius: 12px;">
+                                    <i class="fas fa-envelope fa-lg mb-2" style="color: var(--primary-color);"></i>
+                                    <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;"><a
+                                            href="mailto:mshmaktab1@gmail.com"
+                                            style="color: var(--primary-color); text-decoration: none;">mshmaktab1@gmail.com</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div style="padding: 16px; background: rgba(99,102,241,0.06); border-radius: 12px;">
+                                    <i class="fab fa-telegram fa-lg mb-2" style="color: var(--primary-color);"></i>
+                                    <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;"><a
+                                            href="https://t.me/mshmaktab1" target="_blank"
+                                            style="color: var(--primary-color); text-decoration: none;">@mshmaktab1</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>1-MAKTAB</h2>
+                <p>Marg'ilon shahar 1-umumiy<br>o'rta ta'lim maktabi</p>
+            </div>
+            <div class="footer-social">
+                <div class="social-media">
+                    <a href="https://t.me/mshmaktab1" target="_blank" class="social-item">
+                        <i class="fab fa-telegram"></i> <span>Telegram</span>
+                    </a>
+                    <a href="https://www.youtube.com/@mshmaktab1" target="_blank" class="social-item">
+                        <i class="fab fa-youtube"></i> <span>YouTube</span>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61582267918442" target="_blank"
+                        class="social-item">
+                        <i class="fab fa-facebook"></i> <span>Facebook</span>
+                    </a>
+                    <a href="https://www.instagram.com/mshmaktab1/" target="_blank" class="social-item">
+                        <i class="fab fa-instagram"></i> <span>Instagram</span>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-qr">
+                <span class="qr-label">Sahifani telefonda ko'rish</span>
+                <div class="qr-section">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://mshmaktab1.netlify.app"
+                        alt="QR Code">
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Marg'ilon shahar 1-umumiy o'rta ta'lim maktabi. Barcha huquqlar himoyalangan.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 3D Back to Top Button -->
+    <button id="backToTop" class="btn-3d-up" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+        title="Yuqoriga qaytish">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
