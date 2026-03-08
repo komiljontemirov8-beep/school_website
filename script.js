@@ -1,13 +1,37 @@
 // ==================== ADMIN CONFIG ====================
 // Sayt ko'chirilganda faqat shu yerdagi nomni o'zgartiring:
 const MANAGEMENT_CONFIG = {
-    googleAccount: "[komiljontemirov8]"
+    googleAccount: "[Google_Akkaunt_Nomi_Shu_Yerga_Yoziladi]"
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Fill Management ID in footer automatically
-    const mgmtEl = document.getElementById('mgmtId');
-    if (mgmtEl) mgmtEl.textContent = MANAGEMENT_CONFIG.googleAccount;
+async function loadFooter() {
+    const footer = document.querySelector('footer');
+    if (!footer) return;
+
+    try {
+        const response = await fetch('footer.html');
+        if (!response.ok) throw new Error('Footer not found');
+        const html = await response.json(); // Wait, footer.html is text
+    } catch (e) { }
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    // Load Shared Footer
+    const footerContainer = document.querySelector('footer');
+    if (footerContainer) {
+        try {
+            const resp = await fetch('footer.html');
+            const html = await resp.text();
+            footerContainer.innerHTML = html;
+
+            // Re-apply management ID and visitor counter after footer loads
+            const mgmtEl = document.getElementById('mgmtId');
+            if (mgmtEl) mgmtEl.textContent = MANAGEMENT_CONFIG.googleAccount;
+            updateVisitorCounter();
+        } catch (e) {
+            console.error("Shared footer error:", e);
+        }
+    }
 
     const menuToggle = document.getElementById('mobile-menu');
     const navLinks = document.querySelector('.nav-links');
@@ -776,4 +800,3 @@ async function handleLike(newsId, btn) {
     // Persist in local storage
     localStorage.setItem('liked_' + newsId, 'true');
 }
-
