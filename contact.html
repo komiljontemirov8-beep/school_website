@@ -189,6 +189,10 @@
             <div class="footer-brand">
                 <h2>1-MAKTAB</h2>
                 <p>Marg'ilon shahar 1-umumiy<br>o'rta ta'lim maktabi</p>
+                <div class="visitor-counter" title="Saytga tashrif buyuruvchilar soni">
+                    <i class="fas fa-users visitor-counter-icon"></i>
+                    <span class="visitor-count-text" id="visitorCount">...</span>
+                </div>
             </div>
 
             <!-- Social Media (Center) -->
@@ -222,8 +226,10 @@
             </div>
 
             <div class="copyright">
-                <p>&copy; 2025 Marg'ilon shahar 1-umumiy o'rta ta'lim maktabi. Barcha huquqlar himoyalangan.</p>
-
+                <p>&copy; 2026 Marg'ilon shahar 1-umumiy o'rta ta'lim maktabi. Barcha huquqlar himoyalangan.</p>
+                <div class="deployment-info" style="text-align: center;">
+                    Netlify: mshmaktab1
+                </div>
             </div>
         </div>
     </footer>
@@ -246,6 +252,11 @@
     <button id="backToTop" class="btn-3d-up" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
         title="Yuqoriga qaytish">
         <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- 3D Jump to Footer Button -->
+    <button id="jumpToFooter" class="btn-3d-down" onclick="window.scrollToFooter()" title="Pastga (futerga) o'tish">
+        <i class="fas fa-chevron-down"></i>
     </button>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

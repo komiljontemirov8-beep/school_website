@@ -428,15 +428,92 @@ footer {
     }
 }
 
-/* Dynamic News Styles */
-.news-group-header {
-    grid-column: 1 / -1;
-    margin: 2rem 0 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--primary-color);
-    color: var(--dark-green);
-    text-transform: uppercase;
-    font-size: 1.2rem;
+/* News Card Statistics */
+.news-stats {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.news-stat-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.85rem;
+    color: #6c757d;
+    transition: all 0.3s ease;
+}
+
+.btn-like {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.85rem;
+    transition: var(--transition-standard);
+}
+
+.btn-like:hover {
+    color: #ef4444;
+    transform: scale(1.1);
+}
+
+.btn-like.active {
+    color: #ef4444;
+}
+
+.btn-like.active i {
+    font-weight: 900;
+    /* Solid heart */
+}
+
+.news-views i {
+    color: var(--primary-color);
+}
+
+/* Footer Visitor Counter */
+.visitor-counter {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 15px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 15px;
+    backdrop-filter: blur(5px);
+}
+
+.visitor-counter-icon {
+    color: var(--warning-color);
+    font-size: 1rem;
+    animation: pulse-simple 2s infinite;
+}
+
+@keyframes pulse-simple {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.visitor-count-text {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 1px;
 }
 
 .news-image-container {
@@ -446,7 +523,6 @@ footer {
     position: relative;
     border-bottom: 1px solid #eee;
     background: #f9f9f9;
-    /* Placeholder color */
 }
 
 .news-image-container img {
@@ -1342,6 +1418,37 @@ body.theme-green .btn-3d-up:hover {
     box-shadow: 0 12px 0 #064e3b, 0 20px 30px rgba(0, 0, 0, 0.4);
 }
 
+/* 3D Jump to Footer Button */
+.btn-3d-down {
+    position: fixed;
+    bottom: 105px;
+    right: 37px;
+    width: 45px;
+    height: 45px;
+    background: var(--warning-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #b45309, 0 10px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 1000;
+}
+
+.btn-3d-down:hover {
+    transform: translateY(2px);
+    box-shadow: 0 3px 0 #b45309, 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-3d-down:active {
+    transform: translateY(5px);
+    box-shadow: none;
+}
+
 .btn-3d-up:active {
     transform: translateY(6px);
     box-shadow: 0 2px 0 #1e1b4b, 0 5px 10px rgba(0, 0, 0, 0.2);
@@ -1366,4 +1473,74 @@ body.theme-green .btn-3d-up:active {
         opacity: 1;
         transform: scale(1) translateY(0);
     }
+}
+
+/* Admin Team Section */
+.admin-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+    background: var(--light-bg);
+}
+
+.admin-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition-standard);
+    height: 100%;
+}
+
+.admin-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.admin-card img {
+    width: 200px;
+    height: 250px;
+    border-radius: 8px;
+    object-fit: cover;
+    object-position: top;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.admin-card figcaption {
+    font-weight: 600;
+    color: var(--text-main);
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: center;
+    flex-grow: 1;
+    width: 100%;
+}
+
+.admin-card figcaption p {
+    margin-top: auto;
+    margin-bottom: 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Deployment Hint for User */
+.deployment-info {
+    font-size: 0.65rem;
+    opacity: 0.3;
+    margin-top: 5px;
+    letter-spacing: 0.5px;
+    transition: opacity 0.3s;
+}
+
+.deployment-info:hover {
+    opacity: 0.8;
 }

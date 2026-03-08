@@ -115,6 +115,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load News
     loadNews();
 
+    // Visitor Counter
+    updateVisitorCounter();
+
     async function loadNews() {
         const container = document.getElementById('news-container');
         try {
@@ -201,16 +204,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+                const safeId = item.id.replace(/[^a-zA-Z0-9]/g, '_');
                 card.innerHTML = `
                     ${mediaHtml}
                     <div class="card-body d-flex flex-column" style="padding: 1.5rem;">
                         <span class="text-muted small mb-2"><i class="far fa-clock"></i> ${dateStr}</span>
-                        <p class="card-text flex-grow-1" style="line-height: 1.6; margin-bottom: 1.25rem;">${highlightedShortText}</p>
+                        <p class="card-text flex-grow-1" style="line-height: 1.6; margin-bottom: 0.75rem;">${highlightedShortText}</p>
+                        
+                        <div class="news-stats mb-3">
+                            <span class="news-stat-item news-views">
+                                <i class="far fa-eye" title="Ko'rilganlar soni"></i> 
+                                <span class="view-count" id="views-${safeId}">...</span>
+                            </span>
+                            <button class="btn-like" onclick="handleLike('${item.id.replace(/'/g, "\\'")}', this)" id="like-btn-${safeId}">
+                                <i class="far fa-heart"></i> 
+                                <span class="like-count" id="likes-${safeId}">...</span>
+                            </button>
+                        </div>
+
                         <button class="btn btn-outline-primary btn-sm mt-auto align-self-start" style="border-radius: 20px; padding: 5px 15px;" onclick="openModal('${item.id.replace(/'/g, "\\'")}')">
                             Batafsil o'qish <i class="fas fa-arrow-right ms-1"></i>
                         </button>
                     </div>
                 `;
+
+                // Initial count fetch (background)
+                fetchNewsStats(item.id);
 
 
                 col.appendChild(card);
@@ -262,6 +281,13 @@ function openModal(newsId) {
     window.currentNewsId = newsId;
     const news = window.globalNewsData.find(n => n.id === newsId);
     if (!news) return;
+
+    // Increment view count in API
+    incrementCounter('news_view_' + newsId).then(val => {
+        const safeId = newsId.replace(/[^a-zA-Z0-9]/g, '_');
+        const viewEl = document.getElementById(`views-${safeId}`);
+        if (viewEl) viewEl.textContent = val;
+    });
 
 
     // Elementlarni olish
@@ -526,14 +552,26 @@ function closeImageModal() {
         });
     }
 
-    // Back to Top Button Logic
+    // Back to Top & Jump to Footer Logic
     const backToTop = document.getElementById('backToTop');
+    const jumpToFooter = document.getElementById('jumpToFooter');
     const dateNav = document.getElementById('dynamicDateNav');
 
-    if (backToTop) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                // If dateNav exists and is scrolled past, or just if scrolled far enough
+    window.scrollToFooter = function () {
+        const footer = document.querySelector('footer');
+        if (footer) {
+            footer.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const pageHeight = document.documentElement.scrollHeight;
+        const windowHeight = window.innerHeight;
+
+        // Back to Top visibility
+        if (backToTop) {
+            if (scrollY > 300) {
                 if (!dateNav || dateNav.getBoundingClientRect().bottom < 0) {
                     backToTop.classList.add('show');
                 } else {
@@ -542,8 +580,17 @@ function closeImageModal() {
             } else {
                 backToTop.classList.remove('show');
             }
-        });
-    }
+        }
+
+        // Jump to Footer visibility (hide when already near footer)
+        if (jumpToFooter) {
+            if (scrollY + windowHeight < pageHeight - 300) {
+                jumpToFooter.style.display = 'flex';
+            } else {
+                jumpToFooter.style.display = 'none';
+            }
+        }
+    });
 })();
 
 
@@ -632,4 +679,90 @@ function scrollToDateSection(month, year) {
             break;
         }
     }
+}
+
+// ==================== STATISTICS & COUNTER LOGIC (CounterAPI.dev) ====================
+const COUNTER_NAMESPACE = 'mshmaktab1_school';
+
+// Increments a generic key and returns the value
+async function incrementCounter(key) {
+    try {
+        const res = await fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/${key}/up`);
+        const data = await res.json();
+        return data.count || 0;
+    } catch (e) {
+        console.warn("Counter error:", e);
+        return '...';
+    }
+}
+
+// Just fetches the current value
+async function getCounter(key) {
+    try {
+        const res = await fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/${key}`);
+        const data = await res.json();
+        return data.count || 0;
+    } catch (e) {
+        // If key doesn't exist yet, it might 404, which is fine
+        return 0;
+    }
+}
+
+// Site Visitor Counter
+async function updateVisitorCounter() {
+    const visitorEl = document.getElementById('visitorCount');
+    if (!visitorEl) return;
+
+    // Use localStorage to avoid counting refresh/tab open as new "visit" during the SAME session
+    if (sessionStorage.getItem('visited')) {
+        const count = await getCounter('site_visitors');
+        visitorEl.textContent = count.toLocaleString();
+        return;
+    }
+
+    // Increment site_visitors
+    const count = await incrementCounter('site_visitors');
+    visitorEl.textContent = count.toLocaleString();
+    sessionStorage.setItem('visited', 'true');
+}
+
+// Fetch stats for news card
+async function fetchNewsStats(newsId) {
+    const safeId = newsId.replace(/[^a-zA-Z0-9]/g, '_');
+    const views = await getCounter('news_view_' + newsId);
+    const likes = await getCounter('news_like_' + newsId);
+
+    const viewEl = document.getElementById(`views-${safeId}`);
+    const likeEl = document.getElementById(`likes-${safeId}`);
+    const likeBtn = document.getElementById(`like-btn-${safeId}`);
+
+    if (viewEl) viewEl.textContent = views;
+    if (likeEl) likeEl.textContent = likes;
+
+    // Check if user already liked this
+    if (localStorage.getItem('liked_' + newsId)) {
+        if (likeBtn) likeBtn.classList.add('active');
+    }
+}
+
+// Handle Like Button Click
+async function handleLike(newsId, btn) {
+    if (localStorage.getItem('liked_' + newsId)) {
+        alert("Siz ushbu yangilikka allaqachon layk bosgansiz!");
+        return;
+    }
+
+    const safeId = newsId.replace(/[^a-zA-Z0-9]/g, '_');
+    const likeEl = document.getElementById(`likes-${safeId}`);
+
+    // Add visual feedback immediately
+    btn.classList.add('active');
+    btn.style.pointerEvents = 'none'; // Prevent double click
+
+    // Update API
+    const newVal = await incrementCounter('news_like_' + newsId);
+    if (likeEl) likeEl.textContent = newVal;
+
+    // Persist in local storage
+    localStorage.setItem('liked_' + newsId, 'true');
 }
