@@ -174,7 +174,14 @@ async function fetchNews() {
     console.log("Starting deep recovery process...");
 
     while (keepCrawling) {
-        const batch = await fetchBatch(oldestId);
+        let batch;
+        try {
+            batch = await fetchBatch(oldestId);
+        } catch (error) {
+            console.error(`Failed to fetch batch: ${error.message}`);
+            break;
+        }
+
         if (batch.length === 0) break;
 
         allNews.push(...batch);
