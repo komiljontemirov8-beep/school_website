@@ -1,4 +1,14 @@
+// ==================== ADMIN CONFIG ====================
+// Sayt ko'chirilganda faqat shu yerdagi nomni o'zgartiring:
+const MANAGEMENT_CONFIG = {
+    googleAccount: "[Google_Akkaunt_Nomi_Shu_Yerga_Yoziladi]"
+};
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Fill Management ID in footer automatically
+    const mgmtEl = document.getElementById('mgmtId');
+    if (mgmtEl) mgmtEl.textContent = MANAGEMENT_CONFIG.googleAccount;
+
     const menuToggle = document.getElementById('mobile-menu');
     const navLinks = document.querySelector('.nav-links');
 

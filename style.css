@@ -1532,15 +1532,31 @@ body.theme-green .btn-3d-up:active {
     text-align: center;
 }
 
-/* Deployment Hint for User */
+/* Admin / Deployment Hint */
 .deployment-info {
-    font-size: 0.65rem;
-    opacity: 0.3;
-    margin-top: 5px;
-    letter-spacing: 0.5px;
-    transition: opacity 0.3s;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 12px;
+    letter-spacing: 0.8px;
+    transition: all 0.3s ease;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 8px;
+    display: inline-block;
+    cursor: default;
+}
+
+.deployment-info i {
+    margin-right: 5px;
+    color: var(--warning-color);
 }
 
 .deployment-info:hover {
-    opacity: 0.8;
+    color: rgba(255, 255, 255, 0.9);
+    border-top-color: rgba(255, 255, 255, 0.2);
+}
+
+.deployment-info span {
+    font-weight: 600;
+    color: #ffd700;
+    /* Gold color for the ID */
 }
