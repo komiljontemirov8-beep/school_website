@@ -152,6 +152,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Visitor Counter
     updateVisitorCounter();
 
+    // Premium Calendar Widget
+    initPremiumCalendarWidget();
+
     async function loadNews() {
         const container = document.getElementById('news-container');
         try {
@@ -201,9 +204,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                     // Create Swiper container for THIS month
                     const swiperContainerHTML = document.createElement('div');
-                    swiperContainerHTML.className = 'swiper newsSwiper col-12';
+                    swiperContainerHTML.className = 'swiper newsSwiper col-12 position-relative';
                     swiperContainerHTML.id = safeGroupId;
-                    swiperContainerHTML.style.padding = '10px 0 30px';
+                    swiperContainerHTML.style.padding = '10px 40px 30px';
 
                     const swiperWrapperHTML = document.createElement('div');
                     swiperWrapperHTML.className = 'swiper-wrapper';
@@ -212,8 +215,16 @@ document.addEventListener('DOMContentLoaded', async () => {
                     swiperPaginationHTML.className = 'swiper-pagination mt-3 position-relative';
                     swiperPaginationHTML.style.bottom = '0';
 
+                    const swiperBtnPrev = document.createElement('div');
+                    swiperBtnPrev.className = 'swiper-button-prev custom-swiper-btn';
+
+                    const swiperBtnNext = document.createElement('div');
+                    swiperBtnNext.className = 'swiper-button-next custom-swiper-btn';
+
                     swiperContainerHTML.appendChild(swiperWrapperHTML);
                     swiperContainerHTML.appendChild(swiperPaginationHTML);
+                    swiperContainerHTML.appendChild(swiperBtnPrev);
+                    swiperContainerHTML.appendChild(swiperBtnNext);
                     container.appendChild(swiperContainerHTML);
 
                     currentSwiperWrapperDiv = swiperWrapperHTML;
@@ -294,6 +305,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                             el: container.querySelector('.swiper-pagination'),
                             clickable: true,
                             dynamicBullets: true,
+                        },
+                        navigation: {
+                            nextEl: container.querySelector('.swiper-button-next'),
+                            prevEl: container.querySelector('.swiper-button-prev'),
                         },
                         breakpoints: {
                             768: { slidesPerView: 2 },
@@ -789,9 +804,204 @@ async function incrementCounter(key) {
         const data = await res.json();
         return data.count || 0;
     } catch (e) {
-        console.warn("Counter error:", e);
         return '...';
     }
+}
+
+// ==================== PREMIUM CALENDAR & CLOCK WIDGET ====================
+function initPremiumCalendarWidget() {
+    const widgetHtml = `
+        <div class="premium-datetime-widget glass-effect">
+            <div class="datetime-display" id="datetimeDisplay">
+                <div class="time-block">
+                    <span id="time-hm">00:00</span><span id="time-s">00</span>
+                </div>
+                <div class="date-block">
+                    <div id="date-weekday">Dushanba</div>
+                    <div id="date-full">1 Yanvar, 2026</div>
+                </div>
+                <div class="cal-icon-wrap">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+            </div>
+            <div class="premium-calendar-dropdown" id="premiumCalendar">
+                <div class="calendar-header">
+                    <button id="cal-btn-prev"><i class="fas fa-chevron-left"></i></button>
+                    <div class="calendar-selectors">
+                        <select id="cal-select-month">
+                            <option value="0">Yanvar</option>
+                            <option value="1">Fevral</option>
+                            <option value="2">Mart</option>
+                            <option value="3">Aprel</option>
+                            <option value="4">May</option>
+                            <option value="5">Iyun</option>
+                            <option value="6">Iyul</option>
+                            <option value="7">Avgust</option>
+                            <option value="8">Sentyabr</option>
+                            <option value="9">Oktyabr</option>
+                            <option value="10">Noyabr</option>
+                            <option value="11">Dekabr</option>
+                        </select>
+                        <select id="cal-select-year"></select>
+                    </div>
+                    <button id="cal-btn-next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="calendar-weekdays">
+                    <div>Du</div><div>Se</div><div>Ch</div><div>Pa</div><div>Ju</div><div>Sh</div><div>Ya</div>
+                </div>
+                <div class="calendar-days" id="calendarDays"></div>
+            </div>
+        </div>
+    `;
+
+    const widgetContainer = document.createElement('div');
+    widgetContainer.id = "global-calendar-widget";
+    widgetContainer.innerHTML = widgetHtml;
+
+    // Injection
+    const header = document.querySelector('header');
+    if (header) {
+        header.style.position = 'relative';
+        header.appendChild(widgetContainer);
+    } else {
+        document.body.appendChild(widgetContainer);
+    }
+
+    // Logic
+    const timeHm = document.getElementById('time-hm');
+    const timeS = document.getElementById('time-s');
+    const dateWeekday = document.getElementById('date-weekday');
+    const dateFull = document.getElementById('date-full');
+    const datetimeDisplay = document.getElementById('datetimeDisplay');
+    const premiumCalendar = document.getElementById('premiumCalendar');
+
+    const calDays = document.getElementById('calendarDays');
+    const calMonth = document.getElementById('cal-select-month');
+    const calYear = document.getElementById('cal-select-year');
+    const btnPrev = document.getElementById('cal-btn-prev');
+    const btnNext = document.getElementById('cal-btn-next');
+
+    // Populate Year Dropdown
+    const currentRealDate = new Date();
+    for (let y = 1990; y <= 2050; y++) {
+        const opt = document.createElement('option');
+        opt.value = y;
+        opt.textContent = y;
+        calYear.appendChild(opt);
+    }
+
+    let displayedMonth = currentRealDate.getMonth();
+    let displayedYear = currentRealDate.getFullYear();
+
+    // Selected Date Tracker
+    let selectedDate = new Date(currentRealDate);
+
+    function updateLiveClock() {
+        const now = new Date();
+        const hh = String(now.getHours()).padStart(2, '0');
+        const mm = String(now.getMinutes()).padStart(2, '0');
+        const ss = String(now.getSeconds()).padStart(2, '0');
+
+        timeHm.textContent = hh + ':' + mm;
+        timeS.textContent = ':' + ss;
+
+        const weekdays = ["Yakshanba", "Dushanba", "Seshanba", "Chorshanba", "Payshanba", "Juma", "Shanba"];
+        const months = ["Yanvar", "Fevral", "Mart", "Aprel", "May", "Iyun", "Iyul", "Avgust", "Sentyabr", "Oktyabr", "Noyabr", "Dekabr"];
+
+        // Show the currently selected date in the display, updating day and full date
+        // Actually, user wants "live time" and "selected date"? No, usually a clock shows current day.
+        // But if they select a date, maybe we update the display. Let's make the text show the SELECTED date, but live time always shows CURRENT time.
+        const d = selectedDate;
+        dateWeekday.textContent = weekdays[d.getDay()];
+        dateFull.textContent = d.getDate() + ' ' + months[d.getMonth()] + ', ' + d.getFullYear();
+    }
+
+    setInterval(updateLiveClock, 1000);
+    updateLiveClock();
+
+    // Toggle calendar
+    datetimeDisplay.addEventListener('click', (e) => {
+        e.stopPropagation();
+        premiumCalendar.classList.toggle('active');
+        renderCalendar();
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!widgetContainer.contains(e.target)) {
+            premiumCalendar.classList.remove('active');
+        }
+    });
+
+    function renderCalendar() {
+        calDays.innerHTML = '';
+        calMonth.value = displayedMonth;
+        calYear.value = displayedYear;
+
+        const firstDay = new Date(displayedYear, displayedMonth, 1).getDay();
+        const daysInMonth = new Date(displayedYear, displayedMonth + 1, 0).getDate();
+
+        // Adjust for Monday start (0 is Sunday)
+        let emptyCells = firstDay === 0 ? 6 : firstDay - 1;
+
+        for (let i = 0; i < emptyCells; i++) {
+            const cell = document.createElement('div');
+            cell.className = 'cal-day empty';
+            calDays.appendChild(cell);
+        }
+
+        const today = new Date();
+
+        for (let i = 1; i <= daysInMonth; i++) {
+            const cell = document.createElement('div');
+            cell.className = 'cal-day';
+            cell.textContent = i;
+
+            if (displayedYear === today.getFullYear() && displayedMonth === today.getMonth() && i === today.getDate()) {
+                cell.classList.add('today');
+            }
+            if (displayedYear === selectedDate.getFullYear() && displayedMonth === selectedDate.getMonth() && i === selectedDate.getDate()) {
+                cell.classList.add('selected');
+            }
+
+            cell.addEventListener('click', () => {
+                selectedDate = new Date(displayedYear, displayedMonth, i);
+                updateLiveClock();
+                renderCalendar();
+                // Close after select (optional, but requested for professional feel, maybe leave open or flash?)
+                setTimeout(() => premiumCalendar.classList.remove('active'), 250);
+            });
+
+            calDays.appendChild(cell);
+        }
+    }
+
+    btnPrev.addEventListener('click', () => {
+        displayedMonth--;
+        if (displayedMonth < 0) {
+            displayedMonth = 11;
+            displayedYear--;
+        }
+        renderCalendar();
+    });
+
+    btnNext.addEventListener('click', () => {
+        displayedMonth++;
+        if (displayedMonth > 11) {
+            displayedMonth = 0;
+            displayedYear++;
+        }
+        renderCalendar();
+    });
+
+    calMonth.addEventListener('change', (e) => {
+        displayedMonth = parseInt(e.target.value);
+        renderCalendar();
+    });
+
+    calYear.addEventListener('change', (e) => {
+        displayedYear = parseInt(e.target.value);
+        renderCalendar();
+    });
 }
 
 // Just fetches the current value
