@@ -1,7 +1,7 @@
 // ==================== ADMIN CONFIG ====================
 // Sayt ko'chirilganda faqat shu yerdagi nomni o'zgartiring:
 const MANAGEMENT_CONFIG = {
-    googleAccount: "[komiljontemirov8]"
+    googleAccount: "[Google_Akkaunt_Nomi_Shu_Yerga_Yoziladi]"
 };
 
 async function loadFooter() {
@@ -172,31 +172,58 @@ document.addEventListener('DOMContentLoaded', async () => {
             container.innerHTML = ''; // Clear loading spinner
 
             // Generate Dynamic Navigation
+            const navContainer = document.getElementById('dynamicDateNav');
+            if (navContainer) navContainer.style.display = 'flex'; // Restore visibility
+
             generateArchiveNavigation(news);
 
             let lastGroup = '';
+            let currentSwiperWrapperDiv = null;
 
             news.forEach(item => {
                 const dateObj = new Date(item.date);
-
-                // 1. Grouping by Month Year
+                const dateStr = formatUzbekDate(dateObj);
                 const groupKey = formatMonthYear(dateObj);
+
+                // Initialize a new group if month/year changes
                 if (groupKey !== lastGroup) {
+                    const safeGroupId = 'news-group-' + groupKey.replace(/\s+/g, '-').toLowerCase();
+
+                    // Create group header
                     const groupHeader = document.createElement('div');
-                    groupHeader.className = 'col-12 mt-4 mb-2';
-                    groupHeader.innerHTML = `<h3 class="border-bottom border-primary pb-2 text-primary fs-5 text-uppercase"><i class="far fa-calendar-check"></i> ${groupKey}</h3>`;
+                    groupHeader.className = 'col-12 mt-4 mb-2 d-flex justify-content-between align-items-end flex-wrap gap-2';
+                    groupHeader.innerHTML = `
+                        <h3 class="border-bottom border-primary pb-2 text-primary fs-5 text-uppercase mb-0"><i class="far fa-calendar-check"></i> <span class="group-title">${groupKey}</span></h3>
+                        <button class="btn btn-sm btn-outline-primary rounded-pill view-all-btn fw-bold" data-target="${safeGroupId}">Barchasi <i class="fas fa-th-large ms-1"></i></button>
+                    `;
                     container.appendChild(groupHeader);
                     lastGroup = groupKey;
+
+                    // Create Swiper container for THIS month
+                    const swiperContainerHTML = document.createElement('div');
+                    swiperContainerHTML.className = 'swiper newsSwiper col-12';
+                    swiperContainerHTML.id = safeGroupId;
+                    swiperContainerHTML.style.padding = '10px 0 30px';
+
+                    const swiperWrapperHTML = document.createElement('div');
+                    swiperWrapperHTML.className = 'swiper-wrapper';
+
+                    const swiperPaginationHTML = document.createElement('div');
+                    swiperPaginationHTML.className = 'swiper-pagination mt-3 position-relative';
+                    swiperPaginationHTML.style.bottom = '0';
+
+                    swiperContainerHTML.appendChild(swiperWrapperHTML);
+                    swiperContainerHTML.appendChild(swiperPaginationHTML);
+                    container.appendChild(swiperContainerHTML);
+
+                    currentSwiperWrapperDiv = swiperWrapperHTML;
                 }
 
-                const col = document.createElement('div');
-                col.className = 'col-md-6 col-lg-4';
+                const slide = document.createElement('div');
+                slide.className = 'swiper-slide h-auto'; // Ensure equal card heights
 
                 const card = document.createElement('div');
                 card.className = 'card h-100 shadow-sm border-0 news-card-interactive';
-
-                // 2. Format Date
-                const dateStr = formatUzbekDate(dateObj);
 
                 let mediaHtml = '';
                 if (item.video) {
@@ -222,53 +249,89 @@ document.addEventListener('DOMContentLoaded', async () => {
                     `;
                 }
 
-
-
-
-
                 const fullText = item.text || '';
                 const shortText = fullText.length > 120 ? fullText.substring(0, 120) + '...' : fullText;
 
-                // Highlight hashtags in card preview
-                // Highlight hashtags in card preview safely (split by tags if any exist)
                 const highlightedShortText = shortText.split(/(<[^>]+>)/g).map(part => {
                     if (part && part.startsWith('<')) return part;
                     return part.replace(/(#[^\s#.,!?;:()\[\]{}'"]+)/g, '<span class="inline-hashtag">$1</span>');
                 }).join('');
 
-
-
-                const safeId = item.id.replace(/[^a-zA-Z0-9]/g, '_');
                 card.innerHTML = `
                     ${mediaHtml}
                     <div class="card-body d-flex flex-column" style="padding: 1.5rem;">
                         <span class="text-muted small mb-2"><i class="far fa-clock"></i> ${dateStr}</span>
                         <p class="card-text flex-grow-1" style="line-height: 1.6; margin-bottom: 0.75rem;">${highlightedShortText}</p>
                         
-                        <div class="news-stats mb-3">
-                            <span class="news-stat-item news-views">
-                                <i class="far fa-eye" title="Ko'rilganlar soni"></i> 
-                                <span class="view-count" id="views-${safeId}">...</span>
-                            </span>
-                            <button class="btn-like" onclick="handleLike('${item.id.replace(/'/g, "\\'")}', this)" id="like-btn-${safeId}">
-                                <i class="far fa-heart"></i> 
-                                <span class="like-count" id="likes-${safeId}">...</span>
-                            </button>
-                        </div>
-
-                        <button class="btn btn-outline-primary btn-sm mt-auto align-self-start" style="border-radius: 20px; padding: 5px 15px;" onclick="openModal('${item.id.replace(/'/g, "\\'")}')">
+                        <button class="btn btn-outline-primary btn-sm mt-3 align-self-start" style="border-radius: 20px; padding: 5px 15px;" onclick="openModal('${item.id.replace(/'/g, "\\'")}')">
                             Batafsil o'qish <i class="fas fa-arrow-right ms-1"></i>
                         </button>
                     </div>
                 `;
 
-                // Initial count fetch (background)
-                fetchNewsStats(item.id);
-
-
-                col.appendChild(card);
-                container.appendChild(col);
+                slide.appendChild(card);
+                if (currentSwiperWrapperDiv) {
+                    currentSwiperWrapperDiv.appendChild(slide);
+                }
             });
+
+            // Initialize Multiple Swipers (one for each group)
+            if (window.Swiper) {
+                const swiperContainers = document.querySelectorAll(".newsSwiper");
+                swiperContainers.forEach(container => {
+                    // Start Swiper
+                    new Swiper(container, {
+                        slidesPerView: 1,
+                        spaceBetween: 25,
+                        loop: false,
+                        grabCursor: true,
+                        autoplay: {
+                            delay: 4000,
+                            disableOnInteraction: false,
+                            pauseOnMouseEnter: true,
+                        },
+                        pagination: {
+                            el: container.querySelector('.swiper-pagination'),
+                            clickable: true,
+                            dynamicBullets: true,
+                        },
+                        breakpoints: {
+                            768: { slidesPerView: 2 },
+                            1024: { slidesPerView: 3 }
+                        }
+                    });
+                });
+
+                // Attach View All handlers
+                document.querySelectorAll('.view-all-btn').forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        const targetId = this.getAttribute('data-target');
+                        const swiperContainer = document.getElementById(targetId);
+
+                        if (swiperContainer.classList.contains('grid-view')) {
+                            // Revert to swiper
+                            swiperContainer.classList.remove('grid-view');
+                            this.innerHTML = `Barchasi <i class="fas fa-th-large ms-1"></i>`;
+
+                            // Re-enable swiper
+                            if (swiperContainer.swiper) {
+                                swiperContainer.swiper.autoplay.start();
+                                swiperContainer.swiper.update();
+                            }
+                        } else {
+                            // Switch to grid view
+                            swiperContainer.classList.add('grid-view');
+                            this.innerHTML = `Yig'ish <i class="fas fa-compress-arrows-alt ms-1"></i>`;
+
+                            // Stop swiper animation temporarily
+                            if (swiperContainer.swiper) {
+                                swiperContainer.swiper.autoplay.stop();
+                                swiperContainer.swiper.setTranslate(0);
+                            }
+                        }
+                    });
+                });
+            }
 
         } catch (error) {
             console.error('Error loading news:', error);
@@ -404,7 +467,7 @@ function openModal(newsId) {
         if (modalImage) modalImage.style.display = 'none';
         if (videoEl) {
             videoEl.src = news.video;
-            videoEl.volume = 0.3; // Standart ovoz balandligi 30%
+            videoEl.muted = true; // Ovoz butunlay olib tashlandi
             videoEl.style.display = 'block';
             videoEl.play().catch(e => console.log("Auto-play blocked"));
         }
@@ -702,10 +765,11 @@ function formatMonthName(monthIdx) {
 }
 
 function scrollToDateSection(month, year) {
-    const sections = document.querySelectorAll('#news-container h3');
+    const sections = document.querySelectorAll('#news-container h3 .group-title');
     for (let section of sections) {
         if (section.textContent.includes(month) && section.textContent.includes(year)) {
-            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Because section is the span inside h3, scroll the h3 itself into view.
+            section.parentElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
             // Highlight active button
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -801,3 +865,111 @@ async function handleLike(newsId, btn) {
     localStorage.setItem('liked_' + newsId, 'true');
 }
 
+// ==================== FLOATING PARTICLES ====================
+function initParticles() {
+    const container = document.getElementById('particles-container');
+    if (!container) return;
+
+    // A mix of vibrant colors
+    const colors = ['#f43f5e', '#a855f7', '#3b82f6', '#10b981', '#f59e0b', '#ec4899', '#00e5ff', '#ffffff'];
+    const shapes = ['particle', 'particle', 'particle', 'particle-square', 'particle-triangle'];
+    const particleCount = window.innerWidth > 768 ? 24 : 12; // Reduced count
+
+    for (let i = 0; i < particleCount; i++) {
+        createParticle(container, colors, shapes);
+    }
+}
+
+function createParticle(container, colors, shapes) {
+    const particle = document.createElement('div');
+
+    // Randomize properties for glowing shapes
+    const size = Math.random() * 8 + 4; // 4px to 12px
+    const shapeClass = shapes[Math.floor(Math.random() * shapes.length)];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+
+    // Distribute mostly on the left (0-15vw) or right (85-100vw) sides
+    const isLeftEdge = Math.random() > 0.5;
+    const left = (isLeftEdge ? (Math.random() * 15) : (85 + Math.random() * 15)) + 'vw';
+
+    const top = Math.random() * 100 + 'vh';
+    const animDelay = Math.random() * 20 + 's';
+    const animDuration = Math.random() * 20 + 20 + 's'; // Slower movement (20s to 40s)
+
+    // Apply styles
+    particle.className = shapeClass;
+
+    // Size adjustment
+    if (shapeClass === 'particle-triangle') {
+        particle.style.borderLeft = (size / 2) + 'px solid transparent';
+        particle.style.borderRight = (size / 2) + 'px solid transparent';
+        particle.style.borderBottom = size + 'px solid ' + color;
+        // Neon glow via filter dropshadow for borders (triangle)
+        particle.style.filter = `drop-shadow(0 0 ${size}px ${color})`;
+        particle.style.backgroundColor = 'transparent';
+    } else {
+        particle.style.backgroundColor = color;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        // Neon glow via box shadow (circles and squares)
+        particle.style.boxShadow = `0 0 ${size * 1.5}px ${color}`;
+    }
+
+    particle.style.left = left;
+    particle.style.top = top;
+    particle.style.animationDelay = animDelay;
+    particle.style.animationDuration = animDuration;
+
+    container.appendChild(particle);
+}
+
+// Call on load
+document.addEventListener('DOMContentLoaded', initParticles);
+
+// ==================== MODERN SOFT CLICK SOUND ====================
+let audioCtx;
+
+function playSoftClick() {
+    // Initialize lazily to respect browser autoplay policies
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+    }
+
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+
+    // Very soft "pop/tick" sound frequency
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(600, audioCtx.currentTime); // Start slightly high
+    oscillator.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.05); // Drop frequency extremely fast
+
+    // Volume envelope
+    gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+    gainNode.gain.linearRampToValueAtTime(0.1, audioCtx.currentTime + 0.01); // Soft 10% volume
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05); // Fade out
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    oscillator.start(audioCtx.currentTime);
+    oscillator.stop(audioCtx.currentTime + 0.05);
+}
+
+// Attach click sound listener to interactive elements
+document.addEventListener('click', (e) => {
+    // Check if the click is on an interactive element
+    const isInteractive =
+        e.target.closest('button') ||
+        e.target.closest('a') ||
+        e.target.closest('.card') ||
+        e.target.closest('.nav-item') ||
+        e.target.closest('input') ||
+        e.target.classList.contains('swiper-pagination-bullet');
+
+    if (isInteractive) {
+        playSoftClick();
+    }
+});

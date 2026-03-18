@@ -571,6 +571,9 @@
 </head>
 
 <body>
+    <!-- Slower Particle Background -->
+    <div id="particles-container" class="slow-particles"></div>
+
     <script>
         const savedTheme = localStorage.getItem('theme') || 'modern';
         document.body.classList.add('theme-' + savedTheme);
@@ -797,8 +800,8 @@
                         <div class="admin-card w-100">
                             <img src="images/admin/deputy_1.jpg" alt="O'quv ishlari bo'yicha o'rinbosar">
                             <figcaption>
-                                <h3>Umronov Sardorbek Sodirbek o'g'li</h3>
-                                <p>O'quv ishlari — o'rinbosar</p>
+                                <h3>RUZALIYEVA GULZODAXON AVAZJONOVNA</h3>
+                                <p>Direktorning o'quv ishlari bo'yicha o'rinbosari</p>
                             </figcaption>
                         </div>
                     </div>
@@ -807,7 +810,7 @@
                             <img src="images/admin/deputy_2.jpg" alt="O'quv ishlari bo'yicha o'rinbosar">
                             <figcaption>
                                 <h3>Umarova Diloromxon Muxtorovna</h3>
-                                <p>O'quv ishlari — o'rinbosar</p>
+                                <p>Direktorning o'quv ishlari bo'yicha o'rinbosari</p>
                             </figcaption>
                         </div>
                     </div>
@@ -816,7 +819,7 @@
                             <img src="images/admin/deputy_3.jpg" alt="O'quv ishlari bo'yicha o'rinbosar">
                             <figcaption>
                                 <h3>Xakimov Baxodirjon Nazirdjanovich</h3>
-                                <p>O'quv ishlari — o'rinbosar</p>
+                                <p>Direktorning o'quv ishlari bo'yicha o'rinbosari</p>
                             </figcaption>
                         </div>
                     </div>
@@ -829,7 +832,7 @@
                             <img src="images/admin/deputy_extra_2.jpg" alt="Ma'naviy-ma'rifiy ishlar o'rinbosari">
                             <figcaption>
                                 <h3>Abloberdiyev Sherzodjon Yusubjonovich</h3>
-                                <p>Ma'naviy-ma'rifiy — o'rinbosar</p>
+                                <p>Direktorning ma'naviy-ma'rifiy ishlari bo'yicha o'rinbosari</p>
                             </figcaption>
                         </div>
                     </div>
@@ -837,7 +840,7 @@
                         <div class="admin-card w-100">
                             <img src="images/admin/deputy_extra_1.jpg" alt="Maktab maslahatchisi">
                             <figcaption>
-                                <h3 style="color: #92400e;">Tanlov jarayonlari davom etmoqda</h3>
+                                <h3>Usmanova Barnoxon Xasanovna</h3>
                                 <p>Maktab maslahatchisi</p>
                             </figcaption>
                         </div>
@@ -848,7 +851,7 @@
                                 onerror="this.src='https://via.placeholder.com/200x250/cbd5e1/475569?text=Rasm+uchun+joy';">
                             <figcaption>
                                 <h3 style="text-transform: capitalize;">Mamadjanov Abdujabbor Maxmudovich</h3>
-                                <p>Xo'jalik ishlari — o'rinbosar</p>
+                                <p>Direktorning xo'jalik ishlari bo'yicha o'rinbosari</p>
                             </figcaption>
                         </div>
                     </div>
@@ -856,6 +859,16 @@
 
                 <!-- 4-qator: 2 ta Maktab psixologi -->
                 <div class="row g-4 justify-content-center">
+                    <div class="col-8 col-sm-6 col-md-4 col-lg-3 d-flex">
+                        <div class="admin-card w-100">
+                            <img src="images/admin/library_1.jpg" alt="Kutubxona mudiri"
+                                onerror="this.src='https://via.placeholder.com/200x250/cbd5e1/475569?text=+';">
+                            <figcaption>
+                                <h3>Yuldasheva Nargizaxon Raxmanaliyevna</h3>
+                                <p>Kutubxona mudiri</p>
+                            </figcaption>
+                        </div>
+                    </div>
                     <div class="col-8 col-sm-6 col-md-4 col-lg-3 d-flex">
                         <div class="admin-card w-100">
                             <img src="images/admin/psychologist_1.jpg" alt="Maktab psixologi">
@@ -1092,7 +1105,7 @@
             <div class="row g-4">
                 <div class="col-md-6 col-lg-4">
                     <div class="infra-card">
-                        <div class="infra-icon"><i class="fas fa-school"></i></div>
+                        <div class="infra-icon"><i class="fa-solid fa-building-columns"></i></div>
                         <div>
                             <h4>1-blok — Asosiy bino</h4>
                             <p>Maktabning markaziy ta'lim binosi. Darsxonalar, ma'muriyat xonalari va kutubxona
@@ -1102,7 +1115,7 @@
                 </div>
                 <div class="col-md-6 col-lg-4">
                     <div class="infra-card">
-                        <div class="infra-icon"><i class="fas fa-chalkboard"></i></div>
+                        <div class="infra-icon"><i class="fa-solid fa-person-chalkboard"></i></div>
                         <div>
                             <h4>2-blok — Darsxonalar</h4>
                             <p>Quyi sinflar uchun maxsus jihozlangan darsxonalar. Yosh o'quvchilarga qulay muhit
@@ -1112,7 +1125,7 @@
                 </div>
                 <div class="col-md-6 col-lg-4">
                     <div class="infra-card">
-                        <div class="infra-icon"><i class="fas fa-flask"></i></div>
+                        <div class="infra-icon"><i class="fa-solid fa-microscope"></i></div>
                         <div>
                             <h4>3-blok — Laboratoriyalar</h4>
                             <p>Kimyo, fizika va biologiya laboratoriyalari. Xona 59 — maxsus Ingliz tili o'quv
@@ -1123,7 +1136,7 @@
                 </div>
                 <div class="col-md-6 col-lg-4">
                     <div class="infra-card">
-                        <div class="infra-icon"><i class="fas fa-laptop"></i></div>
+                        <div class="infra-icon"><i class="fa-solid fa-computer"></i></div>
                         <div>
                             <h4>4-blok — Texnologiya</h4>
                             <p>Kompyuter sinflar va zamonaviy axborot-kommunikatsiya texnologiyalari kabineti.
@@ -1133,7 +1146,7 @@
                 </div>
                 <div class="col-md-6 col-lg-4">
                     <div class="infra-card">
-                        <div class="infra-icon"><i class="fas fa-futbol"></i></div>
+                        <div class="infra-icon"><i class="fa-solid fa-volleyball"></i></div>
                         <div>
                             <h4>5-blok — Sport kompleksi</h4>
                             <p>Katta sport zali, ochiq maydoncha va sport inventarlari bilan to'liq jihozlangan
@@ -1144,7 +1157,7 @@
                 </div>
                 <div class="col-md-6 col-lg-4">
                     <div class="infra-card">
-                        <div class="infra-icon"><i class="fas fa-utensils"></i></div>
+                        <div class="infra-icon"><i class="fa-solid fa-bowl-food"></i></div>
                         <div>
                             <h4>Qo'shimcha xizmatlar</h4>
                             <p>Tibbiyot punkti, o'quvchilar ovqatlanish xonasi va kutubxona — o'quvchilar
@@ -1168,28 +1181,28 @@
             <div class="row g-4 mb-5">
                 <div class="col-sm-6 col-lg-3">
                     <div class="value-card">
-                        <div class="value-icon">🎓</div>
+                        <div class="value-icon"><i class="fa-solid fa-graduation-cap text-primary"></i></div>
                         <h4>Sifatli ta'lim</h4>
                         <p>Zamonaviy o'qitish metodlari va malakali pedagoglar orqali bilim berish</p>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-3">
                     <div class="value-card">
-                        <div class="value-icon">🌟</div>
+                        <div class="value-icon"><i class="fa-solid fa-lightbulb text-warning"></i></div>
                         <h4>Ijod va innovatsiya</h4>
                         <p>Har bir o'quvchining iste'dodi va qobiliyatini rivojlantirish</p>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-3">
                     <div class="value-card">
-                        <div class="value-icon">🤝</div>
+                        <div class="value-icon"><i class="fa-solid fa-handshake text-success"></i></div>
                         <h4>Hamkorlik</h4>
                         <p>Ota-onalar, o'qituvchilar va jamiyat o'rtasida mustahkam munosabatlar</p>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-3">
                     <div class="value-card">
-                        <div class="value-icon">🏆</div>
+                        <div class="value-icon"><i class="fa-solid fa-trophy text-danger"></i></div>
                         <h4>Yutuqlarga intilish</h4>
                         <p>Olimpiadalar, ko'rik-tanlovlar va sport musobaqalarida faol ishtirok</p>
                     </div>
