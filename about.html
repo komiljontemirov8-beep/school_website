@@ -614,17 +614,11 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto align-items-center">
-                        <li class="nav-item"><a class="nav-link" href="index.html">Bosh sahifa</a></li>
+                    <ul class="navbar-nav mx-auto align-items-center">
                         <li class="nav-item"><a class="nav-link active" href="about.html">Maktab haqida</a></li>
                         <li class="nav-item"><a class="nav-link" href="achievements.html">Yutuqlar</a></li>
                         <li class="nav-item"><a class="nav-link" href="statistics.html">Statistika</a></li>
                         <li class="nav-item"><a class="nav-link" href="contact.html">Aloqa</a></li>
-                        <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
-                            <button id="themeToggle" class="btn btn-outline-light btn-sm rounded-pill px-3">
-                                <i class="fas fa-magic me-1"></i> <span id="themeToggleText">Modern</span>
-                            </button>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -1268,6 +1262,31 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 
+    <!-- Team Member Modal -->
+    <div id="teamModal" class="team-modal">
+        <div class="team-modal-overlay" onclick="closeTeamModal()"></div>
+        <div class="team-modal-content">
+            <button class="team-modal-close" onclick="closeTeamModal()" aria-label="Yopish">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="team-modal-body">
+                <div class="team-image-container">
+                    <img id="teamModalImg" src="" alt="Team Member">
+                </div>
+                <div class="team-info-container">
+                    <h3 id="teamModalName">Name</h3>
+                    <h4 id="teamModalRole">Role</h4>
+                    <div class="team-details-content">
+                        <div id="teamModalText" class="team-details-text">
+                            <div class="team-loading"><i class="fas fa-spinner fa-spin me-2"></i> Ma'lumotlar
+                                yuklanmoqda...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Fallback images script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -1286,6 +1305,91 @@
                     }
                 });
             });
+
+            // Initialize Team Modals
+            initTeamModals();
+        });
+
+        function initTeamModals() {
+            // Find all admin and leader images
+            const teamElements = document.querySelectorAll('.admin-card, .leader-info-wrapper');
+
+            teamElements.forEach(el => {
+                const img = el.querySelector('img');
+                const nameEl = el.querySelector('h3') || el.querySelector('.leader-name-text');
+                const roleEl = el.querySelector('p') || el.querySelector('.leader-role-text');
+
+                if (img && nameEl && roleEl) {
+                    // Style element to indicate interactivity
+                    el.style.cursor = 'pointer';
+                    el.classList.add('clickable-team-member');
+
+                    // Add hover effect via JS or rely on CSS later
+                    el.addEventListener('click', () => {
+                        openTeamModal(img.src, nameEl.innerText, roleEl.innerText);
+                    });
+                }
+            });
+        }
+
+        function openTeamModal(imgSrc, name, role) {
+            const modal = document.getElementById('teamModal');
+            document.getElementById('teamModalImg').src = imgSrc;
+            document.getElementById('teamModalName').innerText = name;
+            document.getElementById('teamModalRole').innerText = role;
+
+            const textContainer = document.getElementById('teamModalText');
+            textContainer.innerHTML = '<div class="team-loading"><i class="fas fa-spinner fa-spin me-2"></i> Ma\'lumotlar yuklanmoqda...</div>';
+
+            // Show modal with animation
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // Determine txt file path
+            let txtUrl = imgSrc.replace(/\.(jpg|jpeg|png)$/i, '.txt');
+
+            // Fetch content
+            fetch(txtUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Fayl topilmadi');
+                    }
+                    return response.text();
+                })
+                .then(text => {
+                    // Format text safely
+                    let formatted = text
+                        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") // sanitize basic
+                        .replace(/(Sana:|Tayinlangan sana:)/gi, '<strong class="text-primary">$1</strong>')
+                        .replace(/(Vazifasi:|Vazifa:)/gi, '<strong class="text-primary mt-3 d-block">$1</strong>')
+                        .replace(/(Haq-huquqlari:|Huquqlari:)/gi, '<strong class="text-primary mt-3 d-block">$1</strong>')
+                        .replace(/(Majburiyatlari:|Majburiyat:)/gi, '<strong class="text-primary mt-3 d-block">$1</strong>')
+                        .replace(/\n/g, '<br>');
+
+                    textContainer.innerHTML = formatted;
+                })
+                .catch(err => {
+                    textContainer.innerHTML = `
+                        <div class="team-error text-center p-4">
+                            <i class="fas fa-info-circle fa-2x text-muted mb-3"></i>
+                            <p class="text-muted">Bu rahbar haqida batafsil ma'lumotlar hozircha kiritilmagan.</p>
+                            <small><em>(Fayl nomi: ${txtUrl.split('/').pop()})</em></small>
+                        </div>
+                    `;
+                });
+        }
+
+        function closeTeamModal() {
+            const modal = document.getElementById('teamModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        // Escape to close
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && document.getElementById('teamModal').classList.contains('active')) {
+                closeTeamModal();
+            }
         });
     </script>
 </body>

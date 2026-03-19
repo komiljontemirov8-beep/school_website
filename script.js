@@ -824,6 +824,13 @@ function initPremiumCalendarWidget() {
                     <i class="fas fa-calendar-alt"></i>
                 </div>
             </div>
+            <div class="theme-swatch-bar">
+                <div class="theme-swatch theme-modern" data-theme="modern" title="Modern Sapphire"></div>
+                <div class="theme-swatch theme-green" data-theme="green" title="Emerald Forest"></div>
+                <div class="theme-swatch theme-midnight" data-theme="midnight" title="Midnight Purple"></div>
+                <div class="theme-swatch theme-sunset" data-theme="sunset" title="Golden Sunset"></div>
+                <div class="theme-swatch theme-ocean" data-theme="ocean" title="Ocean Cyan"></div>
+            </div>
             <div class="premium-calendar-dropdown" id="premiumCalendar">
                 <div class="calendar-header">
                     <button id="cal-btn-prev"><i class="fas fa-chevron-left"></i></button>
@@ -866,6 +873,17 @@ function initPremiumCalendarWidget() {
     } else {
         document.body.appendChild(widgetContainer);
     }
+
+    // Theme Switcher Logic
+    const swatches = widgetContainer.querySelectorAll('.theme-swatch');
+    swatches.forEach(swatch => {
+        swatch.addEventListener('click', () => {
+            const theme = swatch.getAttribute('data-theme');
+            document.body.classList.remove('theme-modern', 'theme-green', 'theme-midnight', 'theme-sunset', 'theme-ocean');
+            document.body.classList.add('theme-' + theme);
+            localStorage.setItem('theme', theme);
+        });
+    });
 
     // Logic
     const timeHm = document.getElementById('time-hm');
