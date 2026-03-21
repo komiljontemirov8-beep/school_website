@@ -46,17 +46,23 @@
                 <div class="col-12 mb-2">
                     <div
                         class="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mb-2 ministry-links">
-                        <img src="logo_min.png" alt="Gerb" height="30">
-                        <span class="small text-white">O‘zbekiston Respublikasi maktabgacha va maktab ta'limi
-                            vazirligi</span>
+                        <a href="https://uzedu.uz/uz" target="_blank"
+                            class="text-decoration-none d-flex align-items-center gap-2">
+                            <img src="logo_min.png" alt="Gerb" height="30">
+                            <span class="small text-white">O‘zbekiston Respublikasi maktabgacha va maktab ta'limi
+                                vazirligi</span>
+                        </a>
                     </div>
                 </div>
                 <div class="col-12">
                     <div
                         class="d-flex align-items-center justify-content-center justify-content-md-start gap-3 school-identity">
-                        <img src="logo.png" alt="Maktab Logosi" class="school-logo" width="60" height="60">
-                        <h1 class="h4 text-white text-uppercase m-0 school-name-text">Marg'ilon shahar 1-umumiy o'rta
-                            ta'lim maktabi</h1>
+                        <a href="https://t.me/mshmaktab1" target="_blank"
+                            class="text-decoration-none d-flex align-items-center gap-3">
+                            <img src="logo.png" alt="Maktab Logosi" class="school-logo" width="60" height="60">
+                            <h1 class="h4 text-white text-uppercase m-0 school-name-text">Marg'ilon shahar 1-umumiy
+                                o'rta ta'lim maktabi</h1>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -86,9 +92,12 @@
     <!-- Hero Section -->
     <section class="hero text-center text-white py-5">
         <div class="container">
-            <h1 class="display-4 fw-bold">Marg'ilon shahar 1-umumiy o'rta ta'lim maktabining veb-saytiga <br>XUSH
-                KELIBSIZ!</h1>
-            <p class="lead">Bilim - kelajak poydevori. <br>Bizning maktabimizda har bir o'quvchi o'z iqtidorini namoyon
+            <h1 class="display-4 fw-bold main-hero-title">Marg'ilon shahar 1-umumiy o'rta ta'lim maktabining veb-saytiga
+                <br>XUSH
+                KELIBSIZ!
+            </h1>
+            <p class="lead hero-subtitle">Bilim - kelajak poydevori. <br>Bizning maktabimizda har bir o'quvchi o'z
+                iqtidorini namoyon
                 etadi.</p>
         </div>
     </section>
@@ -96,17 +105,38 @@
     <!-- News & Events Section -->
     <section id="news" class="py-5 news-glass-bg">
         <div class="container">
+            <!-- News Search Bar -->
+            <div class="news-search-container">
+                <div class="position-relative">
+                    <input type="text" id="newsSearchInput" class="form-control news-search-input"
+                        placeholder="Yangiliklarni qidirish... (Ctrl + F)" aria-label="Yangiliklarni qidirish">
+                    <i class="fas fa-search search-icon-inside"></i>
+                </div>
+            </div>
+
+            <!-- Dynamic Date Navigation (Calendar) -->
+            <div id="dynamicDateNav" class="mb-4 d-flex flex-wrap gap-2 animate-fade-in justify-content-center">
+                <!-- Navigation buttons will be generated here -->
+            </div>
+
             <h2 class="text-center mb-5 section-title">So'nggi Yangiliklar va Tadbirlar</h2>
+
+            <!-- Search Results Display -->
+            <div id="searchResultsContainer" style="display: none; margin-bottom: 50px;">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="h4 text-primary text-uppercase mb-0"><i class="fas fa-search me-2"></i> Qidiruv
+                        natijalari
+                    </h2>
+                    <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" onclick="clearSearch()">X
+                        Qidiruvni o'chirish</button>
+                </div>
+                <div id="searchResultsGrid" class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4"></div>
+                <hr class="my-5">
+            </div>
 
             <div class="row">
                 <div class="col-lg-12">
-                    <!-- Dynamic Date Navigation -->
-                    <div id="dynamicDateNav" class="mb-4 d-flex flex-wrap gap-2 animate-fade-in">
-                        <!-- Navigation buttons will be generated here -->
-                    </div>
-
                     <div id="news-container" class="row g-4">
-                        <!-- News will be loaded here dynamically by script.js -->
                         <div class="col-12 text-center py-5 loading-spinner">
                             <div class="spinner-border text-primary" role="status">
                                 <span class="visually-hidden">Loading...</span>
@@ -153,6 +183,11 @@
         title="Yuqoriga qaytish">
         <i class="fas fa-chevron-up"></i>
     </button>
+
+    <!-- 3D Home Button -->
+    <a href="index.html" id="homeButton" class="btn-3d-home" title="Bosh sahifaga qaytish">
+        <i class="fas fa-home"></i>
+    </a>
 
     <!-- 3D Jump to Footer Button -->
     <button id="jumpToFooter" class="btn-3d-down" onclick="window.scrollToFooter()" title="Pastga (futerga) o'tish">
