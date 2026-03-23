@@ -12,14 +12,23 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=24">
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 
 <body>
+    <!-- Page Transition Overlay -->
+    <div id="page-transition" class="page-transition"></div>
+    <!-- 3D Scene Global Container -->
+    <div id="hero-3d-container"></div>
+
     <!-- Particle Background -->
     <div id="particles-container"></div>
+
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 
     <script>
         if (localStorage.getItem('theme') === 'modern') {
@@ -44,8 +53,7 @@
             <div class="row align-items-center text-center text-md-start">
                 <!-- Ministry and School Identity Combined for better responsiveness -->
                 <div class="col-12 mb-2">
-                    <div
-                        class="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mb-2 ministry-links">
+                    <div class="d-flex align-items-center justify-content-center gap-2 mb-2 ministry-links">
                         <a href="https://uzedu.uz/uz" target="_blank"
                             class="text-decoration-none d-flex align-items-center gap-2">
                             <img src="logo_min.png" alt="Gerb" height="30">
@@ -55,8 +63,7 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <div
-                        class="d-flex align-items-center justify-content-center justify-content-md-start gap-3 school-identity">
+                    <div class="d-flex align-items-center justify-content-center gap-3 school-identity">
                         <a href="https://t.me/mshmaktab1" target="_blank"
                             class="text-decoration-none d-flex align-items-center gap-3">
                             <img src="logo.png" alt="Maktab Logosi" class="school-logo" width="60" height="60">
@@ -90,15 +97,29 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero text-center text-white py-5">
-        <div class="container">
-            <h1 class="display-4 fw-bold main-hero-title">Marg'ilon shahar 1-umumiy o'rta ta'lim maktabining veb-saytiga
-                <br>XUSH
-                KELIBSIZ!
-            </h1>
-            <p class="lead hero-subtitle">Bilim - kelajak poydevori. <br>Bizning maktabimizda har bir o'quvchi o'z
-                iqtidorini namoyon
-                etadi.</p>
+    <section class="hero-clean-layout">
+        <div class="container-fluid" style="padding: 100px 0; background-color: #fff;">
+            <div class="row justify-content-center">
+                <div class="col-lg-12 d-flex flex-column align-items-center text-center">
+
+                    <h1 class="main-hero-title fw-bold"
+                        style="font-size: 3.5rem; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 25px;">
+                        <span class="d-block">Farg'ona viloyati, Marg'ilon shahar</span>
+                        <span class="d-block">1-umumiy o'rta ta'lim maktabining</span>
+                        <span class="d-block">veb-saytiga xush kelibsiz!</span>
+                    </h1>
+
+                    <div class="hero-subtext">
+                        <p style="font-size: 1.5rem; color: #333; margin-bottom: 10px; font-family: sans-serif;">
+                            Bilim - kelajak poydevori.
+                        </p>
+                        <p style="font-size: 1.3rem; color: #444; font-family: sans-serif;">
+                            Bizning maktabimizda har bir o'quvchi o'z iqtidorini namoyon etadi.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </section>
 
@@ -201,6 +222,7 @@
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="script.js"></script>
+    <script src="hero-3d.js?v=10"></script>
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 // ==================== ADMIN CONFIG ====================
 // Sayt ko'chirilganda faqat shu yerdagi nomni o'zgartiring:
 const MANAGEMENT_CONFIG = {
-    googleAccount: "[bilolov836 (komiljontemirov8]"
+    googleAccount: "[Google_Akkaunt_Nomi_Shu_Yerga_Yoziladi]"
 };
 
 async function loadFooter() {
@@ -16,9 +16,36 @@ async function loadFooter() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+    // --- Page Transition Entry ---
+    const transitionOverlay = document.getElementById('page-transition');
+    if (transitionOverlay) {
+        // Force the transition to end
+        setTimeout(() => {
+            transitionOverlay.classList.remove('active');
+        }, 100);
+    }
+
+    // Intercept internal links for exit transition
+    document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', e => {
+            const href = link.getAttribute('href');
+            if (href && href.endsWith('.html') && !href.startsWith('http') && !link.target) {
+                e.preventDefault();
+                if (transitionOverlay) {
+                    transitionOverlay.classList.add('active');
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 600); // Wait for animation to finish
+                } else {
+                    window.location.href = href;
+                }
+            }
+        });
+    });
+
     // Apply saved theme immediately
     const savedTheme = localStorage.getItem('theme') || 'modern';
-    document.body.classList.remove('theme-modern', 'theme-green', 'theme-midnight', 'theme-sunset', 'theme-ocean');
+    document.body.classList.remove('theme-modern', 'theme-green', 'theme-midnight', 'theme-sunset', 'theme-ocean', 'theme-gray');
     document.body.classList.add('theme-' + savedTheme);
 
     // Load Shared Footer
@@ -332,7 +359,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 function formatUzbekDate(date) {
     const months = [
         "Yanvar", "Fevral", "Mart", "Aprel", "May", "Iyun",
-        "Iyul", "Avgust", "Sentyabr", "Oktyabr", "Noyabr", "Dekabr"
+        "Iyul", "Avgust", "Sentabr", "Oktabr", "Noyabr", "Dekabr"
     ];
     const day = date.getDate();
     const month = months[date.getMonth()];
@@ -344,7 +371,7 @@ function formatUzbekDate(date) {
 function formatMonthYear(date) {
     const months = [
         "Yanvar", "Fevral", "Mart", "Aprel", "May", "Iyun",
-        "Iyul", "Avgust", "Sentyabr", "Oktyabr", "Noyabr", "Dekabr"
+        "Iyul", "Avgust", "Sentabr", "Oktabr", "Noyabr", "Dekabr"
     ];
     return `${date.getFullYear()}-yil ${months[date.getMonth()]}`;
 }
@@ -794,6 +821,7 @@ function initPremiumCalendarWidget() {
                 <div class="theme-swatch theme-midnight" data-theme="midnight" title="Midnight Purple"></div>
                 <div class="theme-swatch theme-sunset" data-theme="sunset" title="Golden Sunset"></div>
                 <div class="theme-swatch theme-ocean" data-theme="ocean" title="Ocean Cyan"></div>
+                <div class="theme-swatch theme-gray" data-theme="gray" title="Professional Gray"></div>
             </div>
             <div class="premium-calendar-dropdown" id="premiumCalendar">
                 <div class="calendar-header">
@@ -843,7 +871,7 @@ function initPremiumCalendarWidget() {
     swatches.forEach(swatch => {
         swatch.addEventListener('click', () => {
             const theme = swatch.getAttribute('data-theme');
-            document.body.classList.remove('theme-modern', 'theme-green', 'theme-midnight', 'theme-sunset', 'theme-ocean');
+            document.body.classList.remove('theme-modern', 'theme-green', 'theme-midnight', 'theme-sunset', 'theme-ocean', 'theme-gray');
             document.body.classList.add('theme-' + theme);
             localStorage.setItem('theme', theme);
         });

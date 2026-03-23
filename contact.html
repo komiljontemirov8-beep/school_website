@@ -10,26 +10,33 @@
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Three.js + GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <style>
         .contact-page-wrapper {
             padding: 80px 0;
-            background: #f8fafc;
+            background: transparent !important;
+            /* Fon yo'q! */
             min-height: calc(100vh - 200px);
         }
 
         .contact-card-main {
-            background: white;
+            background: rgba(255, 255, 255, 0.05) !important;
+            /* Shaffof shisha */
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 30px;
             overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(0, 0, 0, 0.05);
             display: flex;
             flex-wrap: wrap;
         }
 
         .contact-sidebar {
             flex: 1 1 400px;
-            background: var(--primary-gradient);
+            background: rgba(0, 0, 0, 0.25) !important;
+            /* Sidebar ham shaffof */
             padding: 50px;
             color: white;
             display: flex;
@@ -40,7 +47,9 @@
         .contact-form-side {
             flex: 1 1 500px;
             padding: 50px;
-            background: white;
+            background: rgba(255, 255, 255, 0.03) !important;
+            /* Form qismi ham shaffof */
+            color: white;
         }
 
         .contact-info-list {
@@ -108,7 +117,7 @@
 
         .modern-form .form-label {
             font-weight: 600;
-            color: #1e293b;
+            color: #fff;
             margin-bottom: 10px;
         }
 
@@ -160,10 +169,39 @@
                 padding: 30px;
             }
         }
+
+        /* Admin Avatar Style */
+        .admin-avatar-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            flex-shrink: 0;
+            margin-right: 15px;
+        }
+
+        .admin-pic {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .contact-info-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
     </style>
 </head>
 
-<body>
+<body data-page="contact">
+    <!-- Page Transition Overlay -->
+    <div id="page-transition" class="page-transition active"></div>
+    <!-- 3D Scene Container -->
+    <div id="hero-3d-container"></div>
+
     <script>
         const savedTheme = localStorage.getItem('theme') || 'modern';
         document.body.classList.add('theme-' + savedTheme);
@@ -174,22 +212,29 @@
         <div class="ticker-wrap">
             <div class="ticker">DIQQAT! Sayt hozirda test rejimida ishlamoqda.</div>
         </div>
-        <div class="branding-bar">
-            <div class="ministry-links">
-                <a href="https://uzedu.uz/uz" target="_blank" class="ministry-item text-decoration-none">
-                    <img src="logo_min.png" alt="Gerb">
-                    <span>O‘zbekiston Respublikasi maktabgacha va maktab ta'limi vazirligi</span>
-                </a>
-            </div>
-            <div class="school-identity">
-                <a href="https://t.me/mshmaktab1" target="_blank"
-                    class="text-decoration-none d-flex align-items-center gap-2">
-                    <img src="logo.png" alt="Maktab Logosi" class="school-logo"
-                        style="width: 50px !important; height: 50px !important;">
-                    <div class="school-name">
-                        <h1 class="m-0">Marg'ilon shahar 1-umumiy o'rta ta'lim maktabi</h1>
+        <div class="branding-bar container py-3">
+            <div class="row align-items-center text-center text-md-start">
+                <!-- Ministry and School Identity Combined for better responsiveness -->
+                <div class="col-12 mb-2">
+                    <div class="d-flex align-items-center justify-content-center gap-2 mb-2 ministry-links">
+                        <a href="https://uzedu.uz/uz" target="_blank"
+                            class="text-decoration-none d-flex align-items-center gap-2">
+                            <img src="logo_min.png" alt="Gerb" height="30">
+                            <span class="small text-white">O‘zbekiston Respublikasi maktabgacha va maktab ta'limi
+                                vazirligi</span>
+                        </a>
                     </div>
-                </a>
+                </div>
+                <div class="col-12">
+                    <div class="d-flex align-items-center justify-content-center gap-3 school-identity">
+                        <a href="https://t.me/mshmaktab1" target="_blank"
+                            class="text-decoration-none d-flex align-items-center gap-3">
+                            <img src="logo.png" alt="Maktab Logosi" class="school-logo" width="60" height="60">
+                            <h1 class="h4 text-white text-uppercase m-0 school-name-text">Marg'ilon shahar 1-umumiy
+                                o'rta ta'lim maktabi</h1>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
         <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
@@ -241,6 +286,16 @@
                                     <p id="contact-email">Yuklanmoqda...</p>
                                 </div>
                             </li>
+                            <li class="mt-4 pt-3 border-top border-white border-opacity-10">
+                                <div class="admin-avatar-box">
+                                    <img src="https://t.me/i/userpic/320/komiljon_99.jpg" alt="Admin" class="admin-pic">
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">Telegram orqali shaxsiy bog'lanish:</h5>
+                                    <p class="m-0"><a href="https://t.me/komiljon_99" target="_blank"
+                                            class="text-white text-decoration-none fw-bold">@komiljon_99</a></p>
+                                </div>
+                            </li>
                         </ul>
                     </div>
 
@@ -279,11 +334,151 @@
                 </div>
             </div>
 
-            <!-- Map Section -->
-            <div class="map-section animate-up">
-                <iframe id="contact-map" src="" width="100%" height="450" style="border:0;" allowfullscreen=""
-                    loading="lazy"></iframe>
+            <!-- Google Earth Section -->
+            <div class="map-section animate-up" style="position:relative; border-radius:20px; overflow:hidden;">
+                <!-- Satellite preview using Google Maps Embed (allowed) -->
+                <iframe id="contact-map"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3002.44!2d71.7224!3d40.4736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38bb4f0c4d4a0001%3A0x1!2sMarg'ilon%2C%20Uzbekistan!5e1!3m2!1suz!2suz!4v1234567890"
+                    width="100%" height="420" style="border:0; display:block; filter: brightness(0.92) saturate(1.1);"
+                    allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+
+                <!-- Google Earth Overlay Badge -->
+                <div style="
+                    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+                    background: linear-gradient(to top, rgba(0,0,20,0.85) 0%, transparent 50%);
+                    pointer-events: none; border-radius: 20px;">
+                </div>
+
+                <!-- Bottom Info + Button -->
+                <div style="
+                    position: absolute; bottom: 0; left: 0; right: 0;
+                    padding: 24px 30px;
+                    display: flex; align-items: center; justify-content: space-between;
+                    flex-wrap: wrap; gap: 12px;">
+                    <div>
+                        <div
+                            style="color:rgba(255,255,255,0.7); font-size:0.8rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:4px;">
+                            <i class="fas fa-globe-asia me-1"></i> Sun'iy yo'ldosh ko'rinishi
+                        </div>
+                        <div style="color:#fff; font-weight:700; font-size:1.05rem;">
+                            Marg'ilon shahar 1-maktab manzili
+                        </div>
+                    </div>
+                    <button onclick="openEarthModal()" style="
+                        background: linear-gradient(135deg, #4285F4, #34A853);
+                        color: white; border: none; border-radius: 50px;
+                        padding: 12px 28px; font-weight: 700; font-size: 0.95rem;
+                        cursor: pointer; display: flex; align-items: center; gap: 10px;
+                        box-shadow: 0 4px 20px rgba(66,133,244,0.5);
+                        transition: all 0.3s ease;">
+                        <svg width="20" height="20" viewBox="0 0 512 512" fill="white">
+                            <path
+                                d="M256 0C115.3 0 0 115.3 0 256s115.3 256 256 256 256-115.3 256-256S396.7 0 256 0zm0 464c-114.7 0-208-93.3-208-208S141.3 48 256 48s208 93.3 208 208-93.3 208-208 208z" />
+                            <path
+                                d="M256 128c-70.7 0-128 57.3-128 128s57.3 128 128 128 128-57.3 128-128-57.3-128-128-128zm0 208c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z" />
+                        </svg>
+                        Google Earth da kattalashtirish
+                        <i class="fas fa-expand-alt"></i>
+                    </button>
+                </div>
             </div>
+
+            <!-- Google Earth Modal -->
+            <div id="earthModal" style="
+                display:none; position:fixed; inset:0; z-index:99999;
+                background: rgba(0,0,0,0.95);
+                flex-direction:column; align-items:center; justify-content:center;">
+
+                <!-- Close Button -->
+                <button onclick="closeEarthModal()" style="
+                    position:absolute; top:20px; right:24px;
+                    background: rgba(255,255,255,0.15); color:white;
+                    border: 1px solid rgba(255,255,255,0.3); border-radius:50%;
+                    width:48px; height:48px; font-size:1.4rem; cursor:pointer;
+                    backdrop-filter:blur(10px); z-index:10;
+                    transition: all 0.2s; display:flex; align-items:center; justify-content:center;">
+                    ×
+                </button>
+
+                <!-- Modal Content -->
+                <div style="text-align:center; padding:40px 20px; max-width:700px; width:100%;">
+
+                    <!-- Earth Globe Icon -->
+                    <div style="font-size:5rem; margin-bottom:20px; filter: drop-shadow(0 0 30px #4285F4);">🌍</div>
+
+                    <h2 style="color:white; font-weight:800; font-size:2rem; margin-bottom:12px;">
+                        Google Earth - Sun'iy Ko'rinish
+                    </h2>
+                    <p style="color:rgba(255,255,255,0.7); font-size:1.05rem; margin-bottom:10px;">
+                        Marg'ilon shahar 1-umumiy o'rta ta'lim maktabi
+                    </p>
+                    <p style="color:rgba(255,255,255,0.5); font-size:0.9rem; margin-bottom:35px;">
+                        <i class="fas fa-map-marker-alt me-2" style="color:#EA4335;"></i>
+                        Farg'ona viloyati, Marg'ilon shahar, MTT ko'chasi
+                    </p>
+
+                    <!-- Action Buttons -->
+                    <div style="display:flex; gap:15px; justify-content:center; flex-wrap:wrap;">
+                        <a href="https://earth.google.com/web/@40.47589488,71.73497262,493.95289406a,1156.04710908d,35y,0h,0t,0r/data=CgRCAggBMikKJwolCiExN2JrY241WFRzaGVxRlRiYWlYWWZjMkp4SlBjQWQwc3UgAToDCgEwQgIIAEoICLfw0o0GEAE"
+                            target="_blank" style="
+                               background: linear-gradient(135deg, #4285F4, #34A853);
+                               color:white; text-decoration:none; border-radius:50px;
+                               padding:16px 36px; font-weight:700; font-size:1.05rem;
+                               display:flex; align-items:center; gap:12px;
+                               box-shadow: 0 6px 30px rgba(66,133,244,0.5);
+                               transition: all 0.3s ease;">
+                            <i class="fas fa-globe"></i>
+                            Google Earth da ochish
+                            <i class="fas fa-external-link-alt" style="font-size:0.8rem;"></i>
+                        </a>
+                        <a href="https://maps.google.com/?q=40.47589488,71.73497262&t=k" target="_blank" style="
+                               background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3);
+                               color:white; text-decoration:none; border-radius:50px;
+                               padding:16px 36px; font-weight:600; font-size:1rem;
+                               backdrop-filter:blur(10px);
+                               display:flex; align-items:center; gap:10px;">
+                            <i class="fas fa-map"></i>
+                            Google Maps da ko'rish
+                        </a>
+                    </div>
+
+                    <p style="color:rgba(255,255,255,0.35); font-size:0.8rem; margin-top:30px;">
+                        <i class="fas fa-info-circle me-1"></i>
+                        Google Earth xavfsizlik sababli bevosita sahifada ochilmaydi — yangi ko'rinish ochiladi
+                    </p>
+                </div>
+            </div>
+
+            <script>
+                function openEarthModal() {
+                    const m = document.getElementById('earthModal');
+                    m.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                    // Animate in
+                    m.style.opacity = '0';
+                    requestAnimationFrame(() => {
+                        m.style.transition = 'opacity 0.3s ease';
+                        m.style.opacity = '1';
+                    });
+                }
+                function closeEarthModal() {
+                    const m = document.getElementById('earthModal');
+                    m.style.opacity = '0';
+                    setTimeout(() => {
+                        m.style.display = 'none';
+                        document.body.style.overflow = '';
+                    }, 300);
+                }
+                // Close on backdrop click
+                document.getElementById('earthModal').addEventListener('click', function (e) {
+                    if (e.target === this) closeEarthModal();
+                });
+                // Close on Escape
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') closeEarthModal();
+                });
+            </script>
         </div>
     </div>
 
@@ -301,6 +496,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
+    <script src="hero-3d.js?v=10"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             loadContactData();
@@ -348,6 +544,9 @@
             }
         }
     </script>
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="hero-3d.js?v=10"></script>
 </body>
 
 </html>
