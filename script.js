@@ -1,7 +1,7 @@
 // ==================== ADMIN CONFIG ====================
 // Sayt ko'chirilganda faqat shu yerdagi nomni o'zgartiring:
 const MANAGEMENT_CONFIG = {
-    googleAccount: "[bilolov836(github-komiljontmirov8)]"
+    googleAccount: "[Google_Akkaunt_Nomi_Shu_Yerga_Yoziladi]"
 };
 
 async function loadFooter() {
@@ -1233,7 +1233,7 @@ function createNewsCard(item, query = '') {
     let mediaHtml = '';
     if (item.video) {
         mediaHtml = `
-            <div class="position-relative" style="height: 300px; background: #000;">
+            <div class="position-relative" style="height: 300px; background: #000; cursor: pointer;" onclick="openModal('${item.id.replace(/'/g, "\\'")}')">
                 <video src="${item.video}" class="card-img-top w-100 h-100 news-video-preview" style="object-fit: contain;" muted loop playsinline></video>
                 <div class="position-absolute top-50 start-50 translate-middle">
                     <i class="fas fa-play-circle fa-3x text-white opacity-75"></i>
@@ -1242,13 +1242,13 @@ function createNewsCard(item, query = '') {
         `;
     } else if (item.image) {
         mediaHtml = `
-            <div style="height: 300px; background: #f8fafc; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+            <div style="height: 300px; background: #f8fafc; display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: pointer;" onclick="openModal('${item.id.replace(/'/g, "\\'")}')">
                 <img src="${item.image}" class="card-img-top w-100 h-100" alt="Yangilik rasmi" loading="lazy" style="object-fit: contain;">
             </div>
         `;
     } else {
         mediaHtml = `
-            <div class="card-img-top news-placeholder d-flex align-items-center justify-content-center" style="height: 300px; background: var(--primary-gradient); opacity: 0.8;">
+            <div class="card-img-top news-placeholder d-flex align-items-center justify-content-center" style="height: 300px; background: var(--primary-gradient); opacity: 0.8; cursor: pointer;" onclick="openModal('${item.id.replace(/'/g, "\\'")}')">
                 <i class="fas fa-school fa-4x text-white opacity-25"></i>
             </div>
         `;
