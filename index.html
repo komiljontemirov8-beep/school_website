@@ -98,15 +98,14 @@
 
     <!-- Hero Section -->
     <section class="hero-clean-layout">
-        <div class="container-fluid" style="padding: 100px 0; background-color: #fff;">
+        <div class="container-fluid" style="padding: 0 0 30px; background-color: transparent;">
             <div class="row justify-content-center">
                 <div class="col-lg-12 d-flex flex-column align-items-center text-center">
 
-                    <h1 class="main-hero-title fw-bold"
-                        style="font-size: 3.5rem; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 25px;">
-                        <span class="d-block">Farg'ona viloyati, Marg'ilon shahar</span>
-                        <span class="d-block">1-umumiy o'rta ta'lim maktabining</span>
-                        <span class="d-block">veb-saytiga xush kelibsiz!</span>
+                    <h1 class="main-hero-title fw-bold mb-4">
+                        <span class="line-1">Farg'ona viloyati, Marg'ilon shahar</span>
+                        <span class="line-2">1-umumiy o'rta ta'lim maktabining</span>
+                        <span class="line-3">veb-saytiga xush kelibsiz!</span>
                     </h1>
 
                     <div class="hero-subtext">
@@ -119,6 +118,86 @@
                     </div>
 
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUICK NAVIGATION (OVERHAULED PROFESSIONAL INDEX) -->
+    <section class="quick-nav-section">
+        <div class="container text-center mb-5">
+            <span class="quick-nav-badge animate-fade-in">Tezkor o'tish</span>
+            <h2 class="quick-nav-title animate-fade-in">Sizni nima qiziqtiradi?</h2>
+            <p class="quick-nav-subtitle animate-fade-in">Maktabimiz hayoti va uning barcha imkoniyatlari bilan bir
+                zuimda tanishing</p>
+        </div>
+
+        <div class="container">
+            <div class="quick-nav-grid animate-fade-in">
+                <!-- 1. Maktab hayoti -->
+                <a href="#news" class="quick-nav-card shadow-lg">
+                    <div class="quick-nav-icon-box">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <h3>Maktab hayoti</h3>
+                    <p>Eng so'nggi yangiliklar va tadbirlar</p>
+                </a>
+
+                <!-- 2. To'garak mashg'ulotlari -->
+                <a href="about.html#clubs" class="quick-nav-card"
+                    onclick="sessionStorage.setItem('scrollTarget', 'clubs')">
+                    <div class="quick-nav-icon-box">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h3>To'garaklar</h3>
+                    <p>Bo'sh vaqtni mazmunli va foydali o'tkazish</p>
+                </a>
+
+                <!-- 3. O'qituvchilar -->
+                <a href="about.html#teachers" class="quick-nav-card"
+                    onclick="sessionStorage.setItem('scrollTarget', 'teachers')">
+                    <div class="quick-nav-icon-box">
+                        <i class="fas fa-chalkboard-user"></i>
+                    </div>
+                    <h3>O'qituvchilar</h3>
+                    <p>Metod birlashma rahbarlari va pedagoglar</p>
+                </a>
+
+                <!-- 4. Bino va inshootlar -->
+                <a href="about.html#infrastructure" class="quick-nav-card"
+                    onclick="sessionStorage.setItem('scrollTarget', 'infrastructure')">
+                    <div class="quick-nav-icon-box">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Bino va inshootlar</h3>
+                    <p>Maktabning moddiy-texnika bazasi va infratuzilmasi</p>
+                </a>
+
+                <!-- 5. Statistika -->
+                <a href="statistics.html" class="quick-nav-card">
+                    <div class="quick-nav-icon-box">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Statistika</h3>
+                    <p>Maktab ko'rsatkichlari va raqamli ma'lumotlar</p>
+                </a>
+
+                <!-- 6. Yutuqlar -->
+                <a href="achievements.html" class="quick-nav-card">
+                    <div class="quick-nav-icon-box">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Yutuqlar</h3>
+                    <p>O'qituvchi va o'quvchilarimizning zafarlari</p>
+                </a>
+
+                <!-- 7. Bog'lanish -->
+                <a href="contact.html" class="quick-nav-card">
+                    <div class="quick-nav-icon-box">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Bog'lanish</h3>
+                    <p>Savol va murojaatlar uchun aloqa sahifasi</p>
+                </a>
             </div>
         </div>
     </section>

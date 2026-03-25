@@ -4,7 +4,8 @@
     "description": "Script to fetch news from Telegram channel for the school website.",
     "main": "scripts/fetch_news.js",
     "scripts": {
-        "news": "node scripts/fetch_news.js"
+        "news": "node scripts/fetch_news.js",
+        "dev": "npx -y serve -p 3000 ."
     },
     "keywords": [
         "telegram",

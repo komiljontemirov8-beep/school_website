@@ -146,6 +146,7 @@ body {
 }
 
 
+
 /* Hero Title Soft 3D Style - Extra Dark & Professional (Theme-aware) */
 /* Premium Two-Tone Themed Gradient Hero Titles */
 .main-hero-title {
@@ -180,7 +181,7 @@ body {
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    padding: 100px 0 !important;
+    padding: 0 0 30px !important;
     margin: 0 !important;
     text-align: center !important;
     position: relative !important;
@@ -234,15 +235,27 @@ body {
     visibility: visible !important;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .main-hero-title {
-        font-size: 1.5rem !important;
+        font-size: 2.2rem !important;
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
     .main-hero-title {
-        font-size: 1.2rem !important;
+        font-size: 1.5rem !important;
+        line-height: 1.3 !important;
+        flex-direction: column !important;
+        padding: 0 15px !important;
+    }
+
+    .main-hero-title span {
+        display: block !important;
+        white-space: normal !important;
+        width: 100% !important;
+        margin-bottom: 5px !important;
+        font-size: 1.5rem !important;
+        word-break: normal !important;
     }
 }
 
@@ -281,19 +294,34 @@ body {
     background: rgba(79, 70, 229, 0.15);
 }
 
-/* Dynamic Nav Buttons */
+/* Dynamic Nav Buttons - Enhanced Scrollable on Mobile */
+#dynamicDateNav {
+    overflow-x: auto;
+    padding: 10px 5px;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+#dynamicDateNav::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari and Opera */
+}
+
 .nav-btn {
-    border-radius: var(--shape-pill);
-    padding: 8px 22px;
-    font-size: 0.95rem;
+    white-space: nowrap;
+    border-radius: var(--shape-pill, 50px);
+    padding: 6px 18px;
+    font-size: 0.85rem;
     font-weight: 600;
-    transition: var(--transition-standard);
-    background: rgba(255, 255, 255, 0.1) !important;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.4) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     color: var(--primary-color);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
 .nav-btn:hover {
@@ -375,7 +403,7 @@ body.theme-green #news-container .card {
 /* Header & Branding - Glassmorphism Professional Design */
 .branding-bar {
     background: transparent !important;
-    padding: 30px 0;
+    padding: 2px 0;
     color: white;
     box-shadow: none !important;
     border: none !important;
@@ -386,15 +414,20 @@ body.theme-green #news-container .card {
 
 header {
     background: var(--primary-gradient);
-    transition: var(--transition-standard);
     border-bottom: none !important;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
     position: relative;
-    z-index: 1040;
-    border-bottom-left-radius: 40px;
-    border-bottom-right-radius: 40px;
-    padding-bottom: 5px;
-    /* Unified smooth look */
+    z-index: 1050;
+    margin-bottom: 0;
+}
+
+header.scrolled {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Adjust Hero and Body padding to account for fixed header (~190-250px) */
+/* Removed redundant fixed header padding to fix the white gap */
+.hero-clean-layout {
+    padding-top: 0 !important;
 }
 
 /* Force fully transparent artifacts-free header on Contact page */
@@ -487,8 +520,8 @@ header .nav-link {
 
 /* Navbar Navigation Buttons */
 .navbar {
-    padding: 15px 0;
-    margin-top: -25px;
+    padding: 5px 0;
+    margin-top: -10px;
     /* Pull up to overlap slightly */
     position: relative;
     z-index: 20;
@@ -499,7 +532,7 @@ header .nav-link {
     backdrop-filter: none;
     /* Removed thick white rectangle */
     border-radius: 0;
-    padding: 10px 0;
+    padding: 2px 0;
     box-shadow: none;
     border: none;
 }
@@ -522,13 +555,13 @@ body.theme-green .navbar-dark .navbar-nav .nav-link {
 
 .navbar-nav .nav-link {
     transition: all 0.3s ease;
-    padding: 10px 20px !important;
+    padding: 6px 15px !important;
     color: white !important;
     /* Force white for visibility on dark headers */
-    font-weight: 900 !important;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 10px var(--primary-color)44;
+    font-weight: 800 !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     text-transform: uppercase;
-    font-size: 0.95rem;
+    font-size: 0.82rem;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     letter-spacing: 0.5px;
@@ -1285,27 +1318,39 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
+
+    html,
+    body {
+        overflow-x: hidden;
+        width: 100%;
+        position: relative;
+    }
+
     .branding-bar {
-        text-align: center;
+        padding: 15px 0 !important;
     }
 
     .school-identity {
         flex-direction: row;
-        flex-wrap: nowrap;
-        /* Strict single line */
+        flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-        gap: 8px;
+        gap: 12px;
     }
 
-    .school-name h1 {
-        font-size: 0.75rem;
-        /* Sufficiently small for single line */
-        white-space: nowrap;
-        overflow: visible;
-        /* Show all text */
-        margin: 0;
-        text-align: left;
+    .school-name-text,
+    .branding-bar h1 {
+        font-size: 0.9rem !important;
+        white-space: normal !important;
+        line-height: 1.3 !important;
+        text-align: center !important;
+        max-width: 250px;
+    }
+
+    .school-logo {
+        width: 50px !important;
+        height: 50px !important;
+        flex-shrink: 0;
     }
 
     .school-logo {
@@ -2387,41 +2432,15 @@ body.theme-green .custom-swiper-btn:hover {
     #global-calendar-widget {
         display: block;
         position: fixed;
-        top: 20px;
-        /* Moved to top as requested */
-        left: 10px;
+        top: 10px !important;
+        left: 5px !important;
         bottom: auto;
         right: auto;
-        z-index: 20002;
-        /* Above even the particles and navbar */
-        transform: scale(0.75);
+        z-index: 9999999 !important;
+        transform: scale(0.65) !important;
+        /* Smaller for mobile */
         transform-origin: top left;
-    }
-
-    .datetime-display {
-        background: var(--primary-gradient) !important;
-        border: 2px solid white !important;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-        color: white !important;
-    }
-
-    .premium-calendar-dropdown {
-        top: auto;
-        bottom: calc(100% + 15px);
-        left: 0;
-        right: auto;
-        width: 320px;
-        max-width: calc(100vw - 40px);
-        transform: translateY(10px) scale(1.1);
-        transform-origin: bottom left;
-    }
-
-    .premium-calendar-dropdown.active {
-        transform: translateY(0) scale(1.1);
-    }
-
-    .date-block {
-        border-left: 1px solid rgba(255, 255, 255, 0.4);
+        pointer-events: auto !important;
     }
 }
 
@@ -3056,4 +3075,203 @@ body.theme-green .cal-day:not(.empty):hover {
 .swiper-pagination {
     z-index: 10 !important;
     padding: 10px 0;
+}
+
+/* ==================== QUICK NAVIGATION SECTION ==================== */
+.quick-nav-section {
+    padding: 0 0 60px;
+    position: relative;
+    z-index: 100;
+    margin-top: 0;
+}
+
+.quick-nav-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.quick-nav-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 50px;
+    color: var(--primary-color);
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.quick-nav-title {
+    color: #1e1b4b;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.quick-nav-subtitle {
+    color: #4b5563;
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.quick-nav-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    width: 100%;
+}
+
+.quick-nav-card {
+    flex: 0 1 22%;
+    min-width: 250px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 24px;
+    padding: 40px 25px;
+    text-align: center;
+    color: #374151;
+    text-decoration: none !important;
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.quick-nav-card:hover {
+    background: white;
+    transform: translateY(-12px);
+    box-shadow: 0 30px 60px rgba(99, 102, 241, 0.15);
+    border-color: var(--primary-color);
+}
+
+.quick-nav-icon-box {
+    width: 74px;
+    height: 74px;
+    background: #f3f4f6;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    font-size: 2.4rem;
+    color: var(--primary-color);
+    transition: all 0.5s ease;
+}
+
+.quick-nav-card:hover .quick-nav-icon-box {
+    background: var(--primary-color);
+    color: white;
+    transform: rotate(10deg);
+}
+
+.quick-nav-card h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #111827;
+}
+
+.quick-nav-card p {
+    font-size: 0.95rem;
+    color: #6b7280;
+    margin: 0;
+    line-height: 1.5;
+}
+
+@media (max-width: 1200px) {
+    .quick-nav-card {
+        flex: 0 1 30%;
+    }
+}
+
+@media (max-width: 912px) {
+    .quick-nav-card {
+        flex: 0 1 45%;
+    }
+
+    .quick-nav-title {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .quick-nav-section {
+        padding: 40px 0 60px;
+        margin-top: -30px;
+    }
+
+    .quick-nav-grid {
+        gap: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .quick-nav-card {
+        flex: 0 1 100%;
+        width: 100%;
+        padding: 30px 15px;
+    }
+
+    .quick-nav-icon-box {
+        width: 65px;
+        height: 65px;
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+
+    .quick-nav-title {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .quick-nav-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==================== CLUBS & ACHIEVEMENTS STYLING ==================== */
+.extra-modern-card {
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.extra-modern-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1) !important;
+    border-color: var(--primary-color);
+}
+
+.card-img-wrapper img {
+    transition: transform 0.6s ease;
+}
+
+.extra-modern-card:hover .card-img-wrapper img {
+    transform: scale(1.08);
+}
+
+.achievement-modern-card {
+    transition: all 0.4s ease;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.achievement-modern-card:hover {
+    box-shadow: 0 10px 25px rgba(255, 193, 7, 0.15) !important;
+    border-color: #ffc107;
+    transform: translateX(5px);
+}
+
+.achievement-img img {
+    transition: transform 0.5s ease;
+}
+
+.achievement-modern-card:hover .achievement-img img {
+    transform: scale(1.1);
 }

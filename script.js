@@ -1,7 +1,7 @@
 // ==================== ADMIN CONFIG ====================
 // Sayt ko'chirilganda faqat shu yerdagi nomni o'zgartiring:
 const MANAGEMENT_CONFIG = {
-    googleAccount: "[bilolov836(github-komiljontmirov8)]"
+    googleAccount: "GitHub: +komiljontemirov8, komiljontemirov1, mshmaktab1 | Net-account: +bil...836, msh....1, kom...8"
 };
 
 async function loadFooter() {
@@ -1355,3 +1355,27 @@ function initNewsSearch() {
         });
     }
 }
+
+/* ==================== SMOOTH SCROLL FOR ABOUT PAGE REDIRECTS ==================== */
+window.addEventListener('load', () => {
+    const scrollTarget = sessionStorage.getItem('scrollTarget');
+    if (scrollTarget) {
+        const element = document.getElementById(scrollTarget);
+        if (element) {
+            // Give extra time for images or Three.js background to initialize
+            setTimeout(() => {
+                const headerOffset = 100;
+                const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+                const offsetPosition = elementPosition - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+
+                // Important: Clean up target so it doesn't scroll on every reload
+                sessionStorage.removeItem('scrollTarget');
+            }, 300);
+        }
+    }
+});
