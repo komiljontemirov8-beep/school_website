@@ -471,7 +471,8 @@ function openModal(newsId) {
         if (modalImage) modalImage.style.display = 'none';
         if (videoEl) {
             videoEl.src = news.video;
-            videoEl.muted = true; // Ovoz butunlay olib tashlandi
+            videoEl.poster = news.image || ''; // Set poster to show image while loading
+            videoEl.muted = true;
             videoEl.style.display = 'block';
             videoEl.play().catch(e => console.log("Auto-play blocked"));
         }
@@ -1234,7 +1235,7 @@ function createNewsCard(item, query = '') {
     if (item.video) {
         mediaHtml = `
             <div class="position-relative" style="height: 300px; background: #000; cursor: pointer;" onclick="openModal('${item.id.replace(/'/g, "\\'")}')">
-                <video src="${item.video}" class="card-img-top w-100 h-100 news-video-preview" style="object-fit: contain;" muted loop playsinline></video>
+                <video src="${item.video}" poster="${item.image || ''}" class="card-img-top w-100 h-100 news-video-preview" style="object-fit: contain;" muted loop playsinline></video>
                 <div class="position-absolute top-50 start-50 translate-middle">
                     <i class="fas fa-play-circle fa-3x text-white opacity-75"></i>
                 </div>
