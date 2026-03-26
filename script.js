@@ -1,7 +1,7 @@
 // ==================== ADMIN CONFIG ====================
 // Sayt ko'chirilganda faqat shu yerdagi nomni o'zgartiring:
 const MANAGEMENT_CONFIG = {
-    googleAccount: "GitHub: +komiljontemirov8, komiljontemirov1, mshmaktab1 | Net-account: +bil...836, msh....1, kom...8"
+    googleAccount: "GitHub: +komiljontemirov8, mshmaktab1 | Net-account: bil...836, msh....1, kom...1,"
 };
 
 async function loadFooter() {
