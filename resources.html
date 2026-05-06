@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foydali manbalar - Marg'ilon 1-maktab veb sayti</title>
+    <!-- Bootstrap 5 CSS -->
+    <link id="theme-css" rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css?v=25">
+</head>
+
+<body>
+    <!-- Page Transition Overlay -->
+    <div id="page-transition" class="page-transition"></div>
+    <!-- Particle Background -->
+    <div id="particles-container"></div>
+
+    <script>
+        if (localStorage.getItem('theme') === 'modern') {
+            document.body.classList.add('theme-modern');
+        }
+    </script>
+
+    <!-- Header -->
+    <header class="bg-primary text-white">
+        <div class="branding-bar container py-3">
+            <div class="row align-items-center text-center text-md-start">
+                <div class="col-12 mb-2">
+                    <div class="d-flex align-items-center justify-content-center gap-2 mb-2 ministry-links">
+                        <a href="https://uzedu.uz/uz" target="_blank"
+                            class="text-decoration-none d-flex align-items-center gap-2">
+                            <img src="logo_min.png" alt="Gerb" height="30">
+                            <span class="small text-white">O‘zbekiston Respublikasi maktabgacha va maktab ta'limi
+                                vazirligi</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="d-flex align-items-center justify-content-center gap-3 school-identity">
+                        <a href="index.html" class="text-decoration-none d-flex align-items-center gap-3">
+                            <img src="logo.png" alt="Maktab Logosi" class="school-logo" width="60" height="60">
+                            <h1 class="h4 text-white text-uppercase m-0 school-name-text">Marg'ilon shahar 1-umumiy
+                                o'rta ta'lim maktabi</h1>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+            <div class="container">
+                <button class="navbar-toggler mx-auto" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto align-items-center">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Bosh sahifa</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">Maktab haqida</a></li>
+                        <li class="nav-item"><a class="nav-link" href="achievements.html">Yutuqlar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="statistics.html">Statistika</a></li>
+                        <li class="nav-item"><a class="nav-link" href="resources.html">Foydali manbalar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Aloqa</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="py-5" style="position: relative; z-index: 10;">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title">Talim uchun Foydali Manbalar</h2>
+
+            <p class="text-center lead mb-5">O'quvchilar, ustozlar va ota-onalar uchun ta'lim jarayonini qiziqarliroq
+                qilishda asqotadigan interaktiv havolalar, layfxaklar va vositalar.</p>
+
+            <div class="row g-4 mb-5">
+                <!-- Interfaol Platformalar -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 achievement-card"
+                        style="border-radius: 15px; overflow: hidden; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);">
+                        <div class="card-body text-center p-4">
+                            <i class="fas fa-laptop-code fa-3x text-primary mb-3"></i>
+                            <h4 class="card-title fw-bold">Interfaol platformalar</h4>
+                            <p class="card-text text-white">Darslarni qiziqarli usulda tashkil etish uchun yordamchi
+                                saytlar.</p>
+                            <ul class="text-start mt-3 ps-3">
+                                <li><a href="https://kahoot.com/" target="_blank"
+                                        class="text-decoration-none">Kahoot!</a> - viktorina va testlar o'yin tarzida.
+                                </li>
+                                <li><a href="https://phet.colorado.edu/uz/" target="_blank"
+                                        class="text-decoration-none">PhET</a> - fizika va kimyo bo'yicha interaktiv
+                                    simulyatsiyalar.</li>
+                                <li><a href="https://quizlet.com/" target="_blank"
+                                        class="text-decoration-none">Quizlet</a> - yangi tushuncha va terminlarni eslab
+                                    qolish.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- O'qishni Osonlashtiruvchi Layfxaklar -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 achievement-card"
+                        style="border-radius: 15px; overflow: hidden; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);">
+                        <div class="card-body text-center p-4">
+                            <i class="fas fa-lightbulb fa-3x text-warning mb-3"></i>
+                            <h4 class="card-title fw-bold">O'quv Layfxaklari</h4>
+                            <p class="card-text text-white">Vaqtni to'g'ri taqsimlash va yuqori natijaga erishish
+                                sirlari.</p>
+                            <ul class="text-start mt-3 ps-3">
+                                <li><strong>Pomodoro usuli:</strong> 25 daqiqa o'qish, 5 daqiqa tanaffus qilish orqali
+                                    diqqatni saqlang.</li>
+                                <li><strong>Feynman texnikasi:</strong> Mavzuni o'zlashtirish uchun uni oson til bilan
+                                    boshqa birovga tushuntiring.</li>
+                                <li><strong>Faol eslash (Active Recall):</strong> Matnni xotirada saqlash uchun kitob
+                                    yopilgan holda eslab ko'rishga odatlaning.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Qiziqarli Ma'lumotlar -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 achievement-card"
+                        style="border-radius: 15px; overflow: hidden; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);">
+                        <div class="card-body text-center p-4">
+                            <i class="fas fa-globe fa-3x text-success mb-3"></i>
+                            <h4 class="card-title fw-bold">Qiziqarli Faktlar</h4>
+                            <p class="card-text text-white">Ilm-fan va dunyo sirlari bo'yicha e'tiborga molik
+                                ma'lumotlar.</p>
+                            <ul class="text-start mt-3 ps-3">
+                                <li>Inson miyasi hech qachon og'riqni his qilmaydi, chunki unda og'riq retseptorlari
+                                    yo'q.</li>
+                                <li>Dunyodagi eng qadimgi kutubxona taxminan miloddan avvalgi 7-asrda Ashurbanipal
+                                    tomonidan tashkil qilingan.</li>
+                                <li>O'zbekistonda kashf etilgan algoritm, Al-Xorazmiy nomi bilan jamiyat uchun cheksiz
+                                    ilmiy inqilob yaratgan.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Elektron kutubxonalar va qo'llanmalar -->
+                <div class="col-md-6 col-lg-6">
+                    <div class="card h-100 shadow-sm border-0 achievement-card"
+                        style="border-radius: 15px; overflow: hidden; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);">
+                        <div class="card-body text-center p-4">
+                            <i class="fas fa-book-reader fa-3x text-info mb-3"></i>
+                            <h4 class="card-title fw-bold">Kutubxonalar va lug'atlar</h4>
+                            <p class="card-text text-white">O'quv va badiiy adabiyotlar, hamda qo'llanmalarni izlash va
+                                o'qish uchun bepul platformalar.</p>
+                            <ul class="text-start mt-3 ps-3">
+                                <li><a href="https://kitob.uz/" target="_blank"
+                                        class="text-decoration-none">Kitob.uz</a> - O'zbekistondagi eng yirik ta'lim va
+                                    elektron resurslar portali.</li>
+                                <li><a href="https://ziyouz.uz/" target="_blank"
+                                        class="text-decoration-none">Ziyouz.uz</a> - O'zbek va jahon adabiyoti
+                                    durdonalari jamlanmasi.</li>
+                                <li><a href="https://savodxon.uz/" target="_blank"
+                                        class="text-decoration-none">Savodxon.uz</a> - Imlo xatolari va so'z boyligini
+                                    oshirish uchun ajoyib onlayn tizim.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dasturlash va IT ga kirish -->
+                <div class="col-md-6 col-lg-6">
+                    <div class="card h-100 shadow-sm border-0 achievement-card"
+                        style="border-radius: 15px; overflow: hidden; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);">
+                        <div class="card-body text-center p-4">
+                            <i class="fas fa-code fa-3x text-secondary mb-3"></i>
+                            <h4 class="card-title fw-bold">IT va Texnologiyalar</h4>
+                            <p class="card-text text-white">Yosh dasturchilar uchun dastlabki tushunchalar olib, mashq
+                                qilish maydonlari.</p>
+                            <ul class="text-start mt-3 ps-3">
+                                <li><a href="https://code.org/" target="_blank"
+                                        class="text-decoration-none">Code.org</a> - Bolalar uchun o'yin asosida kod
+                                    yozishga o'rgatuvchi tizim.</li>
+                                <li><a href="https://scratch.mit.edu/" target="_blank"
+                                        class="text-decoration-none">Scratch</a> - Interaktiv o'yin va animatsiyalar
+                                    yaratish orqali mantiqni rivojlantirish.</li>
+                                <li><a href="https://uzbekcoders.uz/" target="_blank" class="text-decoration-none">One
+                                        Million Uzbek Coders</a> - IT mutaxassisi bo'lishga ilk tayanchli qadam.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ZAMONAVIY PEDAGOGIK METODLAR BANKI -->
+            <div class="mt-5 pt-4" style="border-top: 1px solid rgba(255,255,255,0.1);">
+                <h3 class="text-center mb-3 section-title" style="font-size: 2.2rem;">Zamonaviy Pedagogik Metodlar Banki
+                </h3>
+                <p class="text-center lead text-white mb-5">O'qituvchilar uchun darsni samarali tashkil etish,
+                    o'quvchilar e'tiborini jalb qilish va ta'lim sifatini oshirishga qaratilgan amaliy, innovatsion
+                    usullar to'plami.</p>
+
+                <div class="row g-4 mb-5">
+
+                    <!-- Method 1 -->
+                    <div class="col-12">
+                        <div class="card shadow border-0 achievement-card p-4"
+                            style="border-radius: 15px; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3"
+                                    style="width: 50px; height: 50px; flex-shrink: 0;">
+                                    <i class="fas fa-sync-alt fa-lg"></i>
+                                </div>
+                                <h4 class="card-title fw-bold m-0 text-white">1. "Bumerang" texnologiyasi</h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <h6 class="text-warning fw-bold"><i class="fas fa-question-circle me-2"></i>Bu o'zi
+                                        nima?</h6>
+                                    <p class="text-white fw-bold">O'quvchilarni guruhlarda ishlab, yangi
+                                        mavzuni mustaqil o'zlashtirishga hamda so'ngra jamoasidagi boshqa sheriklariga
+                                        yetkazib berishga qaratilgan innovatsion yondashuv.</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <h6 class="text-warning fw-bold"><i class="fas fa-cogs me-2"></i>Qanday
+                                        qo'llaniladi?</h6>
+                                    <p class="text-white fw-bold">Yangi mavzu qismlarga (matnlarga) bo'linib
+                                        guruh raqamlariga tarqatiladi. Har kim o'z materialini diqqat bilan o'qiydi.
+                                        Shundan so'ng turli guruhlardan bittadan o'quvchi yig'ilib "Ekspertlar guruhi"
+                                        tuziladi, va bir-biriga o'zining qismini tushuntirib beradi. Tsikl aylanib asli
+                                        holatga qaytadi ("Bumerang" singari).</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <h6 class="text-info fw-bold"><i class="fas fa-users me-2"></i>Maqsadli auditoriya:
+                                    </h6>
+                                    <p class="text-white fw-bold"><strong>5-11 sinf o'quvchilari.</strong>
+                                        Matematikani tushuntirish biroz qiyin bo'lishi mumkin, ammo adabiyot, tarix, ona
+                                        tili, huquq va geografiya asoslarida juda keng samara beradi.</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <h6 class="text-success fw-bold"><i class="fas fa-chart-line me-2"></i>Kutiladigan
+                                        natija:</h6>
+                                    <p class="text-white fw-bold">O'quvchilarda nutq rivojlanadi, ular o'qib
+                                        tushunishni yengillashtiradi, o'zlashtirish tezligi va guruhi, jamoasi oldidagi
+                                        mas'uliyati kuchayadi.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Method 2 -->
+                    <div class="col-12">
+                        <div class="card shadow border-0 achievement-card p-4"
+                            style="border-radius: 15px; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center me-3"
+                                    style="width: 50px; height: 50px; flex-shrink: 0;">
+                                    <i class="fas fa-bolt fa-lg"></i>
+                                </div>
+                                <h4 class="card-title fw-bold m-0 text-white">2. "Aqliy hujum" (Brainstorming) metodi
+                                </h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <h6 class="text-warning fw-bold"><i class="fas fa-question-circle me-2"></i>Bu o'zi
+                                        nima?</h6>
+                                    <p class="text-white fw-bold">Ma'lum yechilishi kerak bo'lgan muammo yoki
+                                        ochiq savol yuzasidan o'quvchilar erkin, cheklovlarsiz va tanqidsiz turli xil
+                                        g'oyalarni taklif qilish muhiti.</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <h6 class="text-warning fw-bold"><i class="fas fa-cogs me-2"></i>Qanday
+                                        qo'llaniladi?</h6>
+                                    <p class="text-white fw-bold">O'qituvchi doskaga "Global harorat
+                                        ko'tarilishini qanday sekinlashtirish mumkin?" degan ochiq ufqdagi savolni
+                                        qo'yadi. Barcha javoblar doskaga baholanmasdan, darhol yozib boriladi.
+                                        Javoblarning kutilmaganligi, g'ayrioddiy ekanligi e'tiborga olinmaydi. Vaqt
+                                        yakunlangachgina sinf bilan birgalikda yaroqsiz g'oyalar o'chirilib, eng
+                                        englaridan yakuniy xulosa tayyorlanadi.</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <h6 class="text-info fw-bold"><i class="fas fa-users me-2"></i>Maqsadli auditoriya:
+                                    </h6>
+                                    <p class="text-white fw-bold"><strong>1-11 sinflar.</strong> Savol to'g'ri,
+                                        yoshi va qiziqishlariga mos qo'yilsa, boshlang'ich sinf bolalari ham, yuqori
+                                        sinf o'smirlari ham yaxshi jalb qilinadi.</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <h6 class="text-success fw-bold"><i class="fas fa-chart-line me-2"></i>Kutiladigan
+                                        natija:</h6>
+                                    <p class="text-white fw-bold">Tanqidiy fikrlash yuzaga keladi, kishilar
+                                        (ayniqsa, tortinchoq bolalar) fikrini aytishda qoralanish, xato qilish
+                                        qo'rquvini e'tibordan chetlashtiradi, chinakam ijodkorlik ko'tariladi.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Method 3 -->
+                    <div class="col-12">
+                        <div class="card shadow border-0 achievement-card p-4"
+                            style="border-radius: 15px; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center me-3"
+                                    style="width: 50px; height: 50px; flex-shrink: 0;">
+                                    <i class="fas fa-balance-scale fa-lg"></i>
+                                </div>
+                                <h4 class="card-title fw-bold m-0 text-white">3. "FSMU" (Fikr, Sabab, Misol,
+                                    Umumlashtirish) texnologiyasi</h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <h6 class="text-warning fw-bold"><i class="fas fa-question-circle me-2"></i>Bu o'zi
+                                        nima?</h6>
+                                    <p class="text-white fw-bold">O'quvchilarga o'z huquqiy, adabiy yoki
+                                        falsafiy fikr-qarashini erkin, mantiqan kuchli va dalillar asosida ifoda etishni
+                                        ketma-ketlikka soluvchi algoritmdir.</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <h6 class="text-warning fw-bold"><i class="fas fa-cogs me-2"></i>Qanday
+                                        qo'llaniladi?</h6>
+                                    <p class="text-white fw-bold">O'quvchi bir masalada argument keltiradi.
+                                        Jarayon 4 bosqichda kechadi:<br>
+                                        1) <strong>F-ikr:</strong> O'zining bahsli masaladagi aniq tarafini aytadi ("Men
+                                        bunga qarshiman ...").<br>
+                                        2) <strong>S-abab:</strong> Nega bunday deb ishonishini bayon qiladi ("Chunki bu
+                                        narsa ... ga salbiy ta'sir qiladi").<br>
+                                        3) <strong>M-isol:</strong> Shaxsiy tajriba yoki aniq tarixiy misol keltiradi
+                                        ("Bunga yaqqol misol sifatida ...").<br>
+                                        4) <strong>U-mumlashtirish:</strong> Xulosa chiqaradi ("Demak, xulosa qilsak
+                                        ...").
+                                    </p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <h6 class="text-info fw-bold"><i class="fas fa-users me-2"></i>Maqsadli auditoriya:
+                                    </h6>
+                                    <p class="text-white fw-bold"><strong>7-11 sinf va undan kattalar
+                                            uchun.</strong> Ona tili, tarix, tarbiya, davlat va huquq asoslari fanlarida
+                                        o'ta samarali vosita.</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <h6 class="text-success fw-bold"><i class="fas fa-chart-line me-2"></i>Kutiladigan
+                                        natija:</h6>
+                                    <p class="text-white fw-bold">Munozara, bahs va debat sohalariga poydevor
+                                        qo'yadi. Argumentlarining asosliligini e'tiborga olish mantiqiy, analitik
+                                        yetuklikni yuzaga chiqaradi.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Method 4 -->
+                    <div class="col-12">
+                        <div class="card shadow border-0 achievement-card p-4"
+                            style="border-radius: 15px; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center me-3"
+                                    style="width: 50px; height: 50px; flex-shrink: 0;">
+                                    <i class="fas fa-project-diagram fa-lg"></i>
+                                </div>
+                                <h4 class="card-title fw-bold m-0 text-white">4. "Klaster" (Tarmog'lash) usuli</h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <h6 class="text-warning fw-bold"><i class="fas fa-question-circle me-2"></i>Bu o'zi
+                                        nima?</h6>
+                                    <p class="text-white fw-bold">Asosiy tushunchadan unga bog'liq bo'lgan
+                                        ma'nolarni (tarmoqlarni) chizib, ma'lumotlarni daraxt qiyofasida
+                                        tizimlashtiruvchi grafik metod.</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <h6 class="text-warning fw-bold"><i class="fas fa-cogs me-2"></i>Qanday
+                                        qo'llaniladi?</h6>
+                                    <p class="text-white fw-bold">Doska o'rtasida katta aylanaga qaysidir
+                                        tushuncha (Masalan, "Axborot texnologiyalari") yoziladi. O'quvchilar bu haqda
+                                        nimalarni bilsa, atrofiga yozib ketishadi (kompyuter, dastur, internet va
+                                        hokazo). Ular ham o'z navbatida shoxalab, tarmoqlanib yanada maydalashib
+                                        boraveradi. Natijada katta yagona manzara yuzaga chiqadi.</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <h6 class="text-info fw-bold"><i class="fas fa-users me-2"></i>Maqsadli auditoriya:
+                                    </h6>
+                                    <p class="text-white fw-bold"><strong>1-9 sinflar.</strong> Ham texnik
+                                        fanlarda, ham til o'rganishda juda mos (vocabulary yig'ishga qulay). Chizilgani
+                                        (ko'rgazmali) uchun miyada saqlab qolish osonlashadi.</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <h6 class="text-success fw-bold"><i class="fas fa-chart-line me-2"></i>Kutiladigan
+                                        natija:</h6>
+                                    <p class="text-white fw-bold">Tartibsiz xotiradan ma'lumotlarni muayyan bir
+                                        struktura orqali vizual ko'rishni o'rgatadi. Bu bilimlarni tez qaytarishga imkon
+                                        tuzadi.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Method 5 -->
+                    <div class="col-12">
+                        <div class="card shadow border-0 achievement-card p-4"
+                            style="border-radius: 15px; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-3"
+                                    style="width: 50px; height: 50px; flex-shrink: 0;">
+                                    <i class="fas fa-theater-masks fa-lg"></i>
+                                </div>
+                                <h4 class="card-title fw-bold m-0 text-white">5. "Rolli o'yin" (Role-playing) usuli</h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <h6 class="text-warning fw-bold"><i class="fas fa-question-circle me-2"></i>Bu o'zi
+                                        nima?</h6>
+                                    <p class="text-white fw-bold">Biror tarixiy vaqt, holat, qahramon roliga
+                                        o'quvchilarni tushirib, ijtimoiy jarayonni va matndagi ruhiyatni sahnada,
+                                        taqlidlar orqali amalga oshirishdir.</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <h6 class="text-warning fw-bold"><i class="fas fa-cogs me-2"></i>Qanday
+                                        qo'llaniladi?</h6>
+                                    <p class="text-white fw-bold">Ma'lum hikoyadagi 3-4 kishi (bo'ri, echki...
+                                        yoki Amir Temur, elchi kabi tarixiy siymolar) roliga bolalar tanlanadi. Agar
+                                        tarix fanida bo'lsa, o'zlashtirilgan bilimdan chiqmagan holda personajlar
+                                        dialogni olib borishi darkor. O'yin so'ngida aktyorlar joyiga o'tiradi va "Nega
+                                        u shunday qarorga keldi?" singari refleksiya uyushtiriladi.</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <h6 class="text-info fw-bold"><i class="fas fa-users me-2"></i>Maqsadli auditoriya:
+                                    </h6>
+                                    <p class="text-white fw-bold"><strong>1-11 sinflar.</strong> Boshlang'ich
+                                        sinfda ertaklar, yuqori sinflarda iqtisodiy bozor, sud muhokamasi singari
+                                        ko'rinishlarga oshib boradi. Til o'rganishda esa "Muloqot (speaking)" ko'nikmasi
+                                        uchun asos vositadir.</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <h6 class="text-success fw-bold"><i class="fas fa-chart-line me-2"></i>Kutiladigan
+                                        natija:</h6>
+                                    <p class="text-white fw-bold">Sinfxonasidanoq bola hayotning boshqa
+                                        ishtirokchilari nima o'ylayotganini tushuna boshlaydi (Empatiya). Jamoa oldida
+                                        nutq so'zlash qo'rquvi yo'qoladi, xotira jismoniy harakat bilan uzoqroq qoladi.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-auto">
+        <!-- Content loaded from footer.html via script.js -->
+    </footer>
+
+    <!-- 3D Back to Top Button -->
+    <button id="backToTop" class="btn-3d-up" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+        title="Yuqoriga qaytish">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

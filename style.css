@@ -40,19 +40,20 @@ body.theme-green .about-hero {
 .achievement-card,
 .stat-card,
 .news-card-interactive {
-    background: rgba(255, 255, 255, 0.45) !important;
+    background: rgba(0, 0, 0, 0.65) !important;
     backdrop-filter: blur(15px) !important;
     -webkit-backdrop-filter: blur(15px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.4) !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+    color: #ffffff !important;
 }
 
 .teacher-card:hover,
 .leader-card:hover,
 .achievement-card:hover {
-    background: rgba(255, 255, 255, 0.65) !important;
+    background: rgba(0, 0, 0, 0.8) !important;
     transform: translateY(-8px) !important;
-    border-color: var(--primary-color) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
 }
 
 
@@ -67,6 +68,10 @@ body.theme-modern {
     --dark-navy: #0f172a;
     --text-main: #1e293b;
     --light-bg: #f1f5f9;
+    --bg-grad-1: #eef2ff;
+    --bg-grad-2: #e0e7ff;
+    --bg-grad-3: #f5f3ff;
+    --bg-grad-4: #ede9fe;
 }
 
 /* Theme Green - Emerald Forest */
@@ -78,6 +83,10 @@ body.theme-green {
     --dark-navy: #064e3b;
     --text-main: #1e293b;
     --light-bg: #ecfdf5;
+    --bg-grad-1: #ecfdf5;
+    --bg-grad-2: #d1fae5;
+    --bg-grad-3: #f0fdf4;
+    --bg-grad-4: #dcfce7;
 }
 
 /* Theme Gray - Professional Slate & Silver */
@@ -89,6 +98,10 @@ body.theme-gray {
     --dark-navy: #0f172a;
     --text-main: #0f172a;
     --light-bg: #f8fafc;
+    --bg-grad-1: #f8fafc;
+    --bg-grad-2: #f1f5f9;
+    --bg-grad-3: #e2e8f0;
+    --bg-grad-4: #f8fafc;
 }
 
 
@@ -101,6 +114,10 @@ body.theme-midnight {
     --dark-navy: #4c1d95;
     --text-main: #1e293b;
     --light-bg: #faf5ff;
+    --bg-grad-1: #faf5ff;
+    --bg-grad-2: #f3e8ff;
+    --bg-grad-3: #fdf4ff;
+    --bg-grad-4: #fae8ff;
 }
 
 /* Theme Sunset - Golden Orange */
@@ -112,6 +129,10 @@ body.theme-sunset {
     --dark-navy: #7c2d12;
     --text-main: #1e293b;
     --light-bg: #fff7ed;
+    --bg-grad-1: #fff7ed;
+    --bg-grad-2: #ffedd5;
+    --bg-grad-3: #fffbeb;
+    --bg-grad-4: #fef3c7;
 }
 
 /* Theme Ocean - Deep Cyan */
@@ -123,6 +144,10 @@ body.theme-ocean {
     --dark-navy: #164e63;
     --text-main: #1e293b;
     --light-bg: #f0f9ff;
+    --bg-grad-1: #f0f9ff;
+    --bg-grad-2: #e0f2fe;
+    --bg-grad-3: #ecfeff;
+    --bg-grad-4: #cffafe;
 }
 
 
@@ -134,15 +159,37 @@ body.theme-ocean {
     font-family: 'Outfit', 'Inter', -apple-system, sans-serif;
 }
 
+html {
+    background: linear-gradient(-45deg, var(--bg-grad-1), var(--bg-grad-2), var(--bg-grad-3), var(--bg-grad-4)) !important;
+    background-size: 400% 400% !important;
+    animation: gradientBG 15s ease infinite !important;
+    min-height: 100vh;
+}
+
 body {
-    background-color: transparent !important;
-    /* To'liq shaffof */
-    color: var(--text-main);
+    background: rgba(0, 0, 0, 0.7) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    color: #ffffff !important;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    transition: var(--transition-standard);
+    transition: background 1s ease, color 0.5s ease;
     line-height: 1.6;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 
@@ -2450,24 +2497,25 @@ body.theme-green .custom-swiper-btn:hover {
 }
 
 .datetime-display {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.65);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 16px;
     padding: 10px 20px;
     display: flex;
     align-items: center;
     gap: 15px;
-    color: white;
+    color: #fff;
     cursor: pointer;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
 }
 
 .datetime-display:hover {
-    background: rgba(255, 255, 255, 0.45);
+    background: rgba(0, 0, 0, 0.8);
     transform: translateY(-2px);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
 }
 
 /* Theme Swatch Bar below clock */
@@ -2595,11 +2643,11 @@ body.theme-green .custom-swiper-btn:hover {
     position: absolute;
     top: calc(100% + 15px);
     right: 0;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-radius: 20px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
     padding: 20px;
     width: 320px;
     opacity: 0;
@@ -2645,7 +2693,7 @@ body.theme-green .custom-swiper-btn:hover {
     border: none;
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--dark-navy);
+    color: #fff;
     cursor: pointer;
     outline: none;
     -webkit-appearance: none;
@@ -2688,7 +2736,7 @@ body.theme-green .custom-swiper-btn:hover {
     text-align: center;
     font-size: 0.85rem;
     font-weight: 700;
-    color: var(--primary-color);
+    color: rgba(255, 255, 255, 0.9);
     margin-bottom: 10px;
 }
 
@@ -2705,15 +2753,15 @@ body.theme-green .custom-swiper-btn:hover {
     justify-content: center;
     font-size: 1rem;
     font-weight: 500;
-    color: var(--text-main);
+    color: #fff;
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .cal-day:not(.empty):hover {
-    background: rgba(99, 102, 241, 0.1);
-    color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.3);
+    color: #fff;
 }
 
 .cal-day.today {
@@ -2741,12 +2789,12 @@ body.theme-green .calendar-header button {
 }
 
 body.theme-green .calendar-weekdays {
-    color: #10b981;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 body.theme-green .cal-day:not(.empty):hover {
-    background: rgba(16, 185, 129, 0.1);
-    color: #10b981;
+    background: rgba(255, 255, 255, 0.3);
+    color: #fff;
 }
 
 /* ===== TEAM MEMBER MODAL STYLES ===== */

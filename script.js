@@ -1,7 +1,7 @@
 // ==================== ADMIN CONFIG ====================
 // Sayt ko'chirilganda faqat shu yerdagi nomni o'zgartiring:
 const MANAGEMENT_CONFIG = {
-    googleAccount: "GitHub: +komiljontemirov8, mshmaktab1 | Net-account: bil...836, msh....1, +kom...1,"
+    googleAccount: "GitHub: +komiljontemirov8, komiljontemirov1, mshmaktab1 | Net-account: +bil...836, msh....1, kom...8"
 };
 
 async function loadFooter() {
@@ -335,6 +335,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                         }
                     });
                 });
+            }
+
+            // Check URL for shared post
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('post');
+            if (postId) {
+                setTimeout(() => {
+                    openModal(postId);
+                }, 500);
             }
 
         } catch (error) {
@@ -805,6 +814,7 @@ function initPremiumCalendarWidget() {
             <div class="datetime-display" id="datetimeDisplay">
                 <div class="time-block">
                     <span id="time-hm">00:00</span><span id="time-s">00</span>
+                    <span id="day-night-icon" style="font-size: 1.2rem; margin-left: 8px;"></span>
                     <span id="tz-label" class="tz-indicator" style="font-size: 0.6rem; opacity: 0.6; margin-left: 5px; font-weight: 800; border: 1px solid rgba(255,255,255,0.4); padding: 1px 3px; border-radius: 4px;">LOK</span>
                 </div>
                 <div class="date-block">
@@ -850,6 +860,14 @@ function initPremiumCalendarWidget() {
                     <div>Du</div><div>Se</div><div>Ch</div><div>Pa</div><div>Ju</div><div>Sh</div><div>Ya</div>
                 </div>
                 <div class="calendar-days" id="calendarDays"></div>
+                <!-- Weather Widget -->
+                <div id="weather-container" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.2); display: flex; flex-direction: column; gap: 10px;">
+                    <div style="font-size: 0.9rem; font-weight: bold; color: rgba(255,255,255,0.9); text-align: center;">Marg'ilon Ob-havosi</div>
+                    <div id="weather-current" style="display: flex; align-items: center; justify-content: center; gap: 15px; color: #fff;">
+                       <span style="font-size: 0.8rem; opacity: 0.7;">Yuklanmoqda...</span>
+                    </div>
+                    <div id="weather-forecast" style="display: flex; gap: 5px; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none;"></div>
+                </div>
             </div>
         </div>
     `;
@@ -939,12 +957,22 @@ function initPremiumCalendarWidget() {
             }
         }
 
-        const hh = String(now.getHours()).padStart(2, '0');
+        const hh_num = now.getHours();
+        const hh = String(hh_num).padStart(2, '0');
         const mm = String(now.getMinutes()).padStart(2, '0');
         const ss = String(now.getSeconds()).padStart(2, '0');
 
         if (timeHm) timeHm.textContent = hh + ':' + mm;
         if (timeS) timeS.textContent = ':' + ss;
+
+        const dayNightIcon = document.getElementById('day-night-icon');
+        if (dayNightIcon) {
+            if (hh_num >= 6 && hh_num < 19) {
+                dayNightIcon.innerHTML = '<i class="fas fa-sun" style="color: #facc15; filter: drop-shadow(0 0 5px rgba(250, 204, 21, 0.5));"></i>';
+            } else {
+                dayNightIcon.innerHTML = '<i class="fas fa-moon" style="color: #cbd5e1; filter: drop-shadow(0 0 5px rgba(203, 213, 225, 0.5));"></i>';
+            }
+        }
 
         const weekdays = ["Yakshanba", "Dushanba", "Seshanba", "Chorshanba", "Payshanba", "Juma", "Shanba"];
         const months = ["Yanvar", "Fevral", "Mart", "Aprel", "May", "Iyun", "Iyul", "Avgust", "Sentyabr", "Oktyabr", "Noyabr", "Dekabr"];
@@ -1040,6 +1068,83 @@ function initPremiumCalendarWidget() {
         displayedYear = parseInt(e.target.value);
         renderCalendar();
     });
+
+    // Weather API Logic
+    async function fetchWeather() {
+        try {
+            // Margilan coordinates: lat 40.47, lon 71.71
+            const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=40.47&longitude=71.71&daily=weathercode,temperature_2m_max,temperature_2m_min&current_weather=true&timezone=auto');
+            const data = await res.json();
+
+            const current = data.current_weather;
+            const currentTemp = Math.round(current.temperature);
+            const isDay = current.is_day === 1;
+
+            const weatherIcons = {
+                0: isDay ? 'fa-sun text-warning' : 'fa-moon text-light',
+                1: isDay ? 'fa-cloud-sun text-warning' : 'fa-cloud-moon text-light',
+                2: 'fa-cloud text-secondary',
+                3: 'fa-cloud text-secondary',
+                45: 'fa-smog text-secondary',
+                48: 'fa-smog text-secondary',
+                51: 'fa-cloud-rain text-info',
+                53: 'fa-cloud-rain text-info',
+                55: 'fa-cloud-rain text-info',
+                61: 'fa-cloud-showers-heavy text-primary',
+                63: 'fa-cloud-showers-heavy text-primary',
+                65: 'fa-cloud-showers-heavy text-primary',
+                71: 'fa-snowflake text-info',
+                73: 'fa-snowflake text-info',
+                75: 'fa-snowflake text-info',
+                95: 'fa-bolt text-warning'
+            };
+
+            const currentIcon = weatherIcons[current.weathercode] || 'fa-cloud';
+
+            const currentHtml = `
+                <i class="fas ${currentIcon}" style="font-size: 2.5rem; text-shadow: 0 2px 10px rgba(0,0,0,0.2);"></i>
+                <div style="display: flex; flex-direction: column;">
+                    <span style="font-size: 1.8rem; font-weight: bold; line-height: 1;">${currentTemp}°C</span>
+                    <span style="font-size: 0.8rem; opacity: 0.9; text-transform: uppercase;">Ayni vaqtda</span>
+                </div>
+            `;
+            const weatherCurrent = document.getElementById('weather-current');
+            if (weatherCurrent) weatherCurrent.innerHTML = currentHtml;
+
+            const forecastDiv = document.getElementById('weather-forecast');
+            if (forecastDiv) {
+                forecastDiv.innerHTML = '';
+                const daily = data.daily;
+                const weekdays = ["Ya", "Du", "Se", "Ch", "Pa", "Ju", "Sh"];
+
+                for (let i = 1; i <= 6; i++) { // Next 6 days
+                    const date = new Date(daily.time[i]);
+                    const dayName = weekdays[date.getDay()];
+                    const maxTemp = Math.round(daily.temperature_2m_max[i]);
+                    const minTemp = Math.round(daily.temperature_2m_min[i]);
+                    const dayIcon = weatherIcons[daily.weathercode[i]] || 'fa-cloud text-secondary';
+                    const safeIcon = dayIcon.replace('fa-moon', 'fa-sun').replace('fa-cloud-moon', 'fa-cloud-sun');
+
+                    const dayHtml = `
+                        <div style="flex: 0 0 calc(100% / 6); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 5px; border-radius: 8px; background: rgba(255,255,255,0.05); text-align: center;">
+                            <span style="font-size: 0.75rem; color: rgba(255,255,255,0.9); font-weight: bold;">${dayName}</span>
+                            <i class="fas ${safeIcon}" style="font-size: 1.2rem; margin: 8px 0; text-shadow: 0 2px 5px rgba(0,0,0,0.2);"></i>
+                            <span style="font-size: 0.85rem; font-weight: bold; color: #fff;">${maxTemp}°</span>
+                            <span style="font-size: 0.7rem; opacity: 0.6; color: #fff;">${minTemp}°</span>
+                        </div>
+                    `;
+                    forecastDiv.innerHTML += dayHtml;
+                }
+            }
+        } catch (e) {
+            const weatherCurrent = document.getElementById('weather-current');
+            if (weatherCurrent) weatherCurrent.innerHTML = '<span style="font-size: 0.8rem; opacity: 0.7;">Tarmoq xatosi...</span>';
+            console.error('Weather fetch error:', e);
+        }
+    }
+
+    fetchWeather();
+    setInterval(fetchWeather, 30 * 60 * 1000);
 }
 
 // Just fetches the current value
@@ -1274,6 +1379,9 @@ function createNewsCard(item, query = '') {
         <div class="card-body d-flex flex-column" style="padding: 1.5rem;">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <span class="text-muted small"><i class="far fa-clock"></i> ${dateStr}</span>
+                <button class="btn btn-sm btn-light rounded-circle text-muted p-0 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; z-index: 2;" onclick="sharePost('${item.id.replace(/'/g, "\\'")}', this, event)" title="Ulashish">
+                    <i class="fas fa-share-alt"></i>
+                </button>
             </div>
             <p class="card-text flex-grow-1" style="line-height: 1.6; margin-bottom: 0.75rem;">${displayHtml}</p>
             <button class="btn btn-outline-primary btn-sm mt-3 align-self-start rounded-pill px-3" onclick="openModal('${item.id.replace(/'/g, "\\'")}')">
@@ -1283,6 +1391,35 @@ function createNewsCard(item, query = '') {
     `;
     return card;
 }
+
+window.sharePost = function (postId, btnElement, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    // Construct share URL that points directly to this post
+    const url = new URL(window.location.href.split('#')[0]); // Remove existing hashes
+    url.searchParams.set('post', postId);
+    const shareUrl = url.href;
+
+    const copySuccess = () => {
+        const icon = btnElement.querySelector('i');
+        if (icon) {
+            const originalClass = icon.className;
+            icon.className = 'fas fa-check text-success';
+            setTimeout(() => { icon.className = originalClass; }, 2000);
+        }
+    };
+
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(shareUrl).then(copySuccess).catch(err => {
+            prompt('Havolani nusxalash (Ctrl+C):', shareUrl);
+        });
+    } else {
+        prompt('Havolani nusxalash (Ctrl+C):', shareUrl);
+    }
+};
 
 function initNewsSearch() {
     const searchInput = document.getElementById('newsSearchInput');
