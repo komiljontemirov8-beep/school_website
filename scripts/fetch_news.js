@@ -204,8 +204,19 @@ async function fetchBatch(beforeId = null) {
 }
 
 async function fetchNews() {
-    const STOP_DATE = new Date('2024-10-01');
-    const allNews = [];
+    const STOP_DATE = new Date('2026-04-08');
+    let allNews = [];
+    if (fs.existsSync(OUTPUT_FILE)) {
+        try {
+            allNews = JSON.parse(fs.readFileSync(OUTPUT_FILE, 'utf8'));
+            console.log(`Loaded ${allNews.length} existing news items to merge.`);
+        } catch (e) {
+            console.error('Could not parse existing news.json:', e.message);
+        }
+    }
+
+    // We will collect new items in a separate array during crawling
+    const newItems = [];
     let oldestId = null;
     let keepCrawling = true;
 
@@ -221,16 +232,19 @@ async function fetchNews() {
             break;
         }
 
-        allNews.push(...batch);
-        const oldestInBatch = batch[0];
+        newItems.push(...batch);
+        const oldestInBatch = batch[batch.length - 1]; // Telegram returns latest first, so the oldest in batch is the last item
         const oldestDate = new Date(oldestInBatch.date);
         oldestId = oldestInBatch.id && oldestInBatch.id.includes('/') ? oldestInBatch.id.split('/')[1] : oldestInBatch.id;
 
-        console.log(`Batch processed. Current total: ${allNews.length}. Oldest date: ${oldestDate.toISOString().split('T')[0]}`);
+        console.log(`Batch processed. Fetched ${newItems.length} new items so far. Oldest date: ${oldestDate.toISOString().split('T')[0]}`);
 
-        if (oldestDate <= STOP_DATE || allNews.length > 2000) keepCrawling = false;
+        if (oldestDate <= STOP_DATE || newItems.length > 2000) keepCrawling = false;
         await new Promise(r => setTimeout(r, 1000));
     }
+
+    // Merge new items into allNews
+    allNews.push(...newItems);
 
     // Deduplicate and localize
     const uniqueNews = Array.from(new Map(allNews.map(item => [item.id, item])).values());
