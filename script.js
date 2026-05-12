@@ -11,7 +11,8 @@ async function loadFooter() {
     try {
         const response = await fetch('footer.html');
         if (!response.ok) throw new Error('Footer not found');
-        const html = await response.json(); // Wait, footer.html is text
+        const html = await response.text();
+        footer.innerHTML = html;
     } catch (e) { }
 }
 
@@ -105,8 +106,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
 
             // 2. Prepare Data (now includes the hidden ID)
-            const data = new FormData(form);
-            const submitBtn = form.querySelector('button');
+            const data = new FormData(contactForm);
+            const submitBtn = contactForm.querySelector('button');
             const originalBtnText = submitBtn.innerHTML;
 
             submitBtn.innerHTML = 'Yuborilmoqda... <i class="fas fa-spinner fa-spin"></i>';
@@ -200,11 +201,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             window.globalNewsData = news;
 
             if (news.length === 0) {
-                container.innerHTML = '<p class="no-news" style="text-align: center; grid-column: 1/-1;">Hozircha yangiliklar yo\'q.</p>';
+                if (container) container.innerHTML = '<p class="no-news" style="text-align: center; grid-column: 1/-1;">Hozircha yangiliklar yo\'q.</p>';
                 return;
             }
 
-            container.innerHTML = ''; // Clear loading spinner
+            if (container) container.innerHTML = ''; // Clear loading spinner
 
             // Generate Dynamic Navigation
             const navContainer = document.getElementById('dynamicDateNav');

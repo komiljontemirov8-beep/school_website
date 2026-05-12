@@ -18,6 +18,32 @@
 </head>
 
 <body>
+    <!-- Global Glass Overlay (Fix for fixed positioning) -->
+    <div id="global-glass-overlay"></div>
+
+    <!-- MODAL STRUKTURA -->
+    <div class="custom-modal-overlay" id="modalOverlay" onclick="closeModal()">
+        <div class="custom-modal" id="customModal" onclick="event.stopPropagation()">
+            <button class="modal-nav-arrow prev-arrow" onclick="navModal(-1)">&#10094;</button>
+            <button class="modal-nav-arrow next-arrow" onclick="navModal(1)">&#10095;</button>
+            <div class="custom-modal-header">
+                <h5 class="custom-modal-title" id="modalTitle">Yangilik Tafsilotlari</h5>
+                <button class="custom-modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="custom-modal-body">
+                <div class="modal-image-side" id="modalMediaContainer">
+                    <img id="modalImage" src="" alt="Yangilik rasmi">
+                    <!-- Video will be inserted here dynamically -->
+                </div>
+                <div class="modal-text-side">
+                    <h3 id="modalHeading"></h3>
+                    <div class="content" id="modalContent"></div>
+                    <div class="modal-hashtags" id="modalHashtags"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Page Transition Overlay -->
     <div id="page-transition" class="page-transition"></div>
     <!-- 3D Scene Global Container -->
@@ -110,10 +136,12 @@
                     </h1>
 
                     <div class="hero-subtext">
-                        <p style="font-size: 1.5rem; color: #333; margin-bottom: 10px; font-family: sans-serif;">
+                        <p
+                            style="font-size: 1.5rem; color: var(--dark-navy); margin-bottom: 10px; font-family: sans-serif; text-shadow: 0 1px 5px rgba(255,255,255,0.8);">
                             Bilim - kelajak poydevori.
                         </p>
-                        <p style="font-size: 1.3rem; color: #444; font-family: sans-serif;">
+                        <p
+                            style="font-size: 1.3rem; color: var(--primary-color); font-family: sans-serif; text-shadow: 0 1px 5px rgba(255,255,255,0.8);">
                             Bizning maktabimizda har bir o'quvchi o'z iqtidorini namoyon etadi.
                         </p>
                     </div>
@@ -256,28 +284,7 @@
         <!-- Content loaded from footer.html via script.js -->
     </footer>
 
-    <!-- MODAL STRUKTURA -->
-    <div class="custom-modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
 
-    <div class="custom-modal" id="customModal">
-        <button class="modal-nav-arrow prev-arrow" onclick="navModal(-1)">&#10094;</button>
-        <button class="modal-nav-arrow next-arrow" onclick="navModal(1)">&#10095;</button>
-        <div class="custom-modal-header">
-            <h5 class="custom-modal-title" id="modalTitle">Yangilik Tafsilotlari</h5>
-            <button class="custom-modal-close" onclick="closeModal()">×</button>
-        </div>
-        <div class="custom-modal-body">
-            <div class="modal-image-side" id="modalMediaContainer">
-                <img id="modalImage" src="" alt="Yangilik rasmi">
-                <!-- Video will be inserted here dynamically -->
-            </div>
-            <div class="modal-text-side">
-                <h3 id="modalHeading"></h3>
-                <div class="content" id="modalContent"></div>
-                <div class="modal-hashtags" id="modalHashtags"></div>
-            </div>
-        </div>
-    </div>
 
     <!-- 3D Back to Top Button -->
     <button id="backToTop" class="btn-3d-up" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"

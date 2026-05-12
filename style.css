@@ -11,7 +11,7 @@
 }
 
 /* Force global transparency for ALL pages and SECTIONS */
-body,
+
 section,
 .hero,
 .about-hero,
@@ -59,7 +59,7 @@ body.theme-green .about-hero {
 
 
 /* Theme Modern - Sapphire Indigo */
-body,
+
 body.theme-modern {
     --primary-color: #4338ca;
     --primary-gradient: linear-gradient(135deg, #4338ca 0%, #6366f1 50%, #8b5cf6 100%);
@@ -67,6 +67,7 @@ body.theme-modern {
     --accent-color: #fbbf24;
     --dark-navy: #0f172a;
     --text-main: #1e293b;
+    --text-light: #f8fafc;
     --light-bg: #f1f5f9;
     --bg-grad-1: #eef2ff;
     --bg-grad-2: #e0e7ff;
@@ -82,6 +83,7 @@ body.theme-green {
     --accent-color: #f59e0b;
     --dark-navy: #064e3b;
     --text-main: #1e293b;
+    --text-light: #ecfdf5;
     --light-bg: #ecfdf5;
     --bg-grad-1: #ecfdf5;
     --bg-grad-2: #d1fae5;
@@ -160,17 +162,28 @@ body.theme-ocean {
 }
 
 html {
-    background: linear-gradient(-45deg, var(--bg-grad-1), var(--bg-grad-2), var(--bg-grad-3), var(--bg-grad-4)) !important;
-    background-size: 400% 400% !important;
-    animation: gradientBG 15s ease infinite !important;
     min-height: 100vh;
 }
 
+#global-glass-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(-45deg, var(--bg-grad-1), var(--bg-grad-2), var(--bg-grad-3), var(--bg-grad-4));
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: -5;
+    /* Behind content but above 3D scene */
+    pointer-events: none;
+}
+
 body {
-    background: rgba(0, 0, 0, 0.7) !important;
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
-    color: #ffffff !important;
+    background: transparent !important;
+    color: var(--dark-navy);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -197,19 +210,18 @@ body {
 /* Hero Title Soft 3D Style - Extra Dark & Professional (Theme-aware) */
 /* Premium Two-Tone Themed Gradient Hero Titles */
 .main-hero-title {
-    /* Fallback color for accessibility */
+    /* Darkened Theme Colors for Visibility */
     color: var(--dark-navy) !important;
 
-    /* Elegant Two-Tone Gradient */
+    /* Elegant Dark Gradient */
     background: linear-gradient(180deg, var(--dark-navy) 20%, var(--primary-color) 100%) !important;
     -webkit-background-clip: text !important;
     background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
 
     font-weight: 950 !important;
-    /* Use the user's preferred sizing from their latest snippet */
     font-size: 3.5rem !important;
-    text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.05) !important;
+    text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1) !important;
     letter-spacing: -1px !important;
     line-height: 1.15 !important;
     display: flex !important;
@@ -1610,35 +1622,39 @@ footer {
 .custom-modal-overlay {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.75);
-    z-index: 9998;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 40000;
     animation: fadeIn 0.3s ease;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
 }
 
 .custom-modal-overlay.active {
-    display: block;
+    display: flex;
+    /* Changed from block to flex for centering */
 }
 
 /* Modal o'zi */
 .custom-modal {
     display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.9);
-    width: 95%;
+    position: relative;
+    /* Not fixed anymore, centered by overlay */
+    width: 100%;
     max-width: 1200px;
     max-height: 92vh;
     background: white;
-    border-radius: 20px;
+    border-radius: 24px;
     overflow: hidden;
-    z-index: 9999;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
-    animation: modalAppear 0.3s ease forwards;
+    z-index: 40001;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+    animation: modalAppear 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
 
 .custom-modal.active {
@@ -1658,12 +1674,12 @@ footer {
 
 @keyframes modalAppear {
     from {
-        transform: translate(-50%, -50%) scale(0.9);
+        transform: scale(0.9) translateY(30px);
         opacity: 0;
     }
 
     to {
-        transform: translate(-50%, -50%) scale(1);
+        transform: scale(1) translateY(0);
         opacity: 1;
     }
 }
@@ -1837,53 +1853,40 @@ footer {
 
 /* ==================== MOBIL (768px dan kichik) ==================== */
 @media (max-width: 768px) {
+    .custom-modal-overlay {
+        align-items: flex-end;
+        padding: 0;
+    }
+
     .custom-modal {
-        width: 100%;
-        max-width: 100%;
-        max-height: 95vh;
-        top: auto;
-        bottom: 0;
-        left: 0;
-        transform: translateY(100%);
-        border-radius: 25px 25px 0 0;
+        width: 100% !important;
+        max-width: 100% !important;
+        max-height: 90vh !important;
+        transform: translateY(100%) !important;
+        border-radius: 30px 30px 0 0 !important;
+        animation: none !important;
+        margin: 0 !important;
     }
 
     .custom-modal.active {
-        transform: translateY(0);
-        left: 0;
-    }
-
-    @keyframes modalAppear {
-        from {
-            transform: translateY(100%);
-            opacity: 1;
-        }
-
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
+        transform: translateY(0) !important;
     }
 
     .custom-modal-body {
         flex-direction: column;
-        height: calc(95vh - 70px);
-        max-height: none;
+        height: auto;
+        max-height: 80vh;
     }
 
     .modal-image-side {
-        flex: 0 0 250px;
-        min-height: 250px;
+        flex: 0 0 auto;
+        height: 250px;
+        padding: 1rem;
     }
 
     .modal-text-side {
-        flex: 1;
-        padding: 1.75rem 1.5rem;
-    }
-
-    .modal-nav-arrow {
-        display: none !important;
-        /* Mobil versiyada o'qlarni yashirish */
+        flex: 1 1 auto;
+        padding: 1.5rem;
     }
 }
 
@@ -2344,18 +2347,30 @@ body.theme-green .news-glass-bg {
     background: transparent !important;
 }
 
-/* NEWS CARDS: Force 100% Transparency */
+/* NEWS CARDS: Professional Glassmorphism */
 #news-container .card,
 .card,
 .admin-card,
 .infra-card,
 .value-card,
 .achievement-card {
-    background: transparent !important;
-    background-color: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
+}
+
+body.theme-modern .card,
+body.theme-modern .achievement-card {
+    background: rgba(15, 23, 42, 0.6) !important;
+    color: var(--text-light) !important;
+}
+
+body.theme-green .card,
+body.theme-green .achievement-card {
+    background: rgba(6, 78, 59, 0.6) !important;
+    color: var(--text-light) !important;
 }
 
 #news-container .card-content {
@@ -3177,59 +3192,83 @@ body.theme-green .cal-day:not(.empty):hover {
 .quick-nav-card {
     flex: 0 1 22%;
     min-width: 250px;
-    background: white;
-    border: 1px solid #e5e7eb;
-    border-radius: 24px;
-    padding: 40px 25px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 28px;
+    padding: 35px 25px;
     text-align: center;
-    color: #374151;
+    color: var(--dark-navy) !important;
     text-decoration: none !important;
-    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.quick-nav-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--primary-gradient);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
 }
 
 .quick-nav-card:hover {
-    background: white;
-    transform: translateY(-12px);
-    box-shadow: 0 30px 60px rgba(99, 102, 241, 0.15);
+    background: #ffffff;
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     border-color: var(--primary-color);
 }
 
+.quick-nav-card:hover::after {
+    transform: scaleX(1);
+}
+
 .quick-nav-icon-box {
-    width: 74px;
-    height: 74px;
-    background: #f3f4f6;
+    width: 70px;
+    height: 70px;
+    background: rgba(67, 56, 202, 0.08);
+    /* Light primary tint */
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 25px;
-    font-size: 2.4rem;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
     color: var(--primary-color);
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
 }
 
 .quick-nav-card:hover .quick-nav-icon-box {
     background: var(--primary-color);
     color: white;
-    transform: rotate(10deg);
+    transform: scale(1.1) rotate(5deg);
 }
 
 .quick-nav-card h3 {
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: #111827;
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: var(--dark-navy) !important;
+    letter-spacing: -0.3px;
 }
 
 .quick-nav-card p {
-    font-size: 0.95rem;
-    color: #6b7280;
+    font-size: 0.9rem;
+    color: var(--text-main) !important;
+    opacity: 0.8;
     margin: 0;
     line-height: 1.5;
+    font-weight: 500;
 }
 
 @media (max-width: 1200px) {
