@@ -1336,11 +1336,12 @@ function createNewsCard(item, query = '') {
 
     const card = document.createElement('div');
     card.className = 'card h-100 shadow-sm border-0 news-card-interactive';
+    card.setAttribute('data-id', item.id);
 
     let mediaHtml = '';
     if (item.video) {
         mediaHtml = `
-            <div class="position-relative" style="height: 300px; background: #000; cursor: pointer;" onclick="openModal('${item.id.replace(/'/g, "\\'")}')">
+            <div class="position-relative media-container" style="height: 300px; background: #000; cursor: pointer;" onclick="openModal('${item.id.replace(/'/g, "\\'")}')">
                 <video src="${item.video}" poster="${item.image || ''}" class="card-img-top w-100 h-100 news-video-preview" style="object-fit: contain;" muted loop playsinline></video>
                 <div class="position-absolute top-50 start-50 translate-middle">
                     <i class="fas fa-play-circle fa-3x text-white opacity-75"></i>
@@ -1349,7 +1350,7 @@ function createNewsCard(item, query = '') {
         `;
     } else if (item.image) {
         mediaHtml = `
-            <div style="height: 300px; background: #f8fafc; display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: pointer;" onclick="openModal('${item.id.replace(/'/g, "\\'")}')">
+            <div class="media-container" style="height: 300px; background: #f8fafc; display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: pointer;" onclick="openModal('${item.id.replace(/'/g, "\\'")}')">
                 <img src="${item.image}" class="card-img-top w-100 h-100" alt="Yangilik rasmi" loading="lazy" style="object-fit: contain;">
             </div>
         `;
@@ -1375,21 +1376,46 @@ function createNewsCard(item, query = '') {
         displayHtml = displayHtml.replace(regex, '<mark class="search-highlight">$1</mark>');
     }
 
+    const safeId = item.id.replace(/[^a-zA-Z0-9]/g, '_');
+
     card.innerHTML = `
         ${mediaHtml}
         <div class="card-body d-flex flex-column" style="padding: 1.5rem;">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <span class="text-muted small"><i class="far fa-clock"></i> ${dateStr}</span>
-                <button class="btn btn-sm btn-light rounded-circle text-muted p-0 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; z-index: 2;" onclick="sharePost('${item.id.replace(/'/g, "\\'")}', this, event)" title="Ulashish">
-                    <i class="fas fa-share-alt"></i>
+                <div class="d-flex gap-2">
+                    <span class="text-muted small"><i class="far fa-eye"></i> <span id="views-${safeId}">0</span></span>
+                    <button class="btn btn-sm btn-light rounded-circle text-muted p-0 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; z-index: 2;" onclick="sharePost('${item.id.replace(/'/g, "\\'")}', this, event)" title="Ulashish">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                </div>
+            </div>
+            <p class="card-text flex-grow-1" style="line-height: 1.6; margin-bottom: 0.75rem; cursor: pointer;" onclick="openModal('${item.id.replace(/'/g, "\\'")}')">${displayHtml}</p>
+            
+            <div class="news-reaction-bar" id="reactions-${safeId}">
+                <button class="reaction-btn" data-type="like" onclick="handleReaction('${item.id.replace(/'/g, "\\'")}', 'like', this, event)">
+                    <span>👍</span> <span class="reaction-count">0</span>
+                </button>
+                <button class="reaction-btn" data-type="heart" onclick="handleReaction('${item.id.replace(/'/g, "\\'")}', 'heart', this, event)">
+                    <span>❤️</span> <span class="reaction-count">0</span>
+                </button>
+                <button class="reaction-btn" data-type="clap" onclick="handleReaction('${item.id.replace(/'/g, "\\'")}', 'clap', this, event)">
+                    <span>👏</span> <span class="reaction-count">0</span>
+                </button>
+                <button class="reaction-btn" data-type="fire" onclick="handleReaction('${item.id.replace(/'/g, "\\'")}', 'fire', this, event)">
+                    <span>🔥</span> <span class="reaction-count">0</span>
                 </button>
             </div>
-            <p class="card-text flex-grow-1" style="line-height: 1.6; margin-bottom: 0.75rem;">${displayHtml}</p>
+
             <button class="btn btn-outline-primary btn-sm mt-3 align-self-start rounded-pill px-3" onclick="openModal('${item.id.replace(/'/g, "\\'")}')">
-                Batafsil o'qish <i class="fas fa-arrow-right ms-1"></i>
+                Batafsil <i class="fas fa-arrow-right ms-1"></i>
             </button>
         </div>
     `;
+
+    // Fetch stats in background
+    setTimeout(() => fetchFullStats(item.id), 100);
+
     return card;
 }
 
@@ -1421,6 +1447,84 @@ window.sharePost = function (postId, btnElement, event) {
         prompt('Havolani nusxalash (Ctrl+C):', shareUrl);
     }
 };
+
+// ==================== MASTER REACTION LOGIC ====================
+async function fetchFullStats(newsId) {
+    const safeId = newsId.replace(/[^a-zA-Z0-9]/g, '_');
+
+    // View count
+    const views = await getCounter('news_view_' + newsId);
+    const viewEl = document.getElementById(`views-${safeId}`);
+    if (viewEl) viewEl.textContent = views.toLocaleString();
+
+    // Reactions
+    const reactionTypes = ['like', 'heart', 'clap', 'fire'];
+    for (const type of reactionTypes) {
+        const count = await getCounter(`news_react_${type}_${newsId}`);
+        const reactionBar = document.getElementById(`reactions-${safeId}`);
+        if (reactionBar) {
+            const btn = reactionBar.querySelector(`[data-type="${type}"]`);
+            if (btn) {
+                btn.querySelector('.reaction-count').textContent = count;
+                if (localStorage.getItem(`reacted_${type}_${newsId}`)) {
+                    btn.classList.add('active');
+                }
+            }
+        }
+    }
+}
+
+async function handleReaction(newsId, type, btn, event) {
+    if (event) {
+        event.stopPropagation();
+    }
+
+    if (localStorage.getItem(`reacted_${type}_${newsId}`)) {
+        return; // Already reacted
+    }
+
+    // UI Update immediately
+    btn.classList.add('active');
+    const countEl = btn.querySelector('.reaction-count');
+    const currentCount = parseInt(countEl.textContent) || 0;
+    countEl.textContent = currentCount + 1;
+
+    // Create a mini-explosion effect (Lottie-like logic)
+    const emoji = btn.querySelector('span').textContent;
+    createEmojiExplosion(btn, emoji);
+
+    // Save to server
+    await incrementCounter(`news_react_${type}_${newsId}`);
+    localStorage.setItem(`reacted_${type}_${newsId}`, 'true');
+}
+
+function createEmojiExplosion(element, emoji) {
+    for (let i = 0; i < 6; i++) {
+        const span = document.createElement('span');
+        span.textContent = emoji;
+        span.style.position = 'absolute';
+        span.style.left = '50%';
+        span.style.top = '50%';
+        span.style.pointerEvents = 'none';
+        span.style.zIndex = '100';
+        span.style.transition = 'all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1)';
+
+        const angle = (i / 6) * Math.PI * 2;
+        const dist = 50 + Math.random() * 50;
+        const tx = Math.cos(angle) * dist;
+        const ty = Math.sin(angle) * dist;
+
+        element.appendChild(span);
+
+        requestAnimationFrame(() => {
+            span.style.transform = `translate(${tx}px, ${ty - 50}px) scale(0)`;
+            span.style.opacity = '0';
+        });
+
+        setTimeout(() => span.remove(), 1000);
+    }
+}
+
 
 function initNewsSearch() {
     const searchInput = document.getElementById('newsSearchInput');
@@ -1495,13 +1599,40 @@ function initNewsSearch() {
     }
 }
 
-/* ==================== SMOOTH SCROLL FOR ABOUT PAGE REDIRECTS ==================== */
+/* ==================== MASTER SPATIAL UI & MAGNETIC EFFECTS ==================== */
+document.addEventListener('mousemove', (e) => {
+    // 1. Spatial Background Glow
+    const overlay = document.getElementById('global-glass-overlay');
+    if (overlay) {
+        const x = (e.clientX / window.innerWidth) * 100;
+        const y = (e.clientY / window.innerHeight) * 100;
+        overlay.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(255,255,255,0.08) 0%, transparent 60%), linear-gradient(-45deg, var(--bg-grad-1), var(--bg-grad-2), var(--bg-grad-3), var(--bg-grad-4))`;
+        overlay.style.backgroundSize = '100% 100%, 400% 400%';
+    }
+
+    // 2. Magnetic resonance for cards (Subtle)
+    const cards = document.querySelectorAll('.news-card-interactive');
+    cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const dist = Math.hypot(e.clientX - centerX, e.clientY - centerY);
+
+        if (dist < 400) {
+            const angleX = (e.clientY - centerY) / 25;
+            const angleY = (centerX - e.clientX) / 25;
+            card.style.transform = `perspective(1000px) translateY(-12px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.02)`;
+        } else {
+            card.style.transform = '';
+        }
+    });
+});
+
 window.addEventListener('load', () => {
     const scrollTarget = sessionStorage.getItem('scrollTarget');
     if (scrollTarget) {
         const element = document.getElementById(scrollTarget);
         if (element) {
-            // Give extra time for images or Three.js background to initialize
             setTimeout(() => {
                 const headerOffset = 100;
                 const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
@@ -1511,10 +1642,9 @@ window.addEventListener('load', () => {
                     top: offsetPosition,
                     behavior: 'smooth'
                 });
-
-                // Important: Clean up target so it doesn't scroll on every reload
                 sessionStorage.removeItem('scrollTarget');
             }, 300);
         }
     }
 });
+
