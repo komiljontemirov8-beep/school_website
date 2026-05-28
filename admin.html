@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>Boshqaruv Paneli (Admin) - 1-Maktab</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link id="theme-css" rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="style.css?v=24">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Three.js + GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+
+    <style>
+        .admin-container {
+            margin-top: 40px;
+            margin-bottom: 80px;
+        }
+
+        .admin-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 28px;
+            padding: 35px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            color: white;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+
+        body.theme-modern .admin-card {
+            background: rgba(15, 23, 42, 0.5);
+        }
+
+        .admin-nav-tabs .nav-link {
+            color: rgba(255,255,255,0.7) !important;
+            font-weight: 700;
+            border-radius: 12px;
+            padding: 12px 20px;
+            border: none !important;
+            transition: all 0.3s ease;
+        }
+
+        .admin-nav-tabs .nav-link.active {
+            background: var(--neon-gradient) !important;
+            color: white !important;
+            box-shadow: 0 8px 20px rgba(34, 211, 238, 0.3);
+        }
+
+        .form-control, .form-select {
+            background: rgba(255, 255, 255, 0.08) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            color: white !important;
+            border-radius: 14px !important;
+            padding: 12px 18px !important;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent-neon) !important;
+            box-shadow: 0 0 15px rgba(34, 211, 238, 0.3) !important;
+        }
+
+        .form-label {
+            font-weight: 700;
+            color: var(--accent-neon);
+            margin-bottom: 8px;
+        }
+
+        .admin-achievement-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .admin-achievement-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(34, 211, 238, 0.3);
+        }
+
+        .ach-preview-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--neon-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: white;
+        }
+
+        /* Instructions block */
+        .sync-console {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            color: #10b981;
+            font-size: 0.95rem;
+            position: relative;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        .sync-console::before {
+            content: "TERMINAL";
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #1e293b;
+            color: #94a3b8;
+            font-size: 10px;
+            padding: 3px 10px;
+            border-radius: 0 0 0 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Global Glass Overlay -->
+    <div id="global-glass-overlay"></div>
+    
+    <!-- Page Transition Overlay -->
+    <div id="page-transition" class="page-transition"></div>
+    
+    <!-- 3D Background Container -->
+    <div id="hero-3d-container"></div>
+
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'modern';
+        document.body.classList.add('theme-' + savedTheme);
+    </script>
+
+    <!-- Header -->
+    <header>
+        <div class="ticker-wrap">
+            <div class="ticker">DIQQAT! Sayt hozirda test rejimida ishlamoqda.</div>
+        </div>
+        <div class="branding-bar container py-3">
+            <div class="row align-items-center text-center text-md-start">
+                <div class="col-12 mb-2">
+                    <div class="d-flex align-items-center justify-content-center gap-2 mb-2 ministry-links">
+                        <a href="https://uzedu.uz/uz" target="_blank"
+                            class="text-decoration-none d-flex align-items-center gap-2">
+                            <img src="logo_min.png" alt="Gerb" height="30">
+                            <span class="small text-white">O‘zbekiston Respublikasi maktabgacha va maktab ta'limi
+                                vazirligi</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="d-flex align-items-center justify-content-center gap-3 school-identity">
+                        <a href="https://t.me/mshmaktab1" target="_blank"
+                            class="text-decoration-none d-flex align-items-center gap-3">
+                            <img src="logo.png" alt="Maktab Logosi" class="school-logo" width="60" height="60">
+                            <h1 class="h4 text-white text-uppercase m-0 school-name-text">Marg'ilon shahar 1-umumiy
+                                o'rta ta'lim maktabi</h1>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+            <div class="container">
+                <button class="navbar-toggler mx-auto" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto align-items-center">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Bosh sahifa</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">Maktab haqida</a></li>
+                        <li class="nav-item"><a class="nav-link" href="schedule.html">Dars jadvali</a></li>
+                        <li class="nav-item"><a class="nav-link" href="achievements.html">Yutuqlar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="statistics.html">Statistika</a></li>
+                        <li class="nav-item"><a class="nav-link" href="virtual-tour.html">3D Sayohat</a></li>
+                        <li class="nav-item"><a class="nav-link" href="resources.html">Foydali manbalar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Aloqa</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Admin Hero -->
+    <section class="text-center py-5" style="background: transparent;">
+        <div class="container animate-up">
+            <span class="hero-tag"><i class="fas fa-lock me-2"></i> Boshqaruv xonasi</span>
+            <h1 class="main-hero-title">Admin Boshqaruv Paneli</h1>
+            <p class="lead opacity-75">Maktab statistikalari, yutuqlari va yangiliklarini oson boshqarish tizimi.</p>
+        </div>
+    </section>
+
+    <!-- Main Navigation Tabs -->
+    <div class="container admin-container">
+        <div class="row mb-4">
+            <div class="col-12 animate-up">
+                <ul class="nav nav-pills tour-scene-controls admin-nav-tabs d-flex justify-content-center" id="adminTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active admin-tab-btn" id="stats-tab" data-bs-toggle="tab" data-bs-target="#stats-panel" type="button" role="tab" aria-controls="stats-panel" aria-selected="true">
+                            <i class="fas fa-chart-bar me-2"></i> Statistika
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link admin-tab-btn" id="achievements-tab" data-bs-toggle="tab" data-bs-target="#achievements-panel" type="button" role="tab" aria-controls="achievements-panel" aria-selected="false">
+                            <i class="fas fa-trophy me-2"></i> Yutuqlarimiz
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link admin-tab-btn" id="news-tab" data-bs-toggle="tab" data-bs-target="#news-panel" type="button" role="tab" aria-controls="news-panel" aria-selected="false">
+                            <i class="fab fa-telegram me-2"></i> Telegram-CMS (Yangiliklar)
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Tab Panels -->
+        <div class="tab-content" id="adminTabContent">
+            
+            <!-- 1. STATS PANEL -->
+            <div class="tab-pane fade show active animate-up" id="stats-panel" role="tabpanel" aria-labelledby="stats-tab">
+                <div class="row">
+                    <div class="col-lg-6 mb-4">
+                        <div class="admin-card">
+                            <h3 class="fw-bold mb-4 text-info"><i class="fas fa-edit me-2"></i> Statistikalarni tahrirlash</h3>
+                            <form id="statsForm">
+                                <div id="statsInputsContainer">
+                                    <!-- Dynamic Inputs loaded here -->
+                                </div>
+                                <div class="mt-4 d-flex gap-3">
+                                    <button type="button" class="btn btn-neon w-50" onclick="generateStatsText()">
+                                        <i class="fas fa-sync me-2"></i> Kodni yaratish
+                                    </button>
+                                    <button type="button" class="btn btn-outline-light rounded-pill px-4 w-50" onclick="downloadStatsFile()">
+                                        <i class="fas fa-download me-2"></i> Faylni yuklash
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6 mb-4">
+                        <div class="admin-card d-flex flex-column justify-content-between">
+                            <div>
+                                <h3 class="fw-bold mb-4 text-warning"><i class="fas fa-file-code me-2"></i> Tayyor statistics.txt kodi</h3>
+                                <p class="text-muted small">Quyidagi kodni nusxalab, loyihangizdagi <code>data/statistics.txt</code> fayli tarkibiga to'liq almashtirib qo'ying (yoki "Faylni yuklash" orqali yuklab olib, o'sha papkaga tashlang):</p>
+                                <textarea id="statsOutputCode" class="form-control" style="height: 250px; font-family: monospace; background: #090e1a !important; color: #34d399 !important;" readonly></textarea>
+                            </div>
+                            <button class="btn btn-outline-light rounded-pill px-4 mt-3" onclick="copyText('statsOutputCode')">
+                                <i class="fas fa-copy me-2"></i> Kodni nusxalash
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. ACHIEVEMENTS PANEL -->
+            <div class="tab-pane fade animate-up" id="achievements-panel" role="tabpanel" aria-labelledby="achievements-tab">
+                <div class="row">
+                    <!-- Achievements List and CRUD Forms -->
+                    <div class="col-lg-7 mb-4">
+                        <div class="admin-card">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h3 class="fw-bold m-0 text-info"><i class="fas fa-list me-2"></i> Yutuqlar ro'yxati</h3>
+                                <button class="btn btn-sm btn-neon" onclick="openNewAchievementForm()">
+                                    <i class="fas fa-plus me-1"></i> Yangi yutuq
+                                </button>
+                            </div>
+                            
+                            <!-- Add/Edit form (hidden by default) -->
+                            <div id="achievementFormWrapper" class="mb-4 p-3 rounded-4 bg-white bg-opacity-10 border border-white border-opacity-10" style="display: none;">
+                                <h5 id="achFormTitle" class="fw-bold text-warning mb-3">Yangi yutuq qo'shish</h5>
+                                <input type="hidden" id="ach-index">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Sana</label>
+                                        <input type="text" id="ach-sana" class="form-control" placeholder="Masalan: MART 2026">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Ikonka (FontAwesome klassi)</label>
+                                        <input type="text" id="ach-ikonka" class="form-control" placeholder="Masalan: fas fa-award">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Yutuq sarlavhasi</label>
+                                        <input type="text" id="ach-sarlavha" class="form-control" placeholder="Yutuq nomi...">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Tavsif (Batafsil ma'lumot)</label>
+                                        <textarea id="ach-tavsif" class="form-control" rows="3" placeholder="Tafsilotlar..."></textarea>
+                                    </div>
+                                    <div class="col-12 d-flex gap-2">
+                                        <button type="button" class="btn btn-sm btn-neon px-4" onclick="saveAchievement()">
+                                            <i class="fas fa-check me-1"></i> Saqlash
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-light rounded-pill px-4" onclick="cancelAchievementForm()">
+                                            Bekor qilish
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="achievementsListContainer" style="max-height: 450px; overflow-y: auto; padding-right: 5px;">
+                                <!-- Dynamic Achievements list loaded here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Achievements Export -->
+                    <div class="col-lg-5 mb-4">
+                        <div class="admin-card d-flex flex-column justify-content-between">
+                            <div>
+                                <h3 class="fw-bold mb-4 text-warning"><i class="fas fa-file-code me-2"></i> Tayyor achievements.txt kodi</h3>
+                                <p class="text-muted small">Ushbu kodni to'liq nusxalab, loyihangizdagi <code>data/achievements.txt</code> fayliga joylang, yoki "Faylni yuklash" tugmasi orqali yuklab olib, o'rniga tashlang:</p>
+                                <textarea id="achievementsOutputCode" class="form-control" style="height: 350px; font-family: monospace; background: #090e1a !important; color: #34d399 !important;" readonly></textarea>
+                            </div>
+                            <div class="mt-4 d-flex gap-3">
+                                <button class="btn btn-outline-light rounded-pill px-4 w-50" onclick="copyText('achievementsOutputCode')">
+                                    <i class="fas fa-copy me-2"></i> Nusxalash
+                                </button>
+                                <button class="btn btn-outline-light rounded-pill px-4 w-50" onclick="downloadAchievementsFile()">
+                                    <i class="fas fa-download me-2"></i> Faylni yuklash
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. TELEGRAM NEWS PANEL -->
+            <div class="tab-pane fade animate-up" id="news-panel" role="tabpanel" aria-labelledby="news-tab">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto mb-4">
+                        <div class="admin-card">
+                            <h3 class="fw-bold mb-4 text-info"><i class="fab fa-telegram me-2"></i> Telegram-CMS Ishlash Yo'riqnomasi</h3>
+                            <p class="fs-5">Maktab saytida so'nggi yangiliklar va tadbirlarni yangilab borish uchun sizga alohida Boshqaruv paneli yaratish shart emas! Tizimda allaqachon professional **Telegram sinxronizatsiyasi** o'rnatilgan.</p>
+                            
+                            <div class="my-4">
+                                <h5 class="fw-bold text-warning"><i class="fas fa-check-circle me-2"></i> Bu qanday ishlaydi?</h5>
+                                <ol class="lh-lg">
+                                    <li>Maktabning rasmiy Telegram kanaliga (<a href="https://t.me/mshmaktab1" target="_blank" class="text-info fw-bold">@mshmaktab1</a>) yangi yangilik, rasm yoki video joylashtirasiz.</li>
+                                    <li>Kanal ommaviy bo'lgani sababli, sayt skripti yangi xabarlarni avtomatik tarzda topa oladi.</li>
+                                    <li>Terminalda yoki serveringizda bor-yo'g'i bitta buyruqni ishga tushirasiz va saytdagi yangiliklar rasmlari va videolari bilan yangilanadi.</li>
+                                </ol>
+                            </div>
+
+                            <div class="my-4">
+                                <h5 class="fw-bold text-warning"><i class="fas fa-terminal me-2"></i> Yangilash Buyrug'i</h5>
+                                <p class="text-muted small">Kompyuteringizda terminal (PowerShell yoki CMD) ochib, <code>D:\school_website</code> papkasiga o'ting va quyidagi buyruqni ishga tushiring:</p>
+                                <div class="sync-console">
+                                    npm run news
+                                </div>
+                                <p class="text-muted small mt-2">Skript avtomatik ravishda yangi rasmlar va videolarni yuklab oladi va <code>news.json</code> faylini mukammal tarzda yangilaydi.</p>
+                            </div>
+
+                            <div class="p-3 rounded-4 bg-info bg-opacity-10 border border-info border-opacity-20 mt-4">
+                                <h6 class="fw-bold text-info"><i class="fas fa-lightbulb me-1"></i> Maslahat:</h6>
+                                <p class="small mb-0 opacity-80">Agar Netlify hostingidan foydalansangiz, ushbu buyruqni har kuni 1 marta avtomatik bajaradigan qilib Github Actions yoki bepul Cron timer sozlab qo'yish mumkin. Bu orqali maktab sayti to'liq avtomatik tarzda Telegramdan yangilanib boradi!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer></footer>
+
+    <!-- Utilities -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script src="hero-3d.js?v=10"></script>
+    
+    <script>
+        let currentStats = [];
+        let currentAchievements = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchStats();
+            fetchAchievements();
+        });
+
+        // 1. STATS FUNCTIONS
+        async function fetchStats() {
+            try {
+                const response = await fetch('data/statistics.txt');
+                if (!response.ok) throw new Error('Fayl topilmadi');
+                const text = await response.text();
+                
+                const lines = text.split('\n').filter(l => l.trim().length > 0 && l.includes(':'));
+                currentStats = lines.map(line => {
+                    const [label, val] = line.split(':');
+                    return { label: label.trim(), value: val.trim() };
+                });
+
+                renderStatsInputs();
+                generateStatsText();
+            } catch (err) {
+                console.error("Stats fetch error:", err);
+            }
+        }
+
+        function renderStatsInputs() {
+            const container = document.getElementById('statsInputsContainer');
+            container.innerHTML = '';
+            
+            currentStats.forEach((stat, idx) => {
+                const div = document.createElement('div');
+                div.className = 'mb-3';
+                div.innerHTML = `
+                    <label class="form-label">${stat.label}</label>
+                    <input type="text" class="form-control stat-value-input" data-index="${idx}" value="${stat.value}">
+                `;
+                container.appendChild(div);
+            });
+
+            // Listen for input changes to automatically update text
+            document.querySelectorAll('.stat-value-input').forEach(input => {
+                input.addEventListener('input', (e) => {
+                    const index = e.target.getAttribute('data-index');
+                    currentStats[index].value = e.target.value;
+                    generateStatsText();
+                });
+            });
+        }
+
+        function generateStatsText() {
+            let output = '';
+            currentStats.forEach(stat => {
+                output += `${stat.label}: ${stat.value}\n`;
+            });
+            document.getElementById('statsOutputCode').value = output.trim();
+            return output.trim();
+        }
+
+        function downloadStatsFile() {
+            const text = generateStatsText();
+            const blob = new Blob([text], { type: 'text/plain' });
+            const anchor = document.createElement('a');
+            anchor.download = 'statistics.txt';
+            anchor.href = window.URL.createObjectURL(blob);
+            anchor.click();
+        }
+
+        // 2. ACHIEVEMENTS FUNCTIONS
+        async function fetchAchievements() {
+            try {
+                const response = await fetch('data/achievements.txt');
+                if (!response.ok) throw new Error('Fayl topilmadi');
+                const text = await response.text();
+
+                const sections = text.split('===').filter(s => s.trim().length > 0);
+                currentAchievements = sections.map(section => {
+                    const lines = section.trim().split('\n');
+                    const data = {};
+                    lines.forEach(line => {
+                        const [key, ...val] = line.split(':');
+                        if (key && val) data[key.trim().toLowerCase()] = val.join(':').trim();
+                    });
+                    return {
+                        sana: data.sana || '',
+                        ikonka: data.ikonka || 'fas fa-award',
+                        sarlavha: data.sarlavha || 'Yutuq',
+                        tavsif: data.tavsif || ''
+                    };
+                });
+
+                renderAchievementsList();
+                generateAchievementsText();
+            } catch (err) {
+                console.error("Achievements fetch error:", err);
+            }
+        }
+
+        function renderAchievementsList() {
+            const container = document.getElementById('achievementsListContainer');
+            container.innerHTML = '';
+
+            currentAchievements.forEach((ach, idx) => {
+                const item = document.createElement('div');
+                item.className = 'admin-achievement-item';
+                item.innerHTML = `
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="ach-preview-icon"><i class="${ach.ikonka}"></i></div>
+                        <div>
+                            <span class="badge bg-warning text-dark small" style="font-size:0.75rem;">${ach.sana}</span>
+                            <h6 class="m-0 fw-bold mt-1 text-white">${ach.sarlavha}</h6>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-info" onclick="openEditAchievementForm(${idx})"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteAchievement(${idx})"><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function generateAchievementsText() {
+            let output = '';
+            currentAchievements.forEach(ach => {
+                output += `Sana: ${ach.sana}\nIkonka: ${ach.ikonka}\nSarlavha: ${ach.sarlavha}\nTavsif: ${ach.tavsif}\n===\n`;
+            });
+            document.getElementById('achievementsOutputCode').value = output.trim();
+            return output.trim();
+        }
+
+        function downloadAchievementsFile() {
+            const text = generateAchievementsText();
+            const blob = new Blob([text], { type: 'text/plain' });
+            const anchor = document.createElement('a');
+            anchor.download = 'achievements.txt';
+            anchor.href = window.URL.createObjectURL(blob);
+            anchor.click();
+        }
+
+        function openNewAchievementForm() {
+            document.getElementById('achFormTitle').innerText = "Yangi yutuq qo'shish";
+            document.getElementById('ach-index').value = '';
+            document.getElementById('ach-sana').value = '';
+            document.getElementById('ach-ikonka').value = 'fas fa-award';
+            document.getElementById('ach-sarlavha').value = '';
+            document.getElementById('ach-tavsif').value = '';
+            document.getElementById('achievementFormWrapper').style.display = 'block';
+            gsap.from('#achievementFormWrapper', { opacity: 0, y: -20, duration: 0.4 });
+        }
+
+        function openEditAchievementForm(idx) {
+            const ach = currentAchievements[idx];
+            document.getElementById('achFormTitle').innerText = "Yutuqni tahrirlash";
+            document.getElementById('ach-index').value = idx;
+            document.getElementById('ach-sana').value = ach.sana;
+            document.getElementById('ach-ikonka').value = ach.ikonka;
+            document.getElementById('ach-sarlavha').value = ach.sarlavha;
+            document.getElementById('ach-tavsif').value = ach.tavsif;
+            document.getElementById('achievementFormWrapper').style.display = 'block';
+            gsap.from('#achievementFormWrapper', { opacity: 0, y: -20, duration: 0.4 });
+        }
+
+        function cancelAchievementForm() {
+            document.getElementById('achievementFormWrapper').style.display = 'none';
+        }
+
+        function saveAchievement() {
+            const idxVal = document.getElementById('ach-index').value;
+            const ach = {
+                sana: document.getElementById('ach-sana').value || 'MART 2026',
+                ikonka: document.getElementById('ach-ikonka').value || 'fas fa-award',
+                sarlavha: document.getElementById('ach-sarlavha').value || 'Yutuq',
+                tavsif: document.getElementById('ach-tavsif').value || ''
+            };
+
+            if (idxVal === '') {
+                // Add new
+                currentAchievements.unshift(ach); // Add to beginning of array
+            } else {
+                // Edit existing
+                currentAchievements[parseInt(idxVal)] = ach;
+            }
+
+            renderAchievementsList();
+            generateAchievementsText();
+            cancelAchievementForm();
+        }
+
+        function deleteAchievement(idx) {
+            if (confirm("Haqiqatan ham ushbu yutuqni ro'yxatdan o'chirmoqchimisiz?")) {
+                currentAchievements.splice(idx, 1);
+                renderAchievementsList();
+                generateAchievementsText();
+            }
+        }
+
+        // 3. COPY TOOL
+        function copyText(elemId) {
+            const copyText = document.getElementById(elemId);
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value);
+            
+            // Alert user visually
+            const btn = event.target.tagName === 'I' ? event.target.parentElement : event.target;
+            const originalHtml = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check me-2"></i> Nusxalandi!';
+            btn.classList.add('btn-success');
+            setTimeout(() => {
+                btn.innerHTML = originalHtml;
+                btn.classList.remove('btn-success');
+            }, 2000);
+        }
+    </script>
+</body>
+
+</html>

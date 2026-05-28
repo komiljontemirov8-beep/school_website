@@ -5,8 +5,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="no-referrer">
-    <title>Marg'ilon 1-maktab veb sayti</title>
+    <meta name="description" content="Marg'ilon shahar 1-umumiy o'rta ta'lim maktabining rasmiy veb-sayti. Maktab hayoti, dars jadvali, yutuqlarimiz, 3D virtual sayohat va eng so'nggi yangiliklar bilan tanishing.">
+    <meta name="keywords" content="Marg'ilon shahar 1-maktab, Marg'ilon 1-maktab, Marg'ilon maktablari, Marg'ilon shahar 1-sonli maktab, mshmaktab1">
+    <title>Marg'ilon shahar 1-maktabi — Rasmiy Veb-Sayti | Bilim va Kelajak Maskani</title>
     <meta name="google-site-verification" content="google476e87f7537bedad" />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mshmaktab1.netlify.app/">
+    <meta property="og:title" content="Marg'ilon shahar 1-maktabi — Rasmiy Veb-Sayti">
+    <meta property="og:description" content="Marg'ilon shahar 1-umumiy o'rta ta'lim maktabining rasmiy veb-sayti. Maktab hayoti, dars jadvali, yutuqlarimiz, 3D virtual sayohat va eng so'nggi yangiliklar.">
+    <meta property="og:image" content="https://mshmaktab1.netlify.app/logo.png">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://mshmaktab1.netlify.app/">
+    <meta name="twitter:title" content="Marg'ilon shahar 1-maktabi — Rasmiy Veb-Sayti">
+    <meta name="twitter:description" content="Marg'ilon shahar 1-umumiy o'rta ta'lim maktabining rasmiy veb-sayti. Maktab hayoti, dars jadvali, yutuqlarimiz va eng so'nggi yangiliklar.">
+    <meta name="twitter:image" content="https://mshmaktab1.netlify.app/logo.png">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Schema.org School Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "School",
+      "name": "Marg'ilon shahar 1-umumiy o'rta ta'lim maktabi",
+      "url": "https://mshmaktab1.netlify.app/",
+      "logo": "https://mshmaktab1.netlify.app/logo.png",
+      "image": "https://mshmaktab1.netlify.app/logo.png",
+      "description": "Marg'ilon shahar 1-umumiy o'rta ta'lim maktabining rasmiy veb-sayti. Maktab hayoti, dars jadvali, yutuqlarimiz va darsliklar.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Miltiqsoz MFY, B.Marg'iloniy ko'chasi, 77-uy",
+        "addressLocality": "Marg'ilon",
+        "addressRegion": "Farg'ona",
+        "addressCountry": "UZ"
+      },
+      "sameAs": [
+        "https://t.me/mshmaktab1"
+      ]
+    }
+    </script>
 
     <!-- Bootstrap 5 CSS (Default Theme) -->
     <link id="theme-css" rel="stylesheet"
@@ -20,6 +59,7 @@
 </head>
 
 <body>
+    <div id="seo-variants" style="display:none;"></div>
     <!-- Global Glass Overlay (Fix for fixed positioning) -->
     <div id="global-glass-overlay"></div>
 
@@ -94,16 +134,14 @@
                     <div class="d-flex align-items-center justify-content-center gap-3 school-identity">
                         <a href="https://t.me/mshmaktab1" target="_blank"
                             class="text-decoration-none d-flex align-items-center gap-3">
-                            <img src="logo.png" alt="Maktab Logosi" class="school-logo" width="60" height="60">
+                            <img src="logo_min.png" alt="Maktab Logosi" class="school-logo" width="60" height="60">
                             <h1 class="h4 text-white text-uppercase m-0 school-name-text">Marg'ilon shahar 1-umumiy
                                 o'rta ta'lim maktabi</h1>
                         </a>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Navigation -->
+        </div>        <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
             <div class="container">
                 <button class="navbar-toggler mx-auto" type="button" data-bs-toggle="collapse"
@@ -118,6 +156,7 @@
                         <li class="nav-item"><a class="nav-link" href="schedule.html">Dars jadvali</a></li>
                         <li class="nav-item"><a class="nav-link" href="achievements.html">Yutuqlar</a></li>
                         <li class="nav-item"><a class="nav-link" href="statistics.html">Statistika</a></li>
+                        <li class="nav-item"><a class="nav-link" href="virtual-tour.html">3D Sayohat</a></li>
                         <li class="nav-item"><a class="nav-link" href="resources.html">Foydali manbalar</a></li>
                         <li class="nav-item"><a class="nav-link" href="contact.html">Aloqa</a></li>
                     </ul>
@@ -244,10 +283,20 @@
                 <div class="col-lg-12">
                     <div id="news-container" class="row g-4">
                         <div class="col-12 text-center py-5 loading-spinner">
-                            <div class="spinner-border text-primary" role="status">
-                                <span class="visually-hidden">Loading...</span>
+                            <div class="premium-loader-container">
+                                <div class="edu-book-loader-wrapper">
+                                    <div class="edu-loader-orbit"></div>
+                                    <div class="edu-loader-orbit-reverse"></div>
+                                    <div class="edu-book-loader">
+                                        <div class="book-cover-left"></div>
+                                        <div class="book-cover-right"></div>
+                                        <div class="book-page"></div>
+                                        <div class="book-page"></div>
+                                        <div class="book-page"></div>
+                                    </div>
+                                </div>
+                                <div class="premium-loader-text">Yangiliklar Yuklanmoqda...</div>
                             </div>
-                            <p class="mt-2 text-muted">Yangiliklar yuklanmoqda...</p>
                         </div>
                     </div>
                 </div>
@@ -288,178 +337,4 @@
     <script src="script.js"></script>
     <script src="hero-3d.js?v=10"></script>
 </body>
-
-<!-- SEO Keywords Bank - Search Engine Indexing Only -->
-<div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;opacity:0;" aria-hidden="true">
-    Marg'ilon shahar 1-sonli umumiy o'rta ta'lim maktabi, Marg'ilon shahar 1-umumiy o'rta ta'lim maktabi, Marg'ilon
-    shahar 1-sonli umumta'lim maktabi, Marg'ilon shahar 1-umumta'lim maktabi, Marg'ilon shahar 1-sonli maktabi,
-    Marg'ilon shahar 1-maktabi, Marg'ilon shahar 1-sonli maktab, Marg'ilon shahar 1-maktab, Marg'ilon shahar 1-sonli
-    UO'TM, Marg'ilon shahar 1-UO'TM, Marg'ilon shahar 1-sonli UO'T maktabi, Marg'ilon shahar 1-UO'T maktabi, Marg'ilon
-    shahridagi 1-sonli umumiy o'rta ta'lim maktabi, Marg'ilon shahridagi 1-umumiy o'rta ta'lim maktabi, Marg'ilon
-    shahridagi 1-sonli umumta'lim maktabi, Marg'ilon shahridagi 1-umumta'lim maktabi, Marg'ilon shahridagi 1-sonli
-    maktabi, Marg'ilon shahridagi 1-maktabi, Marg'ilon shahridagi 1-sonli maktab, Marg'ilon shahridagi 1-maktab,
-    Marg'ilon shahridagi 1-sonli UO'TM, Marg'ilon shahridagi 1-UO'TM, Marg'ilon shahridagi 1-sonli UO'T maktabi,
-    Marg'ilon shahridagi 1-UO'T maktabi, Marg'ilon sh. 1-sonli umumiy o'rta ta'lim maktabi, Marg'ilon sh. 1-umumiy o'rta
-    ta'lim maktabi, Marg'ilon sh. 1-sonli umumta'lim maktabi, Marg'ilon sh. 1-umumta'lim maktabi, Marg'ilon sh. 1-sonli
-    maktabi, Marg'ilon sh. 1-maktabi, Marg'ilon sh. 1-sonli maktab, Marg'ilon sh. 1-maktab, Marg'ilon sh. 1-sonli UO'TM,
-    Marg'ilon sh. 1-UO'TM, Marg'ilon sh. 1-sonli UO'T maktabi, Marg'ilon sh. 1-UO'T maktabi, Marg'ilon 1-sonli umumiy
-    o'rta ta'lim maktabi, Marg'ilon 1-umumiy o'rta ta'lim maktabi, Marg'ilon 1-sonli umumta'lim maktabi, Marg'ilon
-    1-umumta'lim maktabi, Marg'ilon 1-sonli maktabi, Marg'ilon 1-maktabi, Marg'ilon 1-sonli maktab, Marg'ilon 1-maktab,
-    Marg'ilon 1-sonli UO'TM, Marg'ilon 1-UO'TM, Marg'ilon 1-sonli UO'T maktabi, Marg'ilon 1-UO'T maktabi, Marg'ilondagi
-    1-sonli umumiy o'rta ta'lim maktabi, Marg'ilondagi 1-umumiy o'rta ta'lim maktabi, Marg'ilondagi 1-sonli umumta'lim
-    maktabi, Marg'ilondagi 1-umumta'lim maktabi, Marg'ilondagi 1-sonli maktabi, Marg'ilondagi 1-maktabi, Marg'ilondagi
-    1-sonli maktab, Marg'ilondagi 1-maktab, Marg'ilondagi 1-sonli UO'TM, Marg'ilondagi 1-UO'TM, Marg'ilondagi 1-sonli
-    UO'T maktabi, Marg'ilondagi 1-UO'T maktabi, Marg'ilon shaharidagi 1-sonli umumiy o'rta ta'lim maktabi, Marg'ilon
-    shaharidagi 1-umumiy o'rta ta'lim maktabi, Marg'ilon shaharidagi 1-sonli umumta'lim maktabi, Marg'ilon shaharidagi
-    1-umumta'lim maktabi, Marg'ilon shaharidagi 1-sonli maktabi, Marg'ilon shaharidagi 1-maktabi, Marg'ilon shaharidagi
-    1-sonli maktab, Marg'ilon shaharidagi 1-maktab, Marg'ilon shaharidagi 1-sonli UO'TM, Marg'ilon shaharidagi 1-UO'TM,
-    Marg'ilon shahar, 1-sonli umumiy o'rta ta'lim maktabi, Marg'ilon shahar, 1-maktab, Marg'ilon shahar 1-son umumiy
-    o'rta ta'lim maktabi, Marg'ilon shahar 1-son umumta'lim maktabi, Marg'ilon shahar 1-son maktabi, Marg'ilon shahar
-    1-son maktab,
-    Farg'ona viloyati Marg'ilon shahar 1-sonli umumiy o'rta ta'lim maktabi, Farg'ona viloyati Marg'ilon shahar 1-umumiy
-    o'rta ta'lim maktabi, Farg'ona viloyati Marg'ilon shahar 1-sonli umumta'lim maktabi, Farg'ona viloyati Marg'ilon
-    shahar 1-umumta'lim maktabi, Farg'ona viloyati Marg'ilon shahar 1-sonli maktabi, Farg'ona viloyati Marg'ilon shahar
-    1-maktabi, Farg'ona viloyati Marg'ilon shahar 1-sonli maktab, Farg'ona viloyati Marg'ilon shahar 1-maktab, Farg'ona
-    viloyati Marg'ilon shahar 1-sonli UO'TM, Farg'ona viloyati Marg'ilon shahar 1-UO'TM, Farg'ona viloyati Marg'ilon
-    shahar 1-sonli UO'T maktabi, Farg'ona viloyati Marg'ilon shahar 1-UO'T maktabi, Farg'ona viloyati, Marg'ilon shahar
-    1-sonli umumiy o'rta ta'lim maktabi, Farg'ona viloyati, Marg'ilon shahar 1-umumiy o'rta ta'lim maktabi, Farg'ona
-    viloyati, Marg'ilon shahar 1-sonli umumta'lim maktabi, Farg'ona viloyati, Marg'ilon shahar 1-umumta'lim maktabi,
-    Farg'ona viloyati, Marg'ilon shahar 1-sonli maktabi, Farg'ona viloyati, Marg'ilon shahar 1-maktabi, Farg'ona
-    viloyati, Marg'ilon shahar 1-sonli maktab, Farg'ona viloyati, Marg'ilon shahar 1-maktab, Farg'ona viloyati,
-    Marg'ilon shahar 1-sonli UO'TM, Farg'ona viloyati, Marg'ilon shahar 1-UO'TM, Farg'ona viloyati Marg'ilon shahridagi
-    1-sonli umumiy o'rta ta'lim maktabi, Farg'ona viloyati Marg'ilon shahridagi 1-umumiy o'rta ta'lim maktabi, Farg'ona
-    viloyati Marg'ilon shahridagi 1-sonli umumta'lim maktabi, Farg'ona viloyati Marg'ilon shahridagi 1-umumta'lim
-    maktabi, Farg'ona viloyati Marg'ilon shahridagi 1-sonli maktabi, Farg'ona viloyati Marg'ilon shahridagi 1-maktabi,
-    Farg'ona viloyati Marg'ilon shahridagi 1-sonli maktab, Farg'ona viloyati Marg'ilon shahridagi 1-maktab, Farg'ona
-    viloyati Marg'ilon shahridagi 1-sonli UO'TM, Farg'ona viloyati Marg'ilon shahridagi 1-UO'TM, Farg'ona viloyati
-    Marg'ilon 1-sonli umumiy o'rta ta'lim maktabi, Farg'ona viloyati Marg'ilon 1-umumiy o'rta ta'lim maktabi, Farg'ona
-    viloyati Marg'ilon 1-sonli umumta'lim maktabi, Farg'ona viloyati Marg'ilon 1-umumta'lim maktabi, Farg'ona viloyati
-    Marg'ilon 1-sonli maktabi, Farg'ona viloyati Marg'ilon 1-maktabi, Farg'ona viloyati Marg'ilon 1-sonli maktab,
-    Farg'ona viloyati Marg'ilon 1-maktab, Farg'ona viloyati Marg'ilon 1-sonli UO'TM, Farg'ona viloyati Marg'ilon
-    1-UO'TM, Farg'ona viloyati, Marg'ilon 1-sonli umumiy o'rta ta'lim maktabi, Farg'ona viloyati, Marg'ilon 1-umumiy
-    o'rta ta'lim maktabi, Farg'ona viloyati, Marg'ilon 1-sonli umumta'lim maktabi, Farg'ona viloyati, Marg'ilon
-    1-umumta'lim maktabi, Farg'ona viloyati, Marg'ilon 1-sonli maktabi, Farg'ona viloyati, Marg'ilon 1-maktabi, Farg'ona
-    viloyati, Marg'ilon 1-sonli maktab, Farg'ona viloyati, Marg'ilon 1-maktab, Farg'ona viloyati, Marg'ilon 1-sonli
-    UO'TM, Farg'ona viloyati, Marg'ilon 1-UO'TM, Farg'ona viloyati Marg'ilondagi 1-sonli umumiy o'rta ta'lim maktabi,
-    Farg'ona viloyati Marg'ilondagi 1-umumiy o'rta ta'lim maktabi, Farg'ona viloyati Marg'ilondagi 1-sonli umumta'lim
-    maktabi, Farg'ona viloyati Marg'ilondagi 1-umumta'lim maktabi, Farg'ona viloyati Marg'ilondagi 1-sonli maktab,
-    Farg'ona viloyati Marg'ilondagi 1-maktab, Farg'ona viloyati Marg'ilon sh. 1-sonli umumiy o'rta ta'lim maktabi,
-    Farg'ona viloyati Marg'ilon sh. 1-sonli umumta'lim maktabi, Farg'ona viloyati Marg'ilon sh. 1-sonli maktabi,
-    Farg'ona viloyati Marg'ilon sh. 1-sonli maktab,
-    Farg'ona vil. Marg'ilon shahar 1-sonli umumiy o'rta ta'lim maktabi, Farg'ona vil. Marg'ilon shahar 1-umumiy o'rta
-    ta'lim maktabi, Farg'ona vil. Marg'ilon shahar 1-sonli umumta'lim maktabi, Farg'ona vil. Marg'ilon shahar
-    1-umumta'lim maktabi, Farg'ona vil. Marg'ilon shahar 1-sonli maktabi, Farg'ona vil. Marg'ilon shahar 1-maktabi,
-    Farg'ona vil. Marg'ilon shahar 1-sonli maktab, Farg'ona vil. Marg'ilon shahar 1-maktab, Farg'ona vil. Marg'ilon
-    shahar 1-sonli UO'TM, Farg'ona vil. Marg'ilon shahar 1-UO'TM, Farg'ona vil. Marg'ilon shahar 1-sonli UO'T maktabi,
-    Farg'ona vil. Marg'ilon shahar 1-UO'T maktabi, Farg'ona vil., Marg'ilon shahar 1-sonli umumiy o'rta ta'lim maktabi,
-    Farg'ona vil., Marg'ilon shahar 1-umumiy o'rta ta'lim maktabi, Farg'ona vil., Marg'ilon shahar 1-sonli umumta'lim
-    maktabi, Farg'ona vil., Marg'ilon shahar 1-umumta'lim maktabi, Farg'ona vil., Marg'ilon shahar 1-sonli maktabi,
-    Farg'ona vil., Marg'ilon shahar 1-maktabi, Farg'ona vil., Marg'ilon shahar 1-sonli maktab, Farg'ona vil., Marg'ilon
-    shahar 1-maktab, Farg'ona vil., Marg'ilon shahar 1-sonli UO'TM, Farg'ona vil., Marg'ilon shahar 1-UO'TM, Farg'ona
-    vil. Marg'ilon shahridagi 1-sonli umumiy o'rta ta'lim maktabi, Farg'ona vil. Marg'ilon shahridagi 1-sonli umumta'lim
-    maktabi, Farg'ona vil. Marg'ilon shahridagi 1-sonli maktab, Farg'ona vil. Marg'ilon shahridagi 1-maktab, Farg'ona
-    vil. Marg'ilon shahridagi 1-sonli UO'TM, Farg'ona vil. Marg'ilon shahridagi 1-UO'TM, Farg'ona vil. Marg'ilon sh.
-    1-sonli umumiy o'rta ta'lim maktabi, Farg'ona vil. Marg'ilon sh. 1-umumiy o'rta ta'lim maktabi, Farg'ona vil.
-    Marg'ilon sh. 1-sonli umumta'lim maktabi, Farg'ona vil. Marg'ilon sh. 1-umumta'lim maktabi, Farg'ona vil. Marg'ilon
-    sh. 1-sonli maktabi, Farg'ona vil. Marg'ilon sh. 1-maktabi, Farg'ona vil. Marg'ilon sh. 1-sonli maktab, Farg'ona
-    vil. Marg'ilon sh. 1-maktab, Farg'ona vil. Marg'ilon sh. 1-sonli UO'TM, Farg'ona vil. Marg'ilon sh. 1-UO'TM,
-    Farg'ona v. Marg'ilon shahar 1-sonli umumiy o'rta ta'lim maktabi, Farg'ona v. Marg'ilon shahar 1-umumiy o'rta ta'lim
-    maktabi, Farg'ona v. Marg'ilon shahar 1-sonli umumta'lim maktabi, Farg'ona v. Marg'ilon shahar 1-umumta'lim maktabi,
-    Farg'ona v. Marg'ilon shahar 1-sonli maktabi, Farg'ona v. Marg'ilon shahar 1-maktabi, Farg'ona v. Marg'ilon shahar
-    1-sonli maktab, Farg'ona v. Marg'ilon shahar 1-maktab, Farg'ona v. Marg'ilon shahar 1-sonli UO'TM, Farg'ona v.
-    Marg'ilon shahar 1-UO'TM, Farg'ona v. Marg'ilon sh. 1-sonli umumiy o'rta ta'lim maktabi, Farg'ona v. Marg'ilon sh.
-    1-umumiy o'rta ta'lim maktabi, Farg'ona v. Marg'ilon sh. 1-sonli umumta'lim maktabi, Farg'ona v. Marg'ilon sh.
-    1-umumta'lim maktabi, Farg'ona v. Marg'ilon sh. 1-sonli maktabi, Farg'ona v. Marg'ilon sh. 1-maktabi, Farg'ona v.
-    Marg'ilon sh. 1-sonli maktab, Farg'ona v. Marg'ilon sh. 1-maktab, Farg'ona v. Marg'ilon sh. 1-sonli UO'TM, Farg'ona
-    v. Marg'ilon sh. 1-UO'TM, Farg'ona vil. Marg'ilon 1-sonli umumiy o'rta ta'lim maktabi, Farg'ona vil. Marg'ilon
-    1-umumiy o'rta ta'lim maktabi, Farg'ona vil. Marg'ilon 1-sonli umumta'lim maktabi, Farg'ona vil. Marg'ilon
-    1-umumta'lim maktabi, Farg'ona vil. Marg'ilon 1-sonli maktabi, Farg'ona vil. Marg'ilon 1-maktabi, Farg'ona vil.
-    Marg'ilon 1-sonli maktab, Farg'ona vil. Marg'ilon 1-maktab, Farg'ona vil. Marg'ilon 1-sonli UO'TM, Farg'ona vil.
-    Marg'ilon 1-UO'TM, Farg'ona v. Marg'ilon 1-sonli umumiy o'rta ta'lim maktabi, Farg'ona v. Marg'ilon 1-umumiy o'rta
-    ta'lim maktabi, Farg'ona v. Marg'ilon 1-sonli umumta'lim maktabi, Farg'ona v. Marg'ilon 1-umumta'lim maktabi,
-    Farg'ona v. Marg'ilon 1-sonli maktabi, Farg'ona v. Marg'ilon 1-maktabi, Farg'ona v. Marg'ilon 1-sonli maktab,
-    Farg'ona v. Marg'ilon 1-maktab, Farg'ona v. Marg'ilon 1-sonli UO'TM, Farg'ona v. Marg'ilon 1-UO'TM, Farg'ona vil.
-    Marg'ilondagi 1-sonli umumiy o'rta ta'lim maktabi, Farg'ona vil. Marg'ilondagi 1-umumiy o'rta ta'lim maktabi,
-    Farg'ona vil. Marg'ilondagi 1-sonli umumta'lim maktabi, Farg'ona vil. Marg'ilondagi 1-umumta'lim maktabi, Farg'ona
-    vil. Marg'ilondagi 1-sonli maktab, Farg'ona vil. Marg'ilondagi 1-maktab, Farg'ona v. Marg'ilondagi 1-sonli umumiy
-    o'rta ta'lim maktabi, Farg'ona v. Marg'ilondagi 1-umumiy o'rta ta'lim maktabi, Farg'ona v. Marg'ilondagi 1-sonli
-    umumta'lim maktabi, Farg'ona v. Marg'ilondagi 1-maktab,
-    1-sonli umumiy o'rta ta'lim maktabi Marg'ilon shahar, 1-umumiy o'rta ta'lim maktabi Marg'ilon shahar, 1-sonli
-    umumta'lim maktabi Marg'ilon shahar, 1-umumta'lim maktabi Marg'ilon shahar, 1-sonli maktabi Marg'ilon shahar,
-    1-maktabi Marg'ilon shahar, 1-sonli maktab Marg'ilon shahar, 1-maktab Marg'ilon shahar, 1-sonli UO'TM Marg'ilon
-    shahar, 1-UO'TM Marg'ilon shahar, 1-sonli umumiy o'rta ta'lim maktabi Marg'ilon sh., 1-umumiy o'rta ta'lim maktabi
-    Marg'ilon sh., 1-sonli umumta'lim maktabi Marg'ilon sh., 1-umumta'lim maktabi Marg'ilon sh., 1-sonli maktabi
-    Marg'ilon sh., 1-maktabi Marg'ilon sh., 1-sonli maktab Marg'ilon sh., 1-maktab Marg'ilon sh., 1-sonli UO'TM
-    Marg'ilon sh., 1-UO'TM Marg'ilon sh., 1-sonli umumiy o'rta ta'lim maktabi Marg'ilon, 1-umumiy o'rta ta'lim maktabi
-    Marg'ilon, 1-sonli umumta'lim maktabi Marg'ilon, 1-umumta'lim maktabi Marg'ilon, 1-sonli maktabi Marg'ilon,
-    1-maktabi Marg'ilon, 1-sonli maktab Marg'ilon, 1-maktab Marg'ilon, 1-sonli UO'TM Marg'ilon, 1-UO'TM Marg'ilon,
-    1-sonli umumiy o'rta ta'lim maktabi Farg'ona viloyati Marg'ilon shahar, 1-umumiy o'rta ta'lim maktabi Farg'ona
-    viloyati Marg'ilon shahar, 1-sonli umumta'lim maktabi Farg'ona viloyati Marg'ilon shahar, 1-umumta'lim maktabi
-    Farg'ona viloyati Marg'ilon shahar, 1-sonli maktabi Farg'ona viloyati Marg'ilon shahar, 1-maktabi Farg'ona viloyati
-    Marg'ilon shahar, 1-sonli maktab Farg'ona viloyati Marg'ilon shahar, 1-maktab Farg'ona viloyati Marg'ilon shahar,
-    1-sonli UO'TM Farg'ona viloyati Marg'ilon shahar, 1-UO'TM Farg'ona viloyati Marg'ilon shahar,
-    Marg'ilon shahar 1-sonli umumiy o'rta ta'lim maktabi Farg'ana viloyati, Marg'ilon shahar 1-sonli umumta'lim maktabi
-    Farg'ona viloyati, Marg'ilon shahar 1-sonli maktabi Farg'ona v., Marg'ilon shahar 1-sonli maktab Farg'ona v.,
-    Marg'ilon shahar 1-maktab Farg'ona v., Marg'ilon shahar 1-sonli UO'TM Farg'ona v., Marg'ilon shahar 1-UO'TM Farg'ona
-    v., Marg'ilon sh. 1-sonli umumiy o'rta ta'lim maktabi Farg'ona v., Marg'ilon sh. 1-sonli umumta'lim maktabi Farg'ona
-    v., Marg'ilon sh. 1-sonli maktab Farg'ona v., Marg'ilon sh. 1-maktab Farg'ona v., Marg'ilon sh. 1-sonli UO'TM
-    Farg'ona v., Marg'ilon shahri 1-sonli umumiy o'rta ta'lim maktabi Farg'ona v., Marg'ilon shahri 1-sonli umumta'lim
-    maktabi Farg'ona v., Marg'ilon shahri 1-sonli maktab Farg'ona v., Marg'ilon shahri 1-maktab Farg'ona v., Marg'ilon
-    shahri 1-sonli UO'TM Farg'ona v., Marg'ilon shahridagi 1-sonli umumiy o'rta ta'lim maktabi Farg'ona v., Marg'ilon
-    shahridagi 1-sonli umumta'lim maktabi Farg'ona v., Marg'ilon shahridagi 1-sonli maktab Farg'ona v., Marg'ilon
-    shahridagi 1-maktab Farg'ona v., Marg'ilondagi 1-sonli umumiy o'rta ta'lim maktabi Farg'ona v., Marg'ilondagi
-    1-sonli umumta'lim maktabi Farg'ona v., Marg'ilondagi 1-sonli maktab Farg'ona v., Marg'ilondagi 1-maktab Farg'ona
-    v., Marg'ilon 1-sonli umumiy o'rta ta'lim maktabi Farg'ona v., Marg'ilon 1-sonli umumta'lim maktabi Farg'ona v.,
-    Marg'ilon 1-sonli maktab Farg'ona v., Marg'ilon 1-maktab Farg'ona v., Marg'ilon 1-sonli UO'TM Farg'ona v.,
-    Marg'ilon shahar 1-son umumiy o'rta ta'lim maktabi, Marg'ilon shahar 1-son umumta'lim maktabi, Marg'ilon shahar
-    1-son maktabi, Marg'ilon shahar 1-son maktab, Marg'ilon shahar 1-son UO'TM, Marg'ilon sh. 1-son umumiy o'rta ta'lim
-    maktabi, Marg'ilon sh. 1-son umumta'lim maktabi, Marg'ilon sh. 1-son maktabi, Marg'ilon sh. 1-son maktab, Marg'ilon
-    sh. 1-son UO'TM, Marg'ilon shahri 1-son umumiy o'rta ta'lim maktabi, Marg'ilon shahri 1-son umumta'lim maktabi,
-    Marg'ilon shahri 1-son maktabi, Marg'ilon shahri 1-son maktab, Marg'ilon shahri 1-son UO'TM, Marg'ilon shahridagi
-    1-son umumiy o'rta ta'lim maktabi, Marg'ilon shahridagi 1-son umumta'lim maktabi, Marg'ilon shahridagi 1-son
-    maktabi, Marg'ilon shahridagi 1-son maktab, Marg'ilon shahridagi 1-son UO'TM, Marg'ilondagi 1-son umumiy o'rta
-    ta'lim maktabi, Marg'ilondagi 1-son umumta'lim maktabi, Marg'ilondagi 1-son maktabi, Marg'ilondagi 1-son maktab,
-    Marg'ilondagi 1-son UO'TM, Marg'ilon 1-son umumiy o'rta ta'lim maktabi, Marg'ilon 1-son umumta'lim maktabi,
-    Marg'ilon 1-son maktabi, Marg'ilon 1-son maktab, Marg'ilon 1-son UO'TM, Marg'ilon shahar 1-sonli umumiy o'rta ta'lim
-    maktab, Marg'ilon shahar 1-sonli umumta'lim maktab, Marg'ilon shahar 1-sonli maktab, Marg'ilon sh. 1-sonli maktab,
-    Marg'ilon shahri 1-sonli maktab, Marg'ilon shahridagi 1-sonli maktab, Marg'ilondagi 1-sonli maktab, Marg'ilon
-    1-sonli maktab, Marg'ilon shahar 1-sonli UO'T maktabi, Marg'ilon sh. 1-sonli UO'T maktabi, Marg'ilon shahri 1-sonli
-    UO'T maktabi, Marg'ilon shahridagi 1-sonli UO'T maktabi, Marg'ilondagi 1-sonli UO'T maktabi, Marg'ilon 1-sonli UO'T
-    maktabi, Marg'ilon shahar 1-son UO'T maktabi, Marg'ilon sh. 1-son UO'T maktabi, Marg'ilon shahri 1-son UO'T maktabi,
-    Marg'ilon shahridagi 1-son UO'T maktabi, Marg'ilondagi 1-son UO'T maktabi, Marg'ilon 1-son UO'T maktabi, Marg'ilon
-    shahar 1-UO'T maktabi, Marg'ilon sh. 1-UO'T maktabi, Marg'ilon shahri 1-UO'T maktabi, Marg'ilon shahridagi 1-UO'T
-    maktabi, Marg'ilondagi 1-UO'T maktabi, Marg'ilon 1-UO'T maktabi, Marg'ilon shahar 1-sonli UO'TMi, Marg'ilon sh.
-    1-sonli UO'TMi, Marg'ilon shahri 1-sonli UO'TMi, Marg'ilon shahridagi 1-sonli UO'TMi, Marg'ilondagi 1-sonli UO'TMi,
-    Marg'ilon 1-sonli UO'TMi, Marg'ilon shahar 1-UO'TMi, Marg'ilon sh. 1-UO'TMi,
-    Farg'ona viloyati: Marg'ilon shahar 1-sonli umumiy o'rta ta'lim maktabi, Farg'ona viloyati: Marg'ilon shahar
-    1-umumiy o'rta ta'lim maktabi, Farg'ona viloyati: Marg'ilon shahar 1-sonli umumta'lim maktabi, Farg'ona viloyati:
-    Marg'ilon shahar 1-umumta'lim maktabi, Farg'ona viloyati: Marg'ilon shahar 1-sonli maktabi, Farg'ona viloyati:
-    Marg'ilon shahar 1-maktabi, Farg'ona viloyati: Marg'ilon shahar 1-sonli maktab, Farg'ona viloyati: Marg'ilon shahar
-    1-maktab, Farg'ona viloyati: Marg'ilon shahar 1-sonli UO'TM, Farg'ona viloyati: Marg'ilon shahar 1-UO'TM, Farg'ona
-    viloyati, Marg'ilon shahar: 1-sonli umumiy o'rta ta'lim maktabi, Farg'ona viloyati, Marg'ilon shahar: 1-umumiy o'rta
-    ta'lim maktabi, Farg'ona viloyati, Marg'ilon shahar: 1-sonli umumta'lim maktabi, Farg'ona viloyati, Marg'ilon
-    shahar: 1-umumta'lim maktabi, Farg'ona viloyati, Marg'ilon shahar: 1-sonli maktabi, Farg'ona viloyati, Marg'ilon
-    shahar: 1-maktabi, Farg'ona viloyati, Marg'ilon shahar: 1-sonli maktab, Farg'ona viloyati, Marg'ilon shahar:
-    1-maktab, Farg'ona viloyati, Marg'ilon shahar: 1-sonli UO'TM, Farg'ona viloyati, Marg'ilon shahar: 1-UO'TM, Farg'ona
-    vil. — Marg'ilon shahar 1-sonli umumiy o'rta ta'lim maktabi, Farg'ona vil. — Marg'ilon shahar 1-sonli umumta'lim
-    maktabi, Farg'ona vil. — Marg'ilon shahar 1-sonli maktab, Farg'ona vil. — Marg'ilon shahar 1-maktab, Farg'ona vil. —
-    Marg'ilon shahar 1-sonli UO'TM, Farg'ona v. — Marg'ilon shahar 1-sonli umumiy o'rta ta'lim maktabi, Farg'ona v. —
-    Marg'ilon shahar 1-sonli umumta'lim maktabi, Farg'ona v. — Marg'ilon shahar 1-sonli maktab, Farg'ona v. — Marg'ilon
-    shahar 1-maktab, Farg'ona v. — Marg'ilon shahar 1-sonli UO'TM, Marg'ilon shahar 1-sonli umumiy o'rta ta'lim maktabi
-    — Farg'ona viloyati, Marg'ilon shahar 1-sonli umumta'lim maktabi — Farg'ona viloyati, Marg'ilon shahar 1-sonli
-    maktabi — Farg'ona viloyati, Marg'ilon shahar 1-sonli maktab — Farg'ona viloyati, Marg'ilon shahar 1-maktab —
-    Farg'ona viloyati, Marg'ilon shahar 1-sonli UO'TM — Farg'ona viloyati, Marg'ilon shahar 1-UO'TM — Farg'ona viloyati,
-    Marg'ilon sh. 1-sonli umumiy o'rta ta'lim maktabi — Farg'ona vil., Marg'ilon sh. 1-sonli umumta'lim maktabi —
-    Farg'ona vil., Marg'ilon sh. 1-sonli maktab — Farg'ona vil., Marg'ilon sh. 1-maktab — Farg'ona vil., Marg'ilon sh.
-    1-sonli UO'TM — Farg'ona vil., Marg'ilon sh. 1-UO'TM — Farg'ona vil., Marg'ilon shahri 1-sonli umumiy o'rta ta'lim
-    maktabi — Farg'ona v., Marg'ilon shahri 1-sonli umumta'lim maktabi — Farg'ona v., Marg'ilon shahri 1-sonli maktab —
-    Farg'ona v., Marg'ilon shahri 1-maktab — Farg'ona v., Marg'ilon shahri 1-sonli UO'TM — Farg'ona v., Marg'ilon shahri
-    1-UO'TM — Farg'ona v., Marg'ilon 1-sonli umumiy o'rta ta'lim maktabi — Farg'ona v., Marg'ilon 1-sonli umumta'lim
-    maktabi — Farg'ona v., Marg'ilon 1-sonli maktab — Farg'ona v., Marg'ilon 1-maktab — Farg'ona v., Marg'ilon 1-sonli
-    UO'TM — Farg'ona v., Marg'ilon 1-UO'TM — Farg'ona v., Marg'ilon shahar 1-sonli UO'T maktabi Farg'ona viloyati,
-    mshmaktab1, msh maktab 1, mshmaktab, maktab1margilon, 1maktab margilon, margilon 1maktab, margilon maktab, fargona
-    viloyati margilon maktab, margilan maktab, margilan 1-maktab, margilon school, margilon shahar 1-maktab, school
-    margilon, 1 school margilon uzbekistan, maktab margilon fargona
-</div>
-
 </html>
