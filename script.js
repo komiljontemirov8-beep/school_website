@@ -188,6 +188,43 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Premium Calendar Widget
     initPremiumCalendarWidget();
 
+    // ── Hero Image Slideshow ──────────────────────────────────
+    if (window.Swiper && document.querySelector('.hero-swiper')) {
+        const heroSwiper = new Swiper('.hero-swiper', {
+            loop: true,
+            speed: 900,
+            effect: 'fade',
+            fadeEffect: { crossFade: true },
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: false,
+            },
+            pagination: {
+                el: '.hero-swiper-pagination',
+                clickable: true,
+            },
+            on: {
+                init: function () {
+                    // Force slides to fill parent
+                    const slides = document.querySelectorAll('.hero-swiper .swiper-slide');
+                    slides.forEach(s => {
+                        s.style.width = '100%';
+                        s.style.height = '100%';
+                    });
+                }
+            }
+        });
+
+        // Manual arrow controls
+        const prevBtn = document.getElementById('heroPrev');
+        const nextBtn = document.getElementById('heroNext');
+        if (prevBtn) prevBtn.addEventListener('click', () => heroSwiper.slidePrev());
+        if (nextBtn) nextBtn.addEventListener('click', () => heroSwiper.slideNext());
+    }
+
+
+
     async function loadNews() {
         const container = document.getElementById('news-container');
         try {

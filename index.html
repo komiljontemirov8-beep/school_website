@@ -5,21 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="no-referrer">
-    <meta name="description" content="Marg'ilon shahar 1-umumiy o'rta ta'lim maktabining rasmiy veb-sayti. Maktab hayoti, dars jadvali, yutuqlarimiz, 3D virtual sayohat va eng so'nggi yangiliklar bilan tanishing.">
-    <meta name="keywords" content="Marg'ilon shahar 1-maktab, Marg'ilon 1-maktab, Marg'ilon maktablari, Marg'ilon shahar 1-sonli maktab, mshmaktab1">
+    <meta name="description"
+        content="Marg'ilon shahar 1-umumiy o'rta ta'lim maktabining rasmiy veb-sayti. Maktab hayoti, dars jadvali, yutuqlarimiz, 3D virtual sayohat va eng so'nggi yangiliklar bilan tanishing.">
+    <meta name="keywords"
+        content="Marg'ilon shahar 1-maktab, Marg'ilon 1-maktab, Marg'ilon maktablari, Marg'ilon shahar 1-sonli maktab, mshmaktab1">
     <title>Marg'ilon shahar 1-maktabi — Rasmiy Veb-Sayti | Bilim va Kelajak Maskani</title>
     <meta name="google-site-verification" content="google476e87f7537bedad" />
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mshmaktab1.netlify.app/">
     <meta property="og:title" content="Marg'ilon shahar 1-maktabi — Rasmiy Veb-Sayti">
-    <meta property="og:description" content="Marg'ilon shahar 1-umumiy o'rta ta'lim maktabining rasmiy veb-sayti. Maktab hayoti, dars jadvali, yutuqlarimiz, 3D virtual sayohat va eng so'nggi yangiliklar.">
+    <meta property="og:description"
+        content="Marg'ilon shahar 1-umumiy o'rta ta'lim maktabining rasmiy veb-sayti. Maktab hayoti, dars jadvali, yutuqlarimiz, 3D virtual sayohat va eng so'nggi yangiliklar.">
     <meta property="og:image" content="https://mshmaktab1.netlify.app/logo.png">
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://mshmaktab1.netlify.app/">
     <meta name="twitter:title" content="Marg'ilon shahar 1-maktabi — Rasmiy Veb-Sayti">
-    <meta name="twitter:description" content="Marg'ilon shahar 1-umumiy o'rta ta'lim maktabining rasmiy veb-sayti. Maktab hayoti, dars jadvali, yutuqlarimiz va eng so'nggi yangiliklar.">
+    <meta name="twitter:description"
+        content="Marg'ilon shahar 1-umumiy o'rta ta'lim maktabining rasmiy veb-sayti. Maktab hayoti, dars jadvali, yutuqlarimiz va eng so'nggi yangiliklar.">
     <meta name="twitter:image" content="https://mshmaktab1.netlify.app/logo.png">
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
@@ -53,7 +57,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="style.css?v=24">
+    <link rel="stylesheet" href="style.css?v=26">
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
@@ -141,7 +145,8 @@
                     </div>
                 </div>
             </div>
-        </div>        <!-- Navigation -->
+        </div>
+        <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
             <div class="container">
                 <button class="navbar-toggler mx-auto" type="button" data-bs-toggle="collapse"
@@ -165,21 +170,56 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero-clean-layout bg-dark">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10 text-center">
-                    <span class="hero-tag animate-fade-in">Marg'ilon shahar 1-maktab</span>
-                    <h1 class="main-hero-title animate-fade-in">
-                        <span class="line-1">Xush kelibsiz!</span><br>
-                        <span class="line-2">Bilim va Kelajak Maskani</span><br>
-                        <span class="line-3">Biz bilan yangi marralarni zabt eting</span>
-                    </h1>
+    <!-- Hero Section with fullscreen slideshow -->
+    <section class="hero-slideshow-section">
+        <!-- Swiper Hero Slideshow -->
+        <div class="swiper hero-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="hero-slide-bg" style="background-image:url('images/hero/outside_school_1.png')"></div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="hero-slide-bg" style="background-image:url('images/hero/classroom_2.png')"></div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="hero-slide-bg" style="background-image:url('images/hero/library_3.png')"></div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="hero-slide-bg" style="background-image:url('images/hero/computer_lab_4.png')"></div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="hero-slide-bg" style="background-image:url('images/hero/sports_court_5.png')"></div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="hero-slide-bg" style="background-image:url('images/hero/science_lab_6.png')"></div>
+                </div>
+            </div>
+            <!-- Pagination dots -->
+            <div class="hero-swiper-pagination"></div>
+        </div>
 
-                    <div class="mt-5 d-flex gap-3 justify-content-center animate-fade-in">
-                        <a href="#quick-nav" class="btn btn-neon">Boshlash</a>
-                        <a href="about.html" class="btn btn-outline-light rounded-pill px-4">Maktab haqida</a>
+        <!-- Dark gradient overlay -->
+        <div class="hero-overlay"></div>
+
+        <!-- Manual nav arrows -->
+        <div class="hero-swiper-btn prev" id="heroPrev"><i class="fas fa-chevron-left"></i></div>
+        <div class="hero-swiper-btn next" id="heroNext"><i class="fas fa-chevron-right"></i></div>
+
+        <!-- Hero content on top -->
+        <div class="hero-content-over">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 text-center">
+                        <span class="hero-tag animate-fade-in">Marg'ilon shahar 1-maktab</span>
+                        <h1 class="main-hero-title animate-fade-in">
+                            <span class="line-1">Xush kelibsiz!</span><br>
+                            <span class="line-2">Bilim va Kelajak Maskani</span><br>
+                            <span class="line-3">Biz bilan yangi marralarni zabt eting</span>
+                        </h1>
+                        <div class="mt-5 d-flex gap-3 justify-content-center animate-fade-in">
+                            <a href="#quick-nav" class="btn btn-neon">Boshlash</a>
+                            <a href="about.html" class="btn btn-outline-light rounded-pill px-4">Maktab haqida</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -337,4 +377,5 @@
     <script src="script.js"></script>
     <script src="hero-3d.js?v=10"></script>
 </body>
+
 </html>
