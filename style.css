@@ -4039,3 +4039,325 @@ body.theme-gray .bento-card-large {
         transform: scale(1.04);
     }
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   O‘ZBEKISTON RESPUBLIKASI MUSTAQILLIGINING 35 YILLIGI SECTION
+═══════════════════════════════════════════════════════════════════ */
+.independence-35-banner {
+    position: relative;
+    z-index: 100;
+    background: radial-gradient(circle at 50% 0%, rgba(15, 23, 42, 0.98), rgba(5, 10, 25, 0.99));
+    border-top: 14px solid transparent;
+    border-image: linear-gradient(to right, #0099b5 0%, #0099b5 33%, #d21034 33%, #d21034 35%, #ffffff 35%, #ffffff 65%, #d21034 65%, #d21034 67%, #1eb53a 67%, #1eb53a 100%) 1;
+    border-bottom: 2px solid rgba(234, 179, 8, 0.4);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 153, 181, 0.4);
+    padding: 35px 0;
+}
+
+.indep-35-card {
+    background: rgba(11, 19, 43, 0.88);
+    border: 2px solid rgba(234, 179, 8, 0.55);
+    border-radius: 24px;
+    padding: 32px 35px;
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    box-shadow: inset 0 0 45px rgba(234, 179, 8, 0.15), 0 20px 50px rgba(0, 0, 0, 0.6);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.indep-35-card::before {
+    content: '';
+    position: absolute;
+    inset: -60px;
+    background: linear-gradient(135deg,
+            rgba(0, 153, 181, 0.35) 0%,
+            rgba(0, 153, 181, 0.22) 28%,
+            rgba(210, 16, 52, 0.35) 30%,
+            rgba(255, 255, 255, 0.22) 32%,
+            rgba(255, 255, 255, 0.22) 62%,
+            rgba(210, 16, 52, 0.35) 64%,
+            rgba(30, 181, 58, 0.22) 66%,
+            rgba(30, 181, 58, 0.35) 100%);
+    background-size: 200% 200%;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 1;
+    animation: flagWaveAnimation 8s ease-in-out infinite alternate;
+    filter: blur(14px);
+}
+
+.indep-35-card>* {
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes flagWaveAnimation {
+    0% {
+        background-position: 0% 20%;
+        transform: rotate(-1.2deg) scale(1);
+    }
+
+    50% {
+        background-position: 100% 80%;
+        transform: rotate(1.2deg) scale(1.04);
+    }
+
+    100% {
+        background-position: 0% 20%;
+        transform: rotate(-1.2deg) scale(1);
+    }
+}
+
+.indep-35-card:hover {
+    border-color: rgba(234, 179, 8, 0.85);
+    box-shadow: inset 0 0 55px rgba(234, 179, 8, 0.25), 0 25px 55px rgba(0, 0, 0, 0.7);
+}
+
+.indep-emblem-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.indep-gerb-img {
+    max-height: 90px;
+    max-width: 100%;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+    transition: transform 0.4s ease;
+}
+
+.indep-35-card:hover .indep-gerb-img {
+    transform: scale(1.08) rotate(2deg);
+}
+
+.indep-35-badge {
+    position: relative;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(135deg, #eab308 0%, #ca8a04 50%, #854d0e 100%);
+    color: #ffffff;
+    border-radius: 50px;
+    padding: 4px 14px;
+    font-weight: 900;
+    font-size: 0.8rem;
+    box-shadow: 0 4px 18px rgba(234, 179, 8, 0.6);
+    border: 1px solid #fef08a;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.indep-35-badge .badge-num {
+    font-size: 1.25rem;
+    font-weight: 950;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.indep-35-badge .badge-txt {
+    letter-spacing: 1px;
+    font-size: 0.7rem;
+}
+
+.indep-tag {
+    display: inline-block;
+    background: rgba(14, 165, 233, 0.2);
+    color: #38bdf8;
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    border-radius: 50px;
+    padding: 5px 20px;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.indep-main-title {
+    font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, #ffffff 0%, #fef08a 50%, #eab308 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+}
+
+.indep-slogan-box {
+    position: relative;
+    background: rgba(234, 179, 8, 0.08);
+    border: 2px solid rgba(234, 179, 8, 0.4);
+    border-left: 6px solid #eab308;
+    border-right: 6px solid #38bdf8;
+    border-radius: 16px;
+    padding: 16px 24px;
+    display: block;
+    max-width: 900px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.slogan-icon-left,
+.slogan-icon-right {
+    color: #eab308;
+    font-size: 1.1rem;
+    margin: 0 8px;
+    vertical-align: middle;
+}
+
+.indep-slogan-text {
+    font-size: clamp(1.2rem, 2.2vw, 1.85rem);
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1.4;
+    letter-spacing: 0.3px;
+    text-shadow: 0 3px 15px rgba(0, 0, 0, 0.7);
+    display: inline;
+}
+
+@media (max-width: 768px) {
+    .independence-35-banner {
+        padding: 22px 0;
+    }
+
+    .indep-35-card {
+        padding: 20px 16px;
+        border-radius: 18px;
+    }
+
+    .indep-gerb-img {
+        height: 85px;
+    }
+
+    .indep-main-title {
+        font-size: 1.25rem;
+        margin-bottom: 12px;
+    }
+
+    .indep-slogan-box {
+        padding: 12px 14px;
+        border-left-width: 4px;
+        border-right-width: 4px;
+    }
+
+    .indep-slogan-text {
+        font-size: 1.1rem;
+        line-height: 1.35;
+    }
+
+    .slogan-icon-left,
+    .slogan-icon-right {
+        font-size: 0.85rem;
+        margin: 0 4px;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   CLOUDINARY FOTO-GALEREYA
+═══════════════════════════════════════════════════════════════════ */
+.cloudinary-gallery-section {
+    background: var(--primary-gradient, radial-gradient(circle at top right, #1e293b, #0f172a));
+}
+
+.gallery-month-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    border-bottom: 2px solid rgba(234, 179, 8, 0.4);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.gallery-card {
+    background: rgba(30, 41, 59, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 14px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.gallery-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5) !important;
+}
+
+.gallery-img {
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.gallery-card:hover .gallery-img {
+    transform: scale(1.06);
+}
+
+.gallery-overlay {
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.4);
+    transition: opacity 0.3s ease;
+    border-radius: 14px 14px 0 0;
+}
+
+.gallery-card:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-img-error {
+    height: 220px;
+    background: rgba(30, 41, 59, 0.6);
+    color: #94a3b8;
+    font-size: 0.85rem;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .gallery-img {
+        height: 180px;
+    }
+
+    .gallery-month-title {
+        font-size: 1rem;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   YOUTUBE VIDEO ARXIV
+═══════════════════════════════════════════════════════════════════ */
+.video-archive-section {
+    background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+}
+
+.video-card {
+    background: rgba(15, 23, 42, 0.9);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6) !important;
+}
+
+.video-card-title {
+    color: #f1f5f9;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.video-placeholder {
+    background: rgba(30, 41, 59, 0.8);
+    color: #64748b;
+    min-height: 180px;
+}
+
+@media (max-width: 576px) {
+    .video-card-title {
+        font-size: 0.88rem;
+    }
+}

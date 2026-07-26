@@ -128,7 +128,7 @@
                     <div class="d-flex align-items-center justify-content-center gap-2 mb-2 ministry-links">
                         <a href="https://uzedu.uz/uz" target="_blank"
                             class="text-decoration-none d-flex align-items-center gap-2">
-                            <img src="logo_min.png" alt="Gerb" height="30">
+                            <img src="images/logo/logo_min.png" alt="Gerb" height="30">
                             <span class="small text-white">O‘zbekiston Respublikasi maktabgacha va maktab ta'limi
                                 vazirligi</span>
                         </a>
@@ -138,7 +138,8 @@
                     <div class="d-flex align-items-center justify-content-center gap-3 school-identity">
                         <a href="https://t.me/mshmaktab1" target="_blank"
                             class="text-decoration-none d-flex align-items-center gap-3">
-                            <img src="logo_min.png" alt="Maktab Logosi" class="school-logo" width="60" height="60">
+                            <img src="images/logo/logo_school.png" alt="Maktab Logosi" class="school-logo" width="60"
+                                height="60">
                             <h1 class="h4 text-white text-uppercase m-0 school-name-text">Marg'ilon shahar 1-umumiy
                                 o'rta ta'lim maktabi</h1>
                         </a>
@@ -169,6 +170,33 @@
             </div>
         </nav>
     </header>
+
+    <!-- O'zbekiston Respublikasi Mustaqilligining 35 yilligi Targ'ibot Banneri -->
+    <section class="independence-35-banner py-4">
+        <div class="container">
+            <div class="indep-35-card text-center">
+                <div class="d-flex align-items-center justify-content-center flex-wrap gap-3 mb-3">
+                    <img src="images/logo/logo_banner.png" alt="O'zbekiston Davlat Gerbi" class="indep-gerb-img">
+                    <div class="indep-35-badge">
+                        <span class="badge-num">35</span>
+                        <span class="badge-txt">YILLIK</span>
+                    </div>
+                </div>
+                <div class="indep-tag mb-2">
+                    <i class="fas fa-flag text-info me-2"></i> 1991 — 2026 MILLIY TANTANA
+                </div>
+                <h2 class="indep-main-title">
+                    O‘zbekiston Respublikasi Mustaqilligining 35 yilligi
+                </h2>
+                <div class="indep-slogan-box mt-3 mx-auto">
+                    <i class="fas fa-quote-left slogan-icon-left"></i>
+                    <span class="indep-slogan-text">“Yagona Vatan, Yagona xalq bo‘lib, yangi hayot va kelajak
+                        yaratamiz!”</span>
+                    <i class="fas fa-quote-right slogan-icon-right"></i>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Hero Section with fullscreen slideshow -->
     <section class="hero-slideshow-section">
@@ -344,6 +372,45 @@
         </div>
     </section>
 
+
+    <!-- ══════════════════════════════════════════════════════════
+         YOUTUBE VIDEO ARXIV
+    ══════════════════════════════════════════════════════════ -->
+    <section id="video-archive" class="py-5 video-archive-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="quick-nav-badge">Maktab hayoti</span>
+                <h2 class="section-title text-white mt-2">Video arxiv</h2>
+                <p class="text-muted mx-auto" style="max-width:600px;">
+                    Maktabimizda o'tkazilgan tadbirlar va musobaqalar videolari.
+                </p>
+            </div>
+            <div id="video-archive-list"></div>
+        </div>
+    </section>
+
+    <!-- Video Archive Script -->
+    <script src="scripts/video-archive.js"></script>
+
+    <!-- ══════════════════════════════════════════════════════════
+         CLOUDINARY FOTO-GALEREYA
+    ══════════════════════════════════════════════════════════ -->
+    <section id="cloudinary-gallery" class="py-5 cloudinary-gallery-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="quick-nav-badge">Maktab hayoti</span>
+                <h2 class="section-title text-white mt-2">Foto-galereya</h2>
+                <p class="text-muted mx-auto" style="max-width:600px;">
+                    Maktabimizda o'tkazilgan tadbirlar, musobaqalar va kundalik hayotdan suratlar.
+                </p>
+            </div>
+            <!-- JavaScript bu yerga kartalarni dinamik joylashtiradi -->
+            <div id="cloudinary-gallery-list"></div>
+        </div>
+    </section>
+
+    <!-- Cloudinary Gallery Script -->
+    <script src="scripts/cloudinary-gallery.js"></script>
 
     <!-- Footer -->
     <footer class="bg-dark text-white py-4 mt-auto">
