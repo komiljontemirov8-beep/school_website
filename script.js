@@ -556,6 +556,10 @@ function openModal(newsId) {
             videoEl.style.display = 'none';
         }
         if (modalImage) {
+            modalImage.dataset.tryStep = '0';
+            modalImage.onerror = function () {
+                handleNewsImageError(this, news.image, news.externalImage);
+            };
             modalImage.src = news.image;
             modalImage.style.display = 'block';
         }
@@ -1365,7 +1369,41 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// ==================== NEWS RENDERING & SEARCH ====================
+// Robust 4-Stage Image Fallback Handler (Local -> Cloudinary -> Cloudinary Subfolder -> Telegram CDN -> Placeholder)
+function handleNewsImageError(imgEl, originalPath, externalImage) {
+    if (!imgEl) return;
+    if (!imgEl.dataset.tryStep) {
+        imgEl.dataset.tryStep = "1";
+    }
+    const step = parseInt(imgEl.dataset.tryStep);
+    const cleanPath = originalPath ? originalPath.replace(/^\/+/, '') : '';
+
+    if (step === 1) {
+        // Try Cloudinary with full path: images/july/...
+        imgEl.dataset.tryStep = "2";
+        imgEl.src = `https://res.cloudinary.com/xpbfp64p/image/upload/f_auto,q_auto/${cleanPath}`;
+    } else if (step === 2) {
+        // Try Cloudinary without 'images/' prefix: july/...
+        imgEl.dataset.tryStep = "3";
+        const noImagesPath = cleanPath.replace(/^images\//, '');
+        imgEl.src = `https://res.cloudinary.com/xpbfp64p/image/upload/f_auto,q_auto/${noImagesPath}`;
+    } else if (step === 3 && externalImage && externalImage.startsWith('http')) {
+        // Try Telegram CDN external URL
+        imgEl.dataset.tryStep = "4";
+        imgEl.src = externalImage;
+    } else {
+        // All options failed -> Render fallback placeholder
+        imgEl.onerror = null;
+        const container = imgEl.parentElement;
+        if (container) {
+            container.innerHTML = `
+                <div class="card-img-top news-placeholder d-flex align-items-center justify-content-center w-100 h-100" style="background: var(--primary-gradient); opacity: 0.8;">
+                    <i class="fas fa-school fa-4x text-white opacity-25"></i>
+                </div>
+            `;
+        }
+    }
+}
 
 function createNewsCard(item, query = '') {
     const dateObj = new Date(item.date);
@@ -1386,9 +1424,11 @@ function createNewsCard(item, query = '') {
             </div>
         `;
     } else if (item.image) {
+        const safeImage = item.image.replace(/'/g, "\\'");
+        const safeExtImage = (item.externalImage || '').replace(/'/g, "\\'");
         mediaHtml = `
             <div class="media-container" style="height: 300px; background: #f8fafc; display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: pointer;" onclick="openModal('${item.id.replace(/'/g, "\\'")}')">
-                <img src="${item.image}" class="card-img-top w-100 h-100" alt="Yangilik rasmi" loading="lazy" style="object-fit: contain;">
+                <img src="${item.image}" class="card-img-top w-100 h-100" alt="Yangilik rasmi" loading="lazy" style="object-fit: contain;" onerror="handleNewsImageError(this, '${safeImage}', '${safeExtImage}')">
             </div>
         `;
     } else {
