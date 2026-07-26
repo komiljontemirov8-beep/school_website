@@ -1369,7 +1369,7 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// Robust 4-Stage Image Fallback Handler (Local -> Cloudinary -> Cloudinary Subfolder -> Telegram CDN -> Placeholder)
+// Multi-Stage Ultra-Robust Image Fallback Handler (Local -> Cloudinary Full Path -> Cloudinary Month Path -> Cloudinary Root -> Without Ext -> Telegram CDN -> Placeholder)
 function handleNewsImageError(imgEl, originalPath, externalImage) {
     if (!imgEl) return;
     if (!imgEl.dataset.tryStep) {
@@ -1377,19 +1377,34 @@ function handleNewsImageError(imgEl, originalPath, externalImage) {
     }
     const step = parseInt(imgEl.dataset.tryStep);
     const cleanPath = originalPath ? originalPath.replace(/^\/+/, '') : '';
+    const noImagesPath = cleanPath.replace(/^images\//, '');
+    const filename = cleanPath.split('/').pop() || '';
+    const cleanPathNoExt = cleanPath.replace(/\.[^/.]+$/, "");
+    const noImagesPathNoExt = noImagesPath.replace(/\.[^/.]+$/, "");
 
     if (step === 1) {
-        // Try Cloudinary with full path: images/july/...
+        // Try Cloudinary full path: images/march/img_...jpg
         imgEl.dataset.tryStep = "2";
         imgEl.src = `https://res.cloudinary.com/xpbfp64p/image/upload/f_auto,q_auto/${cleanPath}`;
     } else if (step === 2) {
-        // Try Cloudinary without 'images/' prefix: july/...
+        // Try Cloudinary month path: march/img_...jpg
         imgEl.dataset.tryStep = "3";
-        const noImagesPath = cleanPath.replace(/^images\//, '');
         imgEl.src = `https://res.cloudinary.com/xpbfp64p/image/upload/f_auto,q_auto/${noImagesPath}`;
-    } else if (step === 3 && externalImage && externalImage.startsWith('http')) {
-        // Try Telegram CDN external URL
+    } else if (step === 3) {
+        // Try Cloudinary full path without extension: images/march/img_...
         imgEl.dataset.tryStep = "4";
+        imgEl.src = `https://res.cloudinary.com/xpbfp64p/image/upload/f_auto,q_auto/${cleanPathNoExt}`;
+    } else if (step === 4) {
+        // Try Cloudinary month path without extension: march/img_...
+        imgEl.dataset.tryStep = "5";
+        imgEl.src = `https://res.cloudinary.com/xpbfp64p/image/upload/f_auto,q_auto/${noImagesPathNoExt}`;
+    } else if (step === 5) {
+        // Try Cloudinary root filename: img_...jpg
+        imgEl.dataset.tryStep = "6";
+        imgEl.src = `https://res.cloudinary.com/xpbfp64p/image/upload/f_auto,q_auto/${filename}`;
+    } else if (step === 6 && externalImage && externalImage.startsWith('http')) {
+        // Try Telegram CDN external URL
+        imgEl.dataset.tryStep = "7";
         imgEl.src = externalImage;
     } else {
         // All options failed -> Render fallback placeholder
